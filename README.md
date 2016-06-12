@@ -70,3 +70,8 @@
 
 ## Section and Headings
 - If you have h1 elements in nested sections they get smaller and smaller, like h2, and h3
+
+## Boolean Attributes
+ - The presence of a boolean attribute on an element = true value
+ - The absence of the attribute = false value
+ - "true" and "false" are NOT allowed on boolean HTML attributes. So you must use the above (presence/absence of the attribute). e.g. the required attribute applies if on an element if you use it, but if omitted, is not applied. 
