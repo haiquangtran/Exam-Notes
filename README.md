@@ -82,3 +82,21 @@
 - New attributes in HTML 5:
   - sandbox = allow-forms, allow-same-origin, allow-scripts, allow-top-navigation
 
+# JavaScript
+
+## == vs ===
+- Use === to check equality of value and type
+- Use == to check only the value
+- Always use === or !== unless you are sure you only want to check for the truthiness of an expression.
+
+## How to Deal with Floating Point Numbers (Floating Point Arithmetic)
+- Squeezing real numbers into a finite number of bits can require an approximate representation.
+- JS uses 64-bit floating point representation, which is same as C#'s double.
+- NEVER compare floats and double with ==
+- Instead, compare the absolute value of their differences and make sure that this difference is as small as possible:
+  - var x = 0.1 + 0.2; 
+  - var difference = Math.abs(x - 0.3);
+  - if (difference < 0.0000001) etc...
+
+
+
