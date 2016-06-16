@@ -98,5 +98,18 @@
   - var difference = Math.abs(x - 0.3);
   - if (difference < 0.0000001) etc...
 
+## Array.join vs Array.concat
+- To combine array items into a comma-separated string use join()
+- To combine two arrays into a new array use concat
+
+## Function overloading
+- JS functions don't have typed signatures which mean they can't do overloading
+- When you define multiple functions with the same name, the one that appears last in your code replaces any previous ones.
+- Can simulate overloading by checking for named arguments (if statements).
+
+## Referencing and Executing Functions
+- For a named function, pass its name
+- If you use parentheses, you are executing the function and assigning whatever it returns as the reference.
+
 
 
