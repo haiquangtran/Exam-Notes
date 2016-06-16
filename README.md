@@ -75,3 +75,10 @@
  - The presence of a boolean attribute on an element = true value
  - The absence of the attribute = false value
  - "true" and "false" are NOT allowed on boolean HTML attributes. So you must use the above (presence/absence of the attribute). e.g. the required attribute applies if on an element if you use it, but if omitted, is not applied. 
+
+## iframe
+- Specifies an inline frame
+- An inline frame is used to embed another document within the current HTML document. 
+- New attributes in HTML 5:
+  - sandbox = allow-forms, allow-same-origin, allow-scripts, allow-top-navigation
+
