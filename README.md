@@ -125,6 +125,30 @@
 - A simple way is to use the || operator which is equivalent to the ?? operator in C#
 - answer = x || someDefault;
 
+## JQuery
+- Created by John Resig, Jan 2006
+- Light-weight, CSS3 complaint, cross-browser, feature-rich library
+- Two major version branches
+  - jQuery 1.x
+  - jQuery 2.x
+- 2.x has the same API, but does not support Microsoft IE 6,7, or 8 so use 1.x version unless you are certain no IE 6,7,8 users are visiting your site.
+
+### JQuery: Attribute Selectors
+- Search characters in HTML attributes with [...] i.e. #('a[href*=firebrand')
+  - *= searches for the term in all text
+  - ~= searches for the word (term delimited by spaces) in all text
+  - ^= searches for the term at the beginning
+  - $= searches for the term at the end
+  - != searches for non-mathces
+
+## JS unit test tools for TDD
+- There are many test tools for TDD with JS
+- JsUnit seems to be the best option, but it is not perfect because:
+  - no simple and integrated way to run JS unit test
+  - forces you to write unit tests in html files 
+  - forces you to have local installation of JsUnit framework to avoid hard coded path to reference js unit files.
+
+
 # JSON
 
 ## JSON is a subset of OLN
