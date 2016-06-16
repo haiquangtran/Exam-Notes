@@ -111,5 +111,31 @@
 - For a named function, pass its name
 - If you use parentheses, you are executing the function and assigning whatever it returns as the reference.
 
+## Passing Parameters by Value and by Reference
+- Numbers and Strings are passed by value
+- Objects are passed by reference
+
+## DOM Event Handling
+- If an element and one of its ancestors have an event handler for the same event, which one should fire first?
+  - Capturing means A, then B,
+  - Bubbling means B, then A
+  - W3C supports both: capturing happens first, then bubbling.
+
+## Null-Coalescing Operator
+- A simple way is to use the || operator which is equivalent to the ?? operator in C#
+- answer = x || someDefault;
+
+# JSON
+
+## JSON is a subset of OLN
+- Objects, arrays, strings, finite numbers, true, false, and null are fully supported so they can be serialized and restored.
+
+## Limitations of JSON
+- Only the enumerable own properties of an object are serialized 
+- NaN, Infinity, and -Infinity are serialized to null
+- Date objects are serialized to ISO-formatted date strings, but JSON.parse() leaves it as a string rather than restoring the Date
+- Function, RegExp, and Error objects and the undefined value cannot be serialized; if a property value cannot be serialized, that property is simply omitted from the stringified output.
+
+
 
 
