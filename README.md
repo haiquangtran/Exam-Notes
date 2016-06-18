@@ -27,11 +27,18 @@
 ## Flex layout: Enabling Flex layout (apply to container)
 - Look up the flex layout
 - Give the container ability to alter its items width, height, and order to best fill the available space (mostly to accommodate to all kind of display devices and screen sizes)
-- Flex layout involves setting properties on both the flex container and the flex items
+- Flex layout involves setting properties on both the flex container and the flex itemsS
 - To establish the main-axis, defining the direction, flex items are placed in the flex container. 
 - flex allows a flex item to grow if necessary
   - if all items have flex-grow = 1, they will use equal size inside the container; if you were to give an item flex-grow = 2, that child would take up twice as much space
 
+## Pseudo Elements and Pseudo Classes
+- pseudo-class is made of one colon (:) followed by the name of the pseudo class. i.e. a:link
+  - If you define CSS rules that match against more than one of these pseudo-classes, it is important that you specify these pseudo-classes in the following order (with prefix is a:): link, visited, focus, hover, active.
+  - a:hover MUST come after a:link and a:visited in the CSS definition in order to be effective!
+  - a:active MUST come after a:hover in the CSS definition in order to be effective!
+- pseudo-element is made of two colons (::) followed by the name of the pseudo element.
+  - Only one pseudo-thingy may appear per selector so you cannot combine :hover and ::after, for example.
 
 ## clear
 - turning off float by using clear
