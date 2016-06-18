@@ -133,13 +133,24 @@
   - jQuery 2.x
 - 2.x has the same API, but does not support Microsoft IE 6,7, or 8 so use 1.x version unless you are certain no IE 6,7,8 users are visiting your site.
 
-### JQuery: Attribute Selectors
+### jQuery: Attribute Selectors
 - Search characters in HTML attributes with [...] i.e. #('a[href*=firebrand')
   - *= searches for the term in all text
   - ~= searches for the word (term delimited by spaces) in all text
   - ^= searches for the term at the beginning
   - $= searches for the term at the end
   - != searches for non-mathces
+
+### jQuery: Serializing Forms
+- serialize() method
+  - returns a string in standard URL-encoded notation
+  - Encode a set of form elements as a string for submission
+
+
+### jQuery: Should I Use success or Done? (AJAX Calls)
+- Old: success, error, complete
+- New: done, fail, always
+- Since the implementation of $.Deferreds, done is the preferred way to implement success callbacks.
 
 ## JS unit test tools for TDD
 - There are many test tools for TDD with JS
@@ -148,6 +159,28 @@
   - forces you to write unit tests in html files 
   - forces you to have local installation of JsUnit framework to avoid hard coded path to reference js unit files.
 
+## HTML input element
+- <input> elements are used within a <form> element to declare input controls that allow users to input data
+- The <input> element is empty, it contains attributes only
+- Use the <label> element to define labels for <input> elements
+
+## Getting Data for Validation using jQuery
+- val()
+  - Get's current value of the first element in the set of matched elements or set the value of every matched element
+  - Primarily used to get values of form elements such as input, select and text area
+
+# Communicating with a Remote Server
+- Encoding and Decoding
+  - For concatenating together and splitting apart text strings in URI parts
+  - EncodedURI takes something that's nearly a URI, but has invalid characters such as spaces in it, and turns it into a real URI
+  - encodeURI and decodeURI are inteded for use on the full URI
+  - encodeURIComponent and decodeURIComponent are inteded to be used on URI components i.e. any part that lies between separators (; / ? : @ & = + $ , #)
+- Look up the JQuery: $.get calls for AJAX
+
+
+## Regular Expressions
+- When validating input, include the leading caret (^) and trailing dollar to avoid security vulnerabilities.
+  - ^ means start of input; $ means end of input
 
 # JSON
 
