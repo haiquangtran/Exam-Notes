@@ -2,6 +2,43 @@
 
 # CSS3
 
+## Text: Font-Size is Complicated
+- Generally, 1em = 12pt = 16px = 100%
+  - When using these font-sizes, when you increase the base font size (using the body CSS selctor) from 100% to 120% they all change differently.
+  - http://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/
+- Sizing with px
+  - Provide reliability and consistency, but IE will not allow adjustments to font size (although zoom gets round this)
+- Sizing with em
+  - Measurements are relative to parent element, so they compound with nested elements
+- Sizing with rem
+  - "Root em": measurements are relative to the root element
+- https://snook.ca/archives/html_and_css/font-size-with-rem
+- @font-face is a css rule which allows you to download a particular font from your server to render a webpage if the user hasn't got that font installed
+  - Web designers no longer have to adhere to particular set of web safe fonts that the user has preinstalled on their computer.
+
+## Layout: Block Styles
+- display
+  - block: formatted down the page one after another and respect padding, border, and margin values
+  - inline: formatted one after another based on the baseline of their text content until they break down onto another line but they ignore height and width values. 
+  - inline-block: formatted one after another based on baseline of their text content, but they keep height and width values.
+  - table: enables you to identify blocks on the page as tables, rows, cols, and cells. Blocks are aligned by their edges rather than their content, and sized to fit the computed table.
+  - flex/ms-flexbox: choose in which direction boxes are laid out and how boxes are sized, depending on how any excess whitespace around blocks should be handled.
+
+## Flex layout: Enabling Flex layout (apply to container)
+- Look up the flex layout
+- Give the container ability to alter its items width, height, and order to best fill the available space (mostly to accommodate to all kind of display devices and screen sizes)
+- Flex layout involves setting properties on both the flex container and the flex items
+- To establish the main-axis, defining the direction, flex items are placed in the flex container. 
+- flex allows a flex item to grow if necessary
+  - if all items have flex-grow = 1, they will use equal size inside the container; if you were to give an item flex-grow = 2, that child would take up twice as much space
+
+
+## clear
+- turning off float by using clear
+  - left, right, both, none, inherit
+- Elements after the floating element will flow around it unless you use the clear property
+- The clear property specifies which sides an element other floating elements are not allowed
+
 ## Id vs class
 - Use id to identify a single unique element (id's are unique). The same id can be used in multiple different pages (i.e. top navigation bar), but their should only be a unique ID on the same page. 
 - Use class to identify multiple elements (classes are not unique)
