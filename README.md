@@ -264,4 +264,40 @@
   - Once an app is offline it remains cached until one of the following happens:
     - The user clears their browser's data storage for your site
     - The manifest file is modified
+
+## Implementing Real-time Communication by Using Web Sockets
+
+### Web Sockets: When to use
+- Achieving zero-lag connectivity between Web clients and servers requires going beyond the HTTP protocol
+  - The new WebSocket Protocol aims to overcome a structural limitation of the HTTP protocol that makes it inefficient for Web applications hosted in browsers to stay connected to the server over a persistent connection.
+- Great for real-time communication and updates
+- http://msdn.microsoft.com/en-us/magazine/hh975342.aspx
+
+### Web Sockets: SignalR
+- ASP.NET SignalR is a lib for ASP.NET devs that makes it simple to add real-time web functionality to your apps.
+  - SignalR uses WebSockets under the covers when available
+  - SignalR will fallback to other techniques when it isn't
+  - Your app code stays the same
+
+## Performing Background Processing by Using Web Workers
+
+### Web Workers: What can you use inside a web worker?
+- Worker has a global scope separate from the page
+- Worker can use: most JS APIs, External script libraries.
+- Limitations of Web Workers:
+  - Can't access the DOM or window
+  - Has a single thread. Should process and return as quick as possible, otherwise messages will be queued up (or additional workers could be spawned).
+
+### Web Workers: Message Passing
+- In both the page and the worker
+  - Handle the message (aka onmessage) event to receive messages
+  - Call the postMessage() method to send messages
+- In the page: create Worker instances, post objects to them, and handle received objects.
+
+
+
+
+
+
+
   
