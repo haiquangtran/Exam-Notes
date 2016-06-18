@@ -169,6 +169,18 @@
 - A simple way is to use the || operator which is equivalent to the ?? operator in C#
 - answer = x || someDefault;
 
+## JavaScript 1.7 or higher: let blocks
+- let allows you to declare variables, limiting its scope to the block, statement, or expression on which it is used.
+  - if (a === 5) let a = 4; // scope is inside the if-block
+- Unlike var keyword, which defines variable globally, or locally to an entire function.
+
+## Scoping: Hoisting variables
+- Function and var declarations are always moved invisibly to top of their containing scope by JS interpreter.
+- Best practice: Each function should have single var at top for all variables.
+- Hositing with functions differs depending on if you are using a named or anonymous function. 
+  - calling foo() before var foo = function() will not work.
+  - calling foo() before function foo() will work.
+
 ## JQuery
 - Created by John Resig, Jan 2006
 - Light-weight, CSS3 complaint, cross-browser, feature-rich library
@@ -189,7 +201,6 @@
 - serialize() method
   - returns a string in standard URL-encoded notation
   - Encode a set of form elements as a string for submission
-
 
 ### jQuery: Should I Use success or Done? (AJAX Calls)
 - Old: success, error, complete
@@ -237,6 +248,20 @@
 - Date objects are serialized to ISO-formatted date strings, but JSON.parse() leaves it as a string rather than restoring the Date
 - Function, RegExp, and Error objects and the undefined value cannot be serialized; if a property value cannot be serialized, that property is simply omitted from the stringified output.
 
+## Adding Offline Support to Web Applications
 
+### localStorage vs sessionStorage both extend Storage
+- sessionStorage = represents set of storage areas specific to current top-level browsing context
+- localStorage = provides a Storage object for an origin
+  - no difference between them except for intended "non-persistence" of sessionStorage
+  - items = key/value pairs (string/string)
 
-
+### ApplicationCache
+- Any page the user navigates to that includes a manifest will be implicitly added to the application cache
+- You can see urls that are controlled by the app cache by visiting chrome://appcache-internals/ in chrome
+  - If the manifest itself returns a 404 or 410, the cache is deleted
+  - If the manifest or a resource specified in it fails to download, the entire cache update process fails.
+  - Once an app is offline it remains cached until one of the following happens:
+    - The user clears their browser's data storage for your site
+    - The manifest file is modified
+  
