@@ -2,6 +2,13 @@
 
 # CSS3
 
+## @media
+- Sets the media types for a set of rules in a stylesheet object.
+- Used for responsiveness (styling for different devices and sizes etc)
+
+## Animations: CSS Keyframes Animations
+- @keyframes allow you to specify values of a CSS property needs at different points during the animation.
+  - e.g. @keyframes fadeOut { from {} to{} }
 ## Text: Font-Size is Complicated
 - Generally, 1em = 12pt = 16px = 100%
   - When using these font-sizes, when you increase the base font size (using the body CSS selctor) from 100% to 120% they all change differently.
@@ -70,6 +77,12 @@
 
 # HTML5
 
+## HTML <input> tag
+- used within a form to declare input controls that allow users to input data. 
+- Differences between HTML 4.01 and HTML5
+  - In HTML4.01, the align attribute is deprecated, and is not supported in HTML5. Use CSS to align <input> elements.
+  - In HTML5, the input tag has several new attributes, and the type attribute has several new values. 
+
 ## Block vs Inline content
 - Block content 
   - always starts on a new line and takes up the full width available (stetches out to left and right as far as can)
@@ -84,6 +97,32 @@
 - You can have a target attribute that opens the linked document in a new window or tab
   - open in new tab or window: target = "_blank"
   - other options are: _self, _parent, _top, or framename. 
+
+## HTML5 Web Storage
+- With HTML5, web pages can store data locally within the user's browser
+  - Earlier, this was done with cookies. However, Web Storage is more secure and faster. 
+  - The data is not included with every server request, but ONLY used when asked for. 
+  - It is possible to store large amounts of data, without affecting the website's performance.
+- HTMLStorageObject
+  - Represents list of key/value pairs from the Web Storage area
+- localStorage property
+  - Retrieves the Web Storage area specific to the current document
+- sessionStorage property
+  - Retrieves the Web Storage area for the session.
+
+## Differences between SVG and Canvas
+- Canvas: 
+  - Resolution dependent
+  - No support for event handlers
+  - Poor text rendering capabilities
+  - Can save resulting image as .png or .jpg
+  - Well suited for graphic-intensive games
+- SVG:
+  - Resolution independent
+  - Support for event handlers
+  - Best suited for applications with large rendering areas (Google Maps)
+  - Slow rendering if complex (anything that uses the DOM a lot will be slow)
+  - Not suited for game applications
 
 ## Semantic HTML5 Elements
 - **article**
@@ -109,7 +148,9 @@
 - **span**
   - Used to group inline-elements in a document. 
   - Provdes no visual change by itself (can be used to add styling though).
-
+- **figure**
+  - specifies self-contained content, like illustartions, diagrams, photos, code listings, etc. 
+  - While the content of the figure element is related to the main flow, its position is independent of the main flow, and if removed it should not affect the flow of the document.
 - http://www.w3schools.com/tags/default.asp and http://www.anthonycalzadilla.com/2010/08/html5-section-aside-header-nav-footer-elements-not-as-obvious-as-they-sound/
 
 ## Section and Headings
@@ -168,6 +209,14 @@
 ## Null-Coalescing Operator
 - A simple way is to use the || operator which is equivalent to the ?? operator in C#
 - answer = x || someDefault;
+
+## Promises
+- Represent the next great paradigm in JS Programming
+- A promise represents the result of an action, which may or may not have completed.
+- A promise has a function called then, which can be given callbacks to be called when the promise is fulfilled or has failed.
+- The real power of promises comes from chaining many of them together
+  - Calling promise.then(func) returns a new promise, which is not fulfilled until func has completed
+  - jQuery's $.Deferred (done, fail, always, then, and so on)
 
 ## JavaScript 1.7 or higher: let blocks
 - let allows you to declare variables, limiting its scope to the block, statement, or expression on which it is used.
@@ -267,6 +316,11 @@
 
 ## Implementing Real-time Communication by Using Web Sockets
 
+### The WebSocket API
+- API enables web apps to maintain bidirectional communications with server-side processes.
+- Dependencies: HTML and WebIDL (Web Interface Definition Language)
+- Look this up (W3C)
+
 ### Web Sockets: When to use
 - Achieving zero-lag connectivity between Web clients and servers requires going beyond the HTTP protocol
   - The new WebSocket Protocol aims to overcome a structural limitation of the HTTP protocol that makes it inefficient for Web applications hosted in browsers to stay connected to the server over a persistent connection.
@@ -281,6 +335,17 @@
 
 ## Performing Background Processing by Using Web Workers
 
+### WebWorker API
+- WebWorker defines a way to run scripts in the background. 
+- WebWorker provides web application authors to spawn background scripts that run in parallel with the main page.
+  - Can spawn several threads to use for long-running tasks.
+  - All communciation to and from the worker thread is through messages.
+  - Note: You cannot send references to DOM objects to a worker thread. Web workers are limited in what data they can access. Only JS primitives such as Object or String values are allowed.
+- Traditionally browsers have been single-threaded, forcing all the scripts in your app to run together in a single UI thread. 
+  - Although you can create illusion of several things happening at same time by using DOM events and setTimeout,
+  it only takes one computationally intensive task to affect the user experience.
+
+
 ### Web Workers: What can you use inside a web worker?
 - Worker has a global scope separate from the page
 - Worker can use: most JS APIs, External script libraries.
@@ -294,10 +359,33 @@
   - Call the postMessage() method to send messages
 - In the page: create Worker instances, post objects to them, and handle received objects.
 
+## Cross Domain Requests 
 
+### Understanding the Same-Origin Policy Problem
+- Two pages have same origin if the protocol, port (if one is specified), and host are the same for both pages.
+  - The same-origin policy controls interactions between two different origins, such as when you use XMLHttpRequest
+  - Under the policy, a web browser allows scripts contained in a first web page to access data in a second web page, but onyl if both web pages have the same origin.
+  - http://security.stackexchange.com/questions/8264/why-is-the-same-origin-policy-so-important
+- Use JSONP or CORS to allow cross-origin access
+- JSONP (JSON with Padding)
+  - Requests for JSONP retrieve JS code which is not blocked by same origin policy as JSON would be. (Evaluated by JS interpreted, not by a JSON parser)
+  - JSON payload woul dbe blocked
+  - Equivalent JSONP payload (JS) is let through
+  - For each new JSONP request, the browser must add a new <script> element, or reuse an existing one.
+    - JSONP can be said to allow browser pages to work around the same origin policy via script element injection and function name negotiation with the server.
+  - Using JSONP with ASP.NET Web API: JSONP is not supported by default so we need to add a media type formatter manually.
+- https://www.w3.org/TR/cors/
 
+### Cross-Origin Resource Sharing (CORS)
+- Works by adding new HTTP headers that allow servers to describe the set of origins that are permitted to read that information
+- A simple cross-site request is one that only uses GET, HEAD or POST with no custom headers 
+- Might need to configure IIS to Enable CORS
 
+### Preflight Requests
+- Preflighted reqeusts first send an HTTP Options request header in order to determine whether the actual request is safe to send.
 
+### Requests with Credentials
+- Requests that are aware of HTTP Cookies and HTTP Authentication information.
 
 
   
