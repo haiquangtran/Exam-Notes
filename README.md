@@ -166,6 +166,7 @@
 - An inline frame is used to embed another document within the current HTML document. 
 - New attributes in HTML 5:
   - sandbox = allow-forms, allow-same-origin, allow-scripts, allow-top-navigation
+- The sandbox attribute should always be used to restrict what data can be placed into an iFrame.
 
 # JavaScript
 
@@ -288,6 +289,14 @@
 
 # JSON
 
+## Serialization
+- The data is put into a format for transmission.
+- In JSON use JSON.stringify() to serialize data
+
+## Deserialization
+- The transmitted data is converted into something that can be worked with, such as a custom object.
+- In JSON use JSON.parse() to deserialize data
+
 ## JSON is a subset of OLN
 - Objects, arrays, strings, finite numbers, true, false, and null are fully supported so they can be serialized and restored.
 
@@ -387,5 +396,14 @@
 ### Requests with Credentials
 - Requests that are aware of HTTP Cookies and HTTP Authentication information.
 
+## Using the XMLHttpRequest Object (XHR)
+- JS provides built-in support for receiving HTML data via the XMLHttpRequest object.
+- The object makes a call to a web service. 
+- XMLHttpRequest makes an HTTP request and expects to receive back data in XML format.
+- You can make server request using the XMLHttpRequest Object by:
+  - using GET to obtain data from the server.
+  - using POST to send data to the server.
 
-  
+## To serialize and deserialize binary data you need to:
+- Use GET method and set responseType to blob and pass it to URL.createObjectURL() method
+- use POST method for submitting binary data to server and set responseType to blob
