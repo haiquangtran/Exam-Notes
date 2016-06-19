@@ -66,6 +66,14 @@
   - Precedence is reversed, however, for !important rules (https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade)
   - All user and author rules have more weight than rules in the user agent's default style sheet
 
+## The order styles are applied to the pages using HTML5 and CSS3
+- user agent style sheets
+- user normal style sheets
+- author normal style sheets
+- author important style sheets
+- user important style sheets
+- http://stackoverflow.com/questions/13638038/style-sheets-priority-order
+
 ## CSS Specificity
 - Specificity is the weight that is applied to a given CSS declaration. 
 - Specificity only applies when the same element is targeted by multiple declarations. 
