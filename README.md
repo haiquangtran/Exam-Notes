@@ -278,7 +278,7 @@
 - Encoding and Decoding
   - For concatenating together and splitting apart text strings in URI parts
   - EncodedURI takes something that's nearly a URI, but has invalid characters such as spaces in it, and turns it into a real URI
-  - encodeURI and decodeURI are inteded for use on the full URI
+  - encodeURI and decodeURI are intended for use on the full URI
   - encodeURIComponent and decodeURIComponent are inteded to be used on URI components i.e. any part that lies between separators (; / ? : @ & = + $ , #)
 - Look up the JQuery: $.get calls for AJAX
 
