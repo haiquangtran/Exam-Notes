@@ -2,6 +2,11 @@
 
 # CSS3
 
+## How do styles cascade?
+- When style rules conflict the following is the highest order of precendence the browser uses:
+  1. Important (!important)
+  2. Specificity (determines which rule is most specific)
+  3. Textual Order (if specificity seem to be the same, then the last style rule is applied)
 ## @media
 - Sets the media types for a set of rules in a stylesheet object.
 - Used for responsiveness (styling for different devices and sizes etc)
@@ -82,6 +87,11 @@
   0. Type selectors (e.g. h1) and pseudo-elements (e.g., :before).
   1. Class selectors (e.g., .example), attributes selectors (e.g. [type="radio"]) and pseudo-classes (e.g. :hover).
   2. ID selectors (e.g. #example)
+- To calculate the selector’s specificity, start by recording three values, known as a, b, and c,
+as follows.
+  - a Record the number of id attributes in the selector.
+  - b Record the quantity of class selectors, attributes selectors, and pseudo classes.
+  - c Record the quantity of element names in the selector
 
 # HTML5
 
