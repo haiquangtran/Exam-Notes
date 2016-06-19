@@ -267,6 +267,8 @@
 
 ## JS unit test tools for TDD
 - There are many test tools for TDD with JS
+- QUnit can be used to perform TDD with web apps
+- QUnit-Metro can be used to perform TDD with Windows 8 apps.
 - JsUnit seems to be the best option, but it is not perfect because:
   - no simple and integrated way to run JS unit test
   - forces you to write unit tests in html files 
@@ -415,3 +417,7 @@
 ## To serialize and deserialize binary data you need to:
 - Use GET method and set responseType to blob and pass it to URL.createObjectURL() method
 - use POST method for submitting binary data to server and set responseType to blob
+
+## NuGet 
+- Open source package management system for .NET platform 
+- Simplifies the addition of third-party libraries into your code.
