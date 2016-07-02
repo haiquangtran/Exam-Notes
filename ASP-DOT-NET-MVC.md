@@ -38,14 +38,14 @@
 - Asynch actions ASP.NET MVC 4: use the Task framework in the System.Threading.Tasks namespace. (Purpose of Task is to provide pluggable architecture to increase flexibility to make multi-tasking apps easier to write.) 
   - To create async action on controller:
     - Mark controller as async and return result as Task<ActionResult> 
-- Async action: Approach 1:
+- **Async action: Approach 1:**
   - You can create an action that returns synchronously but uses async work within the method to get work done faster. (The main thread has to wait only for the longest-running work unit to respond rather than waiting for all the work to occur, one after the other).
   - Makes sense if you are merging results from multiple service calls into a single model to be passed to the view.
-- Async action: Approach 2:
+- **Async action: Approach 2:**
   - Use async partial view 
   - This helps the overall performance of your app by running the work in that partial view in a different thread, enabling primary thread to continue to process other items.
   - Also helps avoid thread locking because your MVC4 app parses the action.
-- Async actionL Approach 3: 
+- **Async actionL Approach 3:**
   - Break content out on the page
   - load it async from the client.
   - i.e. Create your page normally, but rather than directly calling the action result in your .cshtml file, instead use JS code that calls the server to ask for the partial view result after the page has been rendered on the client side, a traditional AJAX approach. 
@@ -53,7 +53,7 @@
   - long-running, non-CPU-bound requests since they avoid blocking the server from performing work while the method request is still pending.
 - **Strongly consider asynch methods when**:
   - The operation is network-bound or I/O rather than CPU-bound. 
-  - Also async methods make sense when you want to enabel the user to cancel a long-running method.
+  - Also async methods make sense when you want to enable the user to cancel a long-running method.
 - Async programming gives you different ways to solve performance issues where multi-threading might help.
 
 ## Actions 
