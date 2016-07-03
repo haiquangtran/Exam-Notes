@@ -285,3 +285,40 @@
   - Add JS functionality to store the unique identifier on the client side in a sessionStorage or localStorage and make sure you send it back to the server when needed.
   - Add the unique identifier to the query string.
   - Add the unique identifier to the URL and ensure routing tabel has the value mapped accordingly.
+
+## Caching
+- **Page output caching**
+  - Shared strategy on clients and servers.
+  - Can set expiration duration.
+  - Types include: 
+    - Full page caching
+    - Partial page caching
+      - **Donut Caching**
+        - Caches majority of the page, enabling some dynamic content
+      - **Donut Hole Caching**
+        - Enables a majority of the page to be dynamic and caches some content.
+- **Data Caching**
+  - Server-side technique enabling you to put an intermediate step between your business logic and the database
+  - Provides a way to reuse data 
+  - Enhances performance by making database calls only when the cache is invalidated or expired.
+  - Can set expiration period on the caching.
+  - This caching is used by all users on the server.
+  - Can decrease load on database and increase app responsiveness. 
+  - Static queries in which the data is unlikely to cahnge often are excellent candidates for implementing data caching.
+  - Best practice: Put calls to the caching service in the model since it contains primary business logic. 
+- **Application caching**
+  - Is an HTML5 feature that enables you to create a caching manifest that describes the settings across a website or for a page
+  - Gives devs access to the local browser cache. 
+- **HTTP caching**
+  - Is a caching mechanism built into the HTTP protocol that handles its own version of expiration calculation and uses it to determine the response to send to the client.
+  - Generally used in distrbuted systems, especially the internet. 
+  - Happens automatically as part of the request stack and there is little programmatic impact.
+  - HTTP server must respond to a request with the most-up-to-date response held by the cache that is equivalent to the source server.
+  - Validation model: Server detects whether any changes need to be returned. Server sends a 304 (Not modified) response without a body, when there has been no change, otherwise sends full response and body.
+- **Distribution Caching**
+  - Work with web farms
+  - Most complicated
+  - Create data on one app server and share it with the other servers. 
+  - Windows AppFabric is an example of a third-party tool that enables you to create caching content on one server and share it across multiple servers in a web farm.
+  - (Look this up more when needed)
+- (Look it up)
