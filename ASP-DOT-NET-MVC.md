@@ -113,3 +113,17 @@
   - Can create HTML and AJAX-HTML for inclusion in your view, or URL helpers, which help determine the route or URL that can be accessed from both the view and controller.
   - Can write Razor helper using Razor syntax (one of the unique features of Razor)
     - They encapsulate blocks of HTML and server-side logic into reusable page-level methods.
+
+## Entity Framework
+- ORM
+- **Database First Approach**
+  - Enables you to leverage an existing database schema to create entities.
+- **Code First**
+  - Intended to be used in scenarios in which you are creating a new database schema as part of your project
+  - Enables developers to create the object structure first and then use it to create the database schema
+- **Model First**
+  - Intended to be used in scenarios in which you are creating a new database schema as part of your project
+  - Enables designers to work in a tool that enables them to build the object model visually and will use that output to create the database schema. (Edmx Designer)
+- The stateless nature of ASP.NET MVC disables some of the built-in features of Entity Framework. 
+  - Have to write additional code to make the best use of the DBContext class and its approach to data access.
+  - Best to abstract the data access layer using the Repository pattern. 
