@@ -1,16 +1,17 @@
 # ASP.NET MVC
+- Separation of Concerns is one of the primary reasons why ASP.NET MVC exists because its very nature separates the presentation and business layers. 
 
 ## Model
 - Handles Business logic.
 - Manages data access and performs the business logic on the data.
 - **Domain Model approach:**
-  - When the object you are using describes the data you work with in the middle tier of that application. i.e. using passing Entity framework objects to a view for display. 
+  - When the object you are using describes the data you work with in the middle tier of that application. i.e. passing Entity framework objects to a view for display. 
 - **View Model approach:**
   - Describes the data being worked on in the presentation layer.
   - Any data you present in the view is found within the properties of the view model class, which represents all the data the controller transmits to the view after processing the request. 
   - A view model is generally the result of aggregating multiple classes into a single object.
 - **The Input Model approach:**
-  - represents the data being uploaded to the server from the client with each individual HTTP request. 
+  - Represents the data being uploaded to the server from the client with each individual HTTP request. 
   - Uses model binding to capture user input.
   - Use of an input model enables all the work to create and manage these domain objects to stay within a single controller and model.  
 - Model binders are a way to map posted form data to a type and pass that type to an action method as a parameter.
@@ -79,6 +80,7 @@
 - A set of messages is sent to the view via viewDataDictionary, which is wrapped by a ViewBag. 
   - Can set and read values like a standard dictionary: ViewData["UserName"] = User.UserName
   - Can also access the data in the ViewBag as a wrapper: ViewBag.UserName = User.UserName
+- The useo f inline code in the view should be strictly limited to those items that affect only the display of information, not the processing of information.
 - Additional Considerations when working with a view:
   - **Strongly-typed views**
     - Eliminates need for casting in the view. 
@@ -95,3 +97,19 @@
   - **Scaffold template**
     - Creates standard pages as part of the process when creating a project
     - Quick start on development, can alter existing scaffold types or create a new one.
+
+## Razor View and Web Forms View Engines
+- Razor view engine is default view engine in ASP.NET MVC4 and was introduced in ASP.NET 3.
+- Web Forms Engine was the initial view engine.
+- Razor view provides a format that minimizes the amount of coding required within a view and supports concepts of layouts. 
+- The Razor engine uses the @ code delimiter.
+- The Web Forms view engine uses the <% notation.
+- The different view engines cannot process each other's syntax. 
+- Blocks of code are pieces of code executed within the view. Avoid doing work that should properly be done in the controller or model.
+- **Extending the View Engines: **
+  - Can override either view engine classes to deviate from convention-based design the standard view engines must follow. 
+  - Can write HTML helpers to generate HTML inside views. (HTML helpers help generate HTML controls programmatically)
+  - A helper generates HTML and returns the result as a string for inclusion in the response stream. 
+  - Can create HTML and AJAX-HTML for inclusion in your view, or URL helpers, which help determine the route or URL that can be accessed from both the view and controller.
+  - Can write Razor helper using Razor syntax (one of the unique features of Razor)
+    - They encapsulate blocks of HTML and server-side logic into reusable page-level methods.
