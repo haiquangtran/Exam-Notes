@@ -1,5 +1,6 @@
 # ASP.NET MVC
 - Separation of Concerns is one of the primary reasons why ASP.NET MVC exists because its very nature separates the presentation and business layers. 
+- ASP.NET = Active Server Pages, .NET is not an acronym. 
 
 ## Model
 - Handles Business logic.
@@ -116,6 +117,10 @@
 
 ## Entity Framework
 - ORM
+- Relies on DBContext class which is an abstraction over the database:
+  - Manages data querying 
+  - Unit-of-work approach that groups changes and persists them back to the datastore in a single transaction
+  - Relies on flags to determine best way to persist data. 
 - **Database First Approach**
   - Enables you to leverage an existing database schema to create entities.
 - **Code First**
@@ -127,3 +132,71 @@
 - The stateless nature of ASP.NET MVC disables some of the built-in features of Entity Framework. 
   - Have to write additional code to make the best use of the DBContext class and its approach to data access.
   - Best to abstract the data access layer using the Repository pattern. 
+
+## Data Access Options
+- **Option 1: ORM**
+  - Aids in conversion of data within a relational database management system and the object model that is necessary for use within OOP. 
+  - ORM's in ASP.NET MVC 4: NHibernate, Entity Framework, Linq-to-SQL. 
+- **Option 2: Writing your own component to manage interactions with the database**
+  - Manage any conversions to and from your object model
+  - Preferred when working with a data model that does not closely model your object model, or you are using a database format that is not purely relational i.e NoSQL. 
+
+## Integrating Web Services
+- Standard for putting services into the app space is Microsoft Windows Communication Foundation (WCF).
+  - WCF is a SOAP-based protocol and is still the primary communications mechanism
+  - But ASP.NET MVC 4 Web API has made advances in RESTful services.
+- With ASP.NET MVC 4, concept of WEB API was introduced:
+  - Allows you to bind data using model binding directly to the output
+  - Can also use ASP.NET 4 to create REST services.
+  - The ASP.NET Web API comes with its own controller called ApiController for REST since it returns serialized data. 
+    - It does not use views; instead it reviews the HTML header to find Accepts property being sent with the header to determine how to send data back. 
+    - Do not have to handle serialization and deserialization, the ApiController handles it for you.
+  - Also uses the ASP.NET MVC pattern for managing HTTP requests.
+- ASP.NET Web Services (ASMX) is older and enables devs to quickly roll out a SOAP-based web service. 
+  - Use a WSDL to communicate with consumers about endpoints, protocols, and message formats.
+  - Eliminates many configuration issues you encounter with other solutions because it simply enables a consumer to make a call to a function. 
+  - However, cannot customize certain components such as transfer protocols, security and encoders.
+  - ASMX has been superseded by WCF and Web API. 
+
+## Designing a Hybrid Application
+- A hybrid application is an application hosted in multiple places. 
+  - The term became popular with growth of Windows Azure to represent an app in which one part is hosted within the company's network and another part is hsoted in Windows Azure. (To access private or sensitive data)
+  - An app that is partially deployed on-premise and partly off-premise. 
+  - When working in this kind of environment, you need to be aware of the riskier nature of communications and manage the concept of a retry.
+- **Hybrid Pattern 1: Client-centric Pattern**
+  - Client app determines where the app needs to make its service calls. 
+  - Easiest to code, but most likely to fail
+  - Fragile because any change to either server or client might require a change to the other part. 
+- **Hybrid Pattern 2: System-Centric Approach**
+  - Take a more service-oriented architecture (SOA) approach
+  - Turning on-site systems into "services" that can be called from Windows Azure using the service Bus. 
+  - i.e. AppFabric acts as a service bus, providing a single point of contact/service connector that can manage calls out to remote systems by routing the requests to the appropriate server.
+  - Ideally includes a service bus, which will distribute service requests as appropriate whether it is to a service in the cloud, on-premise, or at anmother source completely such as a partner or provider site. 
+- Concerns with distrbuted apps:
+  - Connection resiliency (need to understand the concept of retry)
+  - Latency and good connection properties
+  - Authorization and access are complicated 
+  - Must plan for consistency and concurrency
+  - Must consider: Scalability, latency, cost, robustness, and security.
+  
+## Session Management in a distributed environment
+- In ASP.NET MVC 4 you can approach sessions in two different ways:
+  - **Approach 1: Use session to store small pieces of data **
+  - **Approach 2: Be completely Stateless**
+- Since MVC sits on top of ASP.NET, sessions are available for use throughout the app. 
+- However, ASP.NET MVC 4 is designed to run in a stateless manner
+- In a distributed environment, requests can be distributed among different servers when using a session. 
+- There are 3 modes of session management available in IIS:
+  - **InProc**
+    - Is the default setting
+    - Web sessions stored in web server's local memory
+    - Provides best performance but is not clusterable
+  - **StateServer**
+    - Session information is stored in memory on a separate server
+    - When configuring the state server in IIS, you need to enter the connection string to the server
+    - All servers using same state server have access to the state info
+  - **SQLServer**
+    - Has same advantages as StateServer: session info is shared across multiple servers
+    - Has performance impact: It will add latency to the session access since there needs to be a call to a SQLServer.
+- A Distributed Environment can improve availability, reliability, and scalability.
+  - One of the ways you can achieve that at a web server level is to use a web farm.
