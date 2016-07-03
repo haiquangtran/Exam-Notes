@@ -322,3 +322,21 @@
   - Windows AppFabric is an example of a third-party tool that enables you to create caching content on one server and share it across multiple servers in a web farm.
   - (Look this up more when needed)
 - (Look it up)
+
+## WebSocket Strategy
+- **HTTP Polling**
+  - JS methodology of continuously polling the server to see whether there is any info the client needs to know.
+  - Not the most efficient method
+  - Worked in any browser supporting JS and does not require HTML5
+- **HTTP long polling**
+  - Way to use HTTP to mock up a way for the server to pass data back to the client. 
+  - Opens a long-standing connection to the server that will either timeout or return data when the sever deems necessary. 
+  - Upon timeout or data return, the client can immediately open a new connection.
+- **WebSockets**
+  - Way to provide 2-way communication between the client and server
+  - Both sides can communicate at the same time to the other side
+  - Client connects via HTTP and then sends an upgrade request to the server, which gives a WebSockets connection
+  - Need to create both client-side and server-side code to interact with the socket
+  - After that, every event is an event that is fired when messages are received
+  - Can be used in situations in which long-term, 2 way communication is useful. 
+  - Not always the best solution, especially when there is a chance the app will be viewed by older browsers that do not support HTML5 features. 
