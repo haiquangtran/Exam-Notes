@@ -181,6 +181,9 @@
   - Must consider: Scalability, latency, cost, robustness, and security.
   
 ## Session Management in a distributed environment
+- Session management is a state management mechanism built into Microsoft Internet Information Services (IIS). 
+  - Highly configureable
+  - Can set session management at the IIS level across all apps or just a single website. 
 - In ASP.NET MVC 4 you can approach sessions in two different ways:
   - **Approach 1: Use session to store small pieces of data **
   - **Approach 2: Be completely Stateless**
@@ -340,3 +343,20 @@
   - After that, every event is an event that is fired when messages are received
   - Can be used in situations in which long-term, 2 way communication is useful. 
   - Not always the best solution, especially when there is a chance the app will be viewed by older browsers that do not support HTML5 features. 
+
+## HTTP modules and handlers (Interceptors etc)
+- Enable an ASp.NET MVC 4 dev to interact directly with HTTP requests. 
+  - When a request starts into the pipeline, it gets processed by multiple HTTP modules, and then processed by a single HTTP handler, before flowing back through the request stack to again be processed by the modules.
+- HTTP modules and handlers insert into the request processing path in IIS. (Similar to interceptors for requests in AngularJS)
+- Modules are called before and after the handler executes. 
+- Modules fit into the process on the way down to the handler, and on the way back out from the handler. 
+  - Intended to enable a developer to intercept, participate, or modify each request.
+  - A Synchronous module has an Init method enabling you to set a handler for 1 of the events attached to the request process
+  - An Asynchronous module is more complicated to work with 
+    - But with async, await, and Task you can create an HTTP module that can handle long-running tasks without stopping the process.
+- Handlers are the destination of the requestion process and serve requests for a particular URL/Extension. 
+  - Http handlers help you inject preprocessing logic based on the extension of the file name requested.
+  - A handler can be synchronous or asynchronous, depending on the class they extend
+- Choosing which 1 to create is a matter of determining where in the request process you need to add your functionality
+  - If your requirements expect you to handle a specific URL or extension differently from others, a handler is prob what you need to create. 
+  - If you instead, want to act when something happens during the process, you should use a module.  
