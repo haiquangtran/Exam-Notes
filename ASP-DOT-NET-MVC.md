@@ -263,6 +263,7 @@
     - Passed as part of the complete URL string
     - Has several encruption schema support
     - For storing small amounts of data and visibility isn't a concern
+    - Not secure and limited in size
   - **Context.Items**
     - Part of the HttpContext and lasts only the lifetime of that request
     - Info that is only available during a single request. 
