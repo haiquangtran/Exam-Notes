@@ -144,6 +144,7 @@
 ## Integrating Web Services
 - Standard for putting services into the app space is Microsoft Windows Communication Foundation (WCF).
   - WCF is a SOAP-based protocol and is still the primary communications mechanism
+  - Completely replaces the old ASMX.
   - But ASP.NET MVC 4 Web API has made advances in RESTful services.
 - With ASP.NET MVC 4, concept of WEB API was introduced:
   - Allows you to bind data using model binding directly to the output
@@ -200,3 +201,44 @@
     - Has performance impact: It will add latency to the session access since there needs to be a call to a SQLServer.
 - A Distributed Environment can improve availability, reliability, and scalability.
   - One of the ways you can achieve that at a web server level is to use a web farm.
+
+## Windows Azure
+- Microsoft cloud computing platform used to build, deploy, and manage applications through a global network of Microsoft-managed data centers. 
+- Azure is a stateless system.  
+- Provides both Platform as a Service (PaaS) and Infrastructure as a Service (IaaS)
+  - PaaS: delivers a computing platform, including an OS, a programming language execution environment, a database, and a web server.
+  - IaaS: Offers virtual machines.
+- Classified as the public cloud in Microsoft's cloud computing strategy.
+- There are 3 different types of solutions: 
+  - **Virtual Machines**
+    - Gives you the most control over the environment
+    - Good choice for dev and testing and for running off-the-sheilf apps in the cloud
+  - **Web Sites**
+    - Good choice for simple web hosting and for hosting and running your ASP.NET MVC 4 apps.
+    - Enables scalable experience, with fast deployment and an almost immediate startup
+    - Can upgrade or downgrade this solution quickly and easily as needed
+  - **Cloud Services**
+    - Strictly PaaS approach
+- Windows Azure startup tasks are used to perform actions before a role starts.
+- **Startup tasks**
+  - A startup task can be run more than once. 
+  - AppCmd.exe is a Windows Azure-provided tool that enables you to manage your startup tasks
+  - Can use startup tasks to install any additional software or third-party tool you might need or other specific needs etc
+- There are 3 types of roles in Windows Azure:
+  - **Web**
+    - Use this if planning to run IIS in Windows Azure
+  - **Worker**
+    - Use this if you are going to run middle-tier apps without IIS
+  - **VM**
+    - Use this if what you want to do is beyond scope of Web or Worker
+    - Gives complete access to the VM itself
+- After startup tasks are completed, the OnStart method is called:
+  - Can override the OnStart method
+  - Need to return true from the method otherwise throws error
+- After the OnStart method is called, the process calls Run: 
+  - Run is a void method
+  - Can use override to have apps start that can run in parallel to the main app
+- Upon shutdown, the process calls the OnStop method:
+  - OnStop is a void method
+  - Typically used to close and clean up any processes you have started in the OnStart and Run methods.
+- (Go back to this section (Windows Azure), since skipped heaps)
