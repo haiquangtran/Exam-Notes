@@ -242,3 +242,45 @@
   - OnStop is a void method
   - Typically used to close and clean up any processes you have started in the OnStart and Run methods.
 - (Go back to this section (Windows Azure), since skipped heaps)
+
+## Choosing a State Management Mechanism
+- Web Forms use ViewState which stores info on the page in a hidden form field. 
+  - Ensures every post request to the server includes the view state (carrying it's state with it).
+  - This was a way to get around the concept of stateless as defined in HTTP
+- ASP.NET MVC embraces the nature of a stateless app
+- In ASP.NET MVC 4 app, state information can be stored in the following locations:
+  - **Cache**
+    - Stored on the server memory pool and shared across users
+    - Provides broader scope than the other management objects since the data is available to all classes within ASP.NET.
+  - **Session**
+    - Stored on server and unique for each user
+  - **Cookies**
+    - Stored on client and passed with each HTTP request to server
+    - For storing small amounts of data 
+    - Max is 4 KB.
+    - If you want client side info to persist across different pages etc such as login credentials.
+  - **QueryString**
+    - Passed as part of the complete URL string
+    - Has several encruption schema support
+    - For storing small amounts of data and visibility isn't a concern
+  - **Context.Items**
+    - Part of the HttpContext and lasts only the lifetime of that request
+    - Info that is only available during a single request. 
+    - Typically used to add info to the request that will be available to other modules and to the handler. E.g. Authentication. 
+  - **Profile**
+    - Stored in a database and maintains info across multiple sessions
+    - Part of the Membership and Roles provided
+    - Need to configure a provider in the Web.config file
+    - Need to be using the ASP.NET membership provider.
+
+## Sessionless State
+- Is a way to maintain state without supporting any session models.
+- Need to determine how you will pass the unique identifier from request to request.
+- There are lots of mechanisms available in ASp.NET MVC 4 to help you do this:
+  - Create identifier on server the first time user visits the site and continue to pass this info from request to request
+  - Use hidden form fields to store and pass info from 1 request to the next.
+    - There is some risk because a careless dev could forget to add the value, and you will lose your ability to maintain state.
+  - Use Razor view engine to script the unique identifier storage in layout or master page, so it will render in every page.
+  - Add JS functionality to store the unique identifier on the client side in a sessionStorage or localStorage and make sure you send it back to the server when needed.
+  - Add the unique identifier to the query string.
+  - Add the unique identifier to the URL and ensure routing tabel has the value mapped accordingly.
