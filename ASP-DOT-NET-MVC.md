@@ -474,9 +474,8 @@
   - JQuery Mobile framework provides a unifying way to manage many different mobile platforms. (Look into it.)
 - Common methods for detecting the type of browser:
   - Use JS to query for the userAgent header
-  - Use the window.addEventListener method
-  - Use viewport <meta> tag (and @media queries)
   - Use the DispalyMode provider.
+  - The window.addEventListener method does not give any info on the browser being used by the client, but it can be used to see whether a browser is HTML5-compliant.
 - DisplayModeProvider
   - If targeting smaller screens, you should create a mobile-friendly master page as well as mobile-friendly layouts and designs.
   - i.e. Different views for different browsers/devices such as Home.iemobile.cshtml and Home.IPad.cshtml
