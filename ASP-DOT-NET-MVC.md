@@ -422,9 +422,68 @@
     - Search engine web crawlers, rarely process JS, meaning the data is never indexed by a search engine. 
     - Difficult to bookmark data
     - Can be difficult for screen readers. (Hard to parse and recognize changes)
+- Inserting a partial view into a different model
+  - A partial view that is tied to a model might not be able to display correctly if inserted into a view being controlled by a controller other than the one that created it.
+    - e.g If a partial view is created for Modle FOO, an additional workaround (such as AJAX) is required if the partial view FOO is being inserted into a view created for model BAR.
 
+## Partial Views
+- Way ot reuse functionality on multiple pages.
+- Enable the developer to write code once and include it on other pages as needed.
+- Are the MVC replacement for user controls from ASP.NET web forms. 
+- Partial views are usually stored in the Views/Shared folder.
 
+## Designing and implementing pages by using Razor Templates
+- The Razor view engine enables you to create reusable templates.
+  - The templates are assignable by object type, and can be either for dispaly or edit. 
+- Razor templates are a way to create, maintain, and display sections of page layout.
+  - Enable reusable code that are part of the UI layer and can be managed independently from model or controller
+- ASP.NET MVC 4 has several built-in tempaltes for common classes, such as string.
+- You can also create your own to display upon request by using @Html.EditorFor(model => model.Article)
+  - Where article is of the type that has a custom editor template. 
+- **EditorTemplate**
+  - Type of template dispalyed when you use an @Html.EditorFor helper in a view
+  - EditorFor tempalte is both a create and an edit template, so you must manage situations where the object passed is null.
+  - When creating these templates they should be in their own .cshtml and stored in a well known directory:
+    - ~/Views/ControllerName/EditorTemplates/TemplateName.cshtml
+    - ~/Views/Shared/EditorTemplates/TemplateName.cshtml
+- **DisplayTemplate**
+  - Similar to Editor, but is just for displaying an object rather than creating or editing on the object.
+  - ~/Views/ControllerName/DisplayTemplates/TemplateName.cshtml
+  - ~/Views/Shared/DisplayTemplates/TemplateName.cshtml
 
+## Designing layouts to provide visual structure
+- Typically a layout for a webpage or an MVC app has a header content area, a menu area, a content area, and a footer area. 
+- You can create more than one master or layout within the same folder; the layout of these other master or layout pages can be entirely different from the design of the default master or layout page.
+  - Master or layout pages can be switched on the fly via code. This can be useful if the goal is to create different user experiences based on conditions.
+  - Master/Layout page is used to share libraries and css files to the sub pages. 
 
+## Detecting browser features and capabilities
+- If certain feature are missing or known to behave differently than expected, they must be corrected using add-on libs such as jQuery and Modernizr.
+  - The common method for browser detection is to use JS to query for the userAgent header.
 
-
+## Browser compatability and dealing with different devices.
+- The layout included with default MVC project tempalte supports desktop browsers running in a typical landscape view.
+  - To display portrait view on desktops or to support mobile, can use @media
+- Use CSS
+  - Media queries
+  - Use most common features availablea cross all the browsers for compatability.
+  - If using specific browser methods i.e. -moz-, use fallbacks incase. 
+- Use libs such as jQuery and Modernizr
+  - Consistent look and feel across different browsers 
+  - Accessible across all browsers and devices
+  - JQuery Mobile framework provides a unifying way to manage many different mobile platforms. (Look into it.)
+- Common methods for detecting the type of browser:
+  - Use JS to query for the userAgent header
+  - Use the window.addEventListener method
+  - Use viewport <meta> tag (and @media queries)
+  - Use the DispalyMode provider.
+- DisplayModeProvider
+  - If targeting smaller screens, you should create a mobile-friendly master page as well as mobile-friendly layouts and designs.
+  - i.e. Different views for different browsers/devices such as Home.iemobile.cshtml and Home.IPad.cshtml
+  - Add a new DisplayModeProvider for each device and create special view types you want to support
+- **Summary**
+  - MVC 4 supports mulitple approaches to mobile users.
+    - Can create overridden views that are generic for any mobile device or specific to a device.
+    - The System.Web.Mvc.VirtualPathProviderViewEngine.DisplayModeProvider evaluates incoming requests and routes them based on the values in the userAgent of the request and the configured DispalyModeProviders.
+    - Another choice for mobile-viewable websites is to use the viewport <meta> tag and CSS @media queries. 
+    - The jQuery Mobile lib enables you to use markup to provide additional functionality as supported by the client browser. If the browser does not support the functionality, the jQuery lib will downgrade the functionality gracefully.
