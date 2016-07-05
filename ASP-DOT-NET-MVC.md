@@ -360,3 +360,71 @@
 - **Choosing which 1 to create is a matter of determining where in the request process you need to add your functionality**
   - If your requirements expect you to handle a specific URL or extension differently from others, a handler is prob what you need to create. 
   - If you instead, want to act when something happens during the process, you should use a module.  
+
+## UI Design
+- HTML provides structure to rendered page
+- CSS provides additional control over the look and feel, or presention of the page.
+- Dynamic page content is the main reason to use ASP.NET MVC 4. 
+  - Dynamic content is different info dispalyed based on a set of conditions
+- Razor view engine uses the _Layout.cshtml file for the primary design template for the app
+  - One of the key features is the link to the CSS file that defines the styles for the site
+  - This element also contains common UI elements such as menus, headers, and footers for the pages in the site. 
+  - A site can have one or more CSS files.
+- ASPX view engine uses the Site.Master file rather than the _Layout.cshtml file
+- Helpers are ASP.NET MVC code constructs taht output HTML
+  - Many different helpers such as @Html.TextBox
+  - @Html.TextBoxFor links to a model.
+
+## Validation
+- **Model (MVC)**
+  - Manages behaviour and data of an app domain.
+  - The model validates fields required in the MVC web app
+    - Validated through data annotation [Required], [Range(1, 250)] etc
+      - min length, max length, data type, rules for the attribute etc
+- **Views (MVC)**
+  - Manages the dispaly of info 
+  - Using model-based data annotations provides a view that enables you to allow client-side validation 
+    - Two of the key constructs are @Html.EditorFor and @Html.ValidationMessageFor
+      - EditorFor helper relates validation information in the model to the text box that displays in the editor. This relation occurs serverside where it is tied back to the model.
+        - Typically, whenever you see an EditorFor, you will find an Html.LabelFor, which provides the display of the text label for the related item. EditorFor is like a smarter TextBoxFor, it figures out the type of the model and produces a textbox with that type. You can also override it so it gives default tempaltes (Look this stuff up).
+        - ValidationMessageFor helper displayers validation info for the related model/input item.
+- **Controllers (MVC)**
+  - When using model-based data annotations, perform a check on the server side.
+  - The ModelState property on the base controller has several model-specific helpers
+    - IsValid property
+      - Provides a list of valid and invalid fields you can use 
+      - i.e. if (ModelState.Isvalid) { Save etc... }
+- **Remote Validation**
+  - i.e. Checking if username is taken or not. (This must be done via a remote validator to the server)
+  - Remote validation has 2 parts:
+    - A server action that evaluates validity
+      - Typically create a validation-specific controller to handle all your validation.
+      - To ensure the UI can call the validation action, add System.Web.Mvc.Remote Attribute to the validation configured on the model. 
+        - [Remote("IsUserAvailable", "Validation")]
+      - Also need to make configuration changes so the server knows to allow remote validation. (In Web.config):
+        - In <appSettings> add the following: 
+        - <add key="ClientValidationEnabled" value="true"/> 
+        - <add key="UnobtrusiveJavaScriptEnabled" value="true"/>
+- **jQuery UI**
+  - Can help with validation like using the DatePicker to only display valid dates etc.
+
+## Using AJAX to make partial page updates
+- Can use AJAX within MVC web apps to send and retrieve data from the server asynchronously 
+  - Doesn't require a entire page reload, only show and display results from the AJAX (Improves UX)
+  - Use AJAX for dynamic content not static
+    - If app displays info that changes frequently, use AJAX calls fired based on a timer to refresh that area on a regular basis.
+  - Valid example would be a search box, making calls to the server as the user types (filtering out search results in real time).
+  - System.Web.MVC.Ajax namespace helps with AJAX
+  	- Has helpers and extensions
+  	- Helps AJAX constructs in your view such as AJAX-based forms.
+- Limitations of using AJAX:
+  - Due to dnyamic nature, many different web technologies have problems understanding the info
+    - Search engine web crawlers, rarely process JS, meaning the data is never indexed by a search engine. 
+    - Difficult to bookmark data
+    - Can be difficult for screen readers. (Hard to parse and recognize changes)
+
+
+
+
+
+
