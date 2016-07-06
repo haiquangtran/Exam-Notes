@@ -493,8 +493,39 @@
   - 2: Ensure the site is coded properly to facilitate search engine crawlers.
     - Many accessibility produces such as screen readers, depend on properly structured code to provide info to users.
 - Web Accessibility Initiative-Accessible Rich Internet Applications (WAI-ARIA) is a set of descriptions on how to make active content more accessible.
+  - When properly implemented, ARIA should not have any effect on search engine rankings. All markup occurs in attributes within the HTML elements.
+  - Basic concept of ARIA is to provide additional context to HTML elements and to the content they contain
+    - Meaning is delivered visually rather than in a format that can be referenced.
+  - There are four major considations that ARIA tries to address:
+    - **keyboard focus and navigation**
+    - **relationships**
+    - **managing dynamic changes**
+    - **the role of presentation**
+  - To make a fully ARIA-compliant app means you need to manage all of these aspects of your web app.
+  - Limitations of ARIA 
+    - Not every client supports it
+    - Can provide extra text to download, sometimes doubling the payload for a server request
+    - If size of payload is critical, simply adding ARIA can negatively affect performance, however if the payload is less critical, making your site accessible as possible is important.
+- ASP.NET MVC 4 provides limited support for ARIA.
+  - However, MVC enables you to enhance the built-in HTML helpers to provide ARIA specific information. (By extending the helpers).
 - The SEO Toolkit is a widely used tool that examines HTML and reports on issues you should fix.
   - The toolkit runs under IIS.
   - You download the toolkit from Microsoft.com
   - Can analyze a website or web app, create sitemaps and create robot exclusion rules and a robots.txt file for a site, which tells search engines not to index a certain page.
-- (Look at this section again).
+-  W3C offers free validators for HTML, CSS, feed formats, and mobility
+  - Can also upload rendered content while developing a site.
+  - Although V3C validators do not search for SEO specifically, their evaluation of the HTML structure can improve your site's accessibilitiy for search engine crawlers and for users with disabilities.
+- Another tool for validating your app is Page Inspector in Visual Studio.
+  - Evalutes HTML in your app, looking for potential issues.
+- **Summary**
+  - SEO
+    - Ensure your code does not have any missing or incorrectly ordered HTML tags
+    - Ensure you have separated your content from your presentation and scripting info
+      - Especially important for ASP.NET MVC apps because much of the rendered HTML is created by HTML helpers or shared from template pages, and is not usually inspected
+  - HTML analysis tools can help you determine validity of the HTML your app outputs. 
+    - IIS SEO Toolkit
+    - Internet Explorer Developer Toolbar
+    - W3C provides online validators that check HTML and CSS
+  - WAI-ARIA is a markup system that helps assistive technologies, thus users, better understand and make use of your content
+  - ASP.NET MVC 4 does not currently offer built-in support for ARIA. 
+    - However you can extend it to create HTML helpers that extend the current set of built-in helpers
