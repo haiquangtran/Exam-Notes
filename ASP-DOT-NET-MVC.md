@@ -486,3 +486,15 @@
     - The System.Web.Mvc.VirtualPathProviderViewEngine.DisplayModeProvider evaluates incoming requests and routes them based on the values in the userAgent of the request and the configured DispalyModeProviders.
     - Another choice for mobile-viewable websites is to use the viewport <meta> tag and CSS @media queries. 
     - The jQuery Mobile lib enables you to use markup to provide additional functionality as supported by the client browser. If the browser does not support the functionality, the jQuery lib will downgrade the functionality gracefully.
+
+## Search Engine Optimization (SEO)
+- There are two primary ways to optimize your website for search indexing:
+  - 1: Ensure a clear consistent message within the text on the page.
+  - 2: Ensure the site is coded properly to facilitate search engine crawlers.
+    - Many accessibility produces such as screen readers, depend on properly structured code to provide info to users.
+- Web Accessibility Initiative-Accessible Rich Internet Applications (WAI-ARIA) is a set of descriptions on how to make active content more accessible.
+- The SEO Toolkit is a widely used tool that examines HTML and reports on issues you should fix.
+  - The toolkit runs under IIS.
+  - You download the toolkit from Microsoft.com
+  - Can analyze a website or web app, create sitemaps and create robot exclusion rules and a robots.txt file for a site, which tells search engines not to index a certain page.
+- (Look at this section again).
