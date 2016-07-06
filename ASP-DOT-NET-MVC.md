@@ -529,3 +529,35 @@
   - WAI-ARIA is a markup system that helps assistive technologies, thus users, better understand and make use of your content
   - ASP.NET MVC 4 does not currently offer built-in support for ARIA. 
     - However you can extend it to create HTML helpers that extend the current set of built-in helpers
+
+## Globalization and Localization
+- Globalization 
+  - **Internationalization (l18N):** 
+    - Making your app able to support the use of multiple cultures 
+  - **Localization**
+    - Effort necessary to translate data, labels, help files, support documents, and so on to enable any user to understand the application.
+    - Creating locale-specific content, images, and video - all the items your application presents to the user.
+- Both l18N and localization need to be done before your app can be considered 
+multicultural, and the timing of your conversion is important.
+  - It can take almost as long to translate an app as it does to develop an app.
+    - After you globalize an app, you don't have to repeat the effort.
+  - Items that need to be translated must be pulled out of an app and put into separate resource files.
+  - Your app then needs to interpret the culture in thebrowser and set the server info appropriately. 
+  - Finally, after you receive the translated info, you need to make it available in your app. (Only at this point will your app be globalized)
+- Look this up again if you actually want to do it.
+  - Planning a localization strategy
+  - Creating and applying resources to the UI
+  - Settings cultures
+  - Creating satellite resource assemblies
+- **Summary**
+  - Globalization requires you to put all displayable strings in resource files. 
+     - Can choose which resource files to create
+     - Should minimize duplication of strings to ensure minimal time to performing translations.
+  - An alternative approach to resource files is to provide different views for different languages.
+    - Eliminates dependency on resource files, but can lead to code replication.
+  - Can use shared approach to globalization, in which resource files are used along with multiple copies of views.
+    - Best suited to supporting non-Western languages.
+    - Using another set of views strictly for right-to-left languages is a logical appraoch
+  - Provide globalization resources to jQuery-specific items.
+    - JS cannot determine the culture from the browser, even if the info is available and is being sent to the browser.
+  - Can give users option to choose their culture in your app.
