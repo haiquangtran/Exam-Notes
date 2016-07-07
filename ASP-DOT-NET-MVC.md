@@ -561,3 +561,90 @@ multicultural, and the timing of your conversion is important.
   - Provide globalization resources to jQuery-specific items.
     - JS cannot determine the culture from the browser, even if the info is available and is being sent to the browser.
   - Can give users option to choose their culture in your app.
+
+## Applying authorization attributes and global filters
+- Adding attributes to a controller/action enables you to implement complex requirements across an application.
+- The attribute's primary role is to analyze information, especially the HttpContext class, coming into and out of the controller to determine whether it meets a set of requirements.
+  - The basic set of attributes enables a developer to put some business logic around the flow of the application.
+- **Traditional filters**
+  - Ensure a request meets a certain expectation:
+    - RequireHttpsAttribute
+      - Ensures requests go through HTTPS
+    - ValidateAntiForgeryTokenAttribute
+      - For protection against cross-site request forgeries
+      - Ensures that there is a shared, secret value between the form data in a hidden field, a cookie, and on the server. 
+      - Validates that the form is one that your server posted, that it is the same browser version, and that it matches an expected value on the server.
+    - ValidateInputAttribute 
+      - Gives you control over the content coming back from a post operation and ensures that there is no potentially dangerous content such as injections.
+      - Can select form fields that will not be validated in the attribute by [ValidateInput(true, Exclude = "ArbitraryField")] and on a model property by AllowHtml attribute. 
+    - AuthorizeAttribute
+      - Gives you control over whether the user must be authenticated before being able to take the action.
+      - Authorize(Roles = Admin, PowerUser)
+      - In many cases, the AuthorizeAttribute is applied globally so that all actions in all controllers require that the user be authorized
+      - With a few that do not require authorization being marked with AllowAnonymous.
+    - and ChildActionOnlyAttribute. 
+      - Looks at the application context to examine whether it should respond. 
+      - Ensures that an action cannot be reached through the traditional mapping process since ChildActionOnlyAttribute can be called only from Action or RenderAction HTML extension methods such as @Html.RenderAction.
+  - The remaining two filters:
+    - HandleErrorAttribute
+      - Error management tool handling exceptions occuring within the action
+      - By default, ASP.NET MVC 4 displays the ~/Views/Shared/Error view when an error occurs in a decorated action. 
+      - Can also set the ExceptionType, View, and Master properties to call different views with different master pages based on the type of exception.
+      - To perform customizations or overrides using the HandleErrorAttribute, override the OnException method. 
+    - ActionFilterAttribute
+      - Isn't a true attribute, it's a abstract class upon which action filters are based. 
+      - Enables creation of custom action filters. The 4 primary methods avaliable for override: 
+        - OnActionExecuting
+        - OnActionExecuted
+        - OnResultExecuting
+        - OnResultExecuted
+- Ordering filter attributes: The first approach:
+  - Put reject filters first, and in the order from the most likely to fail to the least likely to fail. 
+    - This avoids extra computation since you want the app to fail faster, if there is errors.
+- Ordering filter attributes: The second approach:
+  - Ordering based on business importance from the most important to the least. 
+
+## MVC Controllers and Actions 
+- There are 9 default action results with ASP.NET MVC 4:
+  - **ContentResult**
+    - Helper method: Content
+      - Returns a user-defined content type
+  - **EmptyResult**
+    - Helper method: (None)
+      - Represents a return value to be used if the action method must return a null result
+  - **FileResult**
+    - Helper method: File
+      - Returns binary output that is written to the result
+  - **JavaScriptResult**
+    - Helper method: JavaScript
+      - Returns JavaScript that is executable on the client
+  - **JsonResult**
+    - Json
+      - Returns a serialized JSON object
+  - **PartialViewResult**
+    - Helper method: PartialView
+      - Renders a partial view
+  - **RedirectResult**
+    - Helper method: Redirect
+      - Redirects to another action method by using its URL and passing through the routing process
+  - **RedirectToRouteResult**
+    - Helper method: RedirectToActionRedirectRoute
+      - Redirects to another action method
+  - **ViewResult**
+    - Helper method: View
+      - Renders a view as an HTML document
+- **Summary**
+  - Filter attributes provide a way for the developer to examine and take action on information in a request before and after the action is called. 
+    - ASP.NET MVC comes with built-in attributes that help with authentication and authorization, secure access, anti-forgery support, and error management. 
+    - You can create custom action filters as needed.
+  - Action results are the finishing actions taken by an application.   
+  - Model binding is a flexible process that maps fields on the UI to properties on the model. 
+    - There are 3 types of model binding: 
+      - **strongly-typed binding**
+        - 2-way tool in that the HTML helper understands attributes on the model and can set up client-side validation based on that info. 
+      - **weakly-typed binding**
+        - 1-way binding in that it doesn't provide validation on the client side, but it does create the model after the request is returned. 
+        - Can provide some helpers as well as create an accepted list or blocked list of attributes that should be populated from the form by using the Include and Exclude parameters on the Bind attribute.
+      - **and using the value provider.**
+        - Can map forms data returned from the client using the ToValueProvider on the FormCollection object. This process attempts to match the fields of an empty model with the values it finds in the list of keys.
+        - If it finds a semantic match, it populates the property in the model with the value in the form collection.
