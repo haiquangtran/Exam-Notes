@@ -648,3 +648,19 @@ multicultural, and the timing of your conversion is important.
       - **and using the value provider.**
         - Can map forms data returned from the client using the ToValueProvider on the FormCollection object. This process attempts to match the fields of an empty model with the values it finds in the list of keys.
         - If it finds a semantic match, it populates the property in the model with the value in the form collection.
+
+## Design and implement Routes
+- **Summary**
+  - When SEO is important to your application, consider human-understandable URLs, such as Product/<BookTitle>, rather than something like Product/1.
+  - The order you place routes into the RouteCollection object, or route table, is important. 
+    - The route handler processes the list until it finds one that matches the incoming pattern
+    - Should start your list with the patterns that the route handler should ignore and then add more specific URL patterns so they will be matched by the route handler before a more general one finds it. 
+    - Use the MapRoute function to add a route to the RouteCollection object. 
+  - When creating a route, you can add default values to take place of any values that are missing in the URL string. 
+  - Constraints are a way to filter a requested URL to define different routing for items based on the variable type or content. 
+    - The route handler reviews the constraint as a regular expression and evaluates the appropriate variable against it to determine whether a match exists.
+  - Large, complex ASP.NET MVC apps might need to support hundreds of actions on a controller. 
+    - Using **areas** enables the designer to separate functionality into logical or functional groups. 
+      - Creates new copies of Models, Views, and Controllers directories in an Areas directory so you can split functionality in an appropriate way. 
+      - Each has its own route management features as well, so one area can define a route different from another area. 
+      - The areas are split in the application by AreaName/Controller/Action
