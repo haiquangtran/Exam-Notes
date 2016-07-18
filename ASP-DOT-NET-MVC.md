@@ -666,6 +666,8 @@ multicultural, and the timing of your conversion is important.
       - The areas are split in the application by AreaName/Controller/Action
 
 ## MVC Filters and controller factories
+- Filters should be thought of as adding extra functionality consistently throughout your application. Authorization filters, for example, enable you to do custom work around authentication and authorization.
+- The main filters are:
 - **Authorization**
   - An authorization filter makes a security based evaluation about whether an action method should be executed, and it can perform custom or other security needs and evaluations.
 - **Action**
@@ -677,4 +679,21 @@ multicultural, and the timing of your conversion is important.
 - **Exception**
   - Is run when there is an unhandled exception thrown in the processing of an action method. 
   - Covers the whole lifetime of the action, from the initial authorization filters through the result filter.
+- When using an attribute, you can apply it as described in AttributeTargets (controller classes or actio nmethods) or you can employ it globally.
+- To ensure it runs on every method, every time, add it to your global filters. 
+  - You do this by adding them in App_Start/FilterConfig.cs in the RegisterGlobalFilters method:
+  - filters.Add(new MyCustomAttribute());
+- Custom controller factories are usually for support of DI and Inversion of control (IoC). 
+  - Another reason is passing in service reference or data repository information. Basically, any time you need to create a controller in a way that is not supported by the basic functionality.
+- **Summary**
+  - One of the most powerful extensibility points, and likely the most used one, is the action filter. 
+    - You can overwrite an existing action filter to add custom functionality, or you can create your own filter. 
+    - The action filter enables you to get into the processing stack before the action gets executed, or immediately after the action gets executed.
+  - You can add a result filter, which is like an action filter but for action results. It has two methods: OnResultingExecuting and OnResultExecuted.
+  - You can create a custom controller factory that enables you to make nontraditional decisions about how your controllers are constructed. This kind of approach is useful when you need to pass inc ertain information such as dependencies or runtime references. 
+  - Overriding a view engine enables you to interject additional business logic into the HTML rendering. If your needs are more extensive than adding behaviour, such as replacing behaviour or wanting to support a syntax different from Razor or ASPX, you can create and register your own custom view engine.
+  - Model binding is a vehicle for facilitating one- and two-way communication between the view/form items and a model in the application. Sometimes there is no direct correlation between the two values. In those cases, custom model binding is a good way to pull that out of a controller and make it testable and reusable. 
+  - The default route handler gives the developer a lot of flexibility in defining routes, but sometimes you might need additional or different functionality. ASP.NET MVC 4 enables you to create custom route handlers that support your need to interpret URLs differently. As with the other customization choices, you can either override the existing default functionality to add your required logic or you can comepletely replace it. 
+
+
 
