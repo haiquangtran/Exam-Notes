@@ -695,5 +695,58 @@ multicultural, and the timing of your conversion is important.
   - Model binding is a vehicle for facilitating one- and two-way communication between the view/form items and a model in the application. Sometimes there is no direct correlation between the two values. In those cases, custom model binding is a good way to pull that out of a controller and make it testable and reusable. 
   - The default route handler gives the developer a lot of flexibility in defining routes, but sometimes you might need additional or different functionality. ASP.NET MVC 4 enables you to create custom route handlers that support your need to interpret URLs differently. As with the other customization choices, you can either override the existing default functionality to add your required logic or you can comepletely replace it. 
 
+## Reduce network bandwidth
+- One method is to ensure that only needed items are sent to the client. 
+  - You should clean up old, unused JS files or methods that are still inked, and remove unused or redundant styles in your CSS files.
+  - Also can take advantage of bundling and minification, which are JS and ASP.NET MVC features that remove extraneous information from scripts and merge them into a single script for download.
+  - Consider compressing the data you are transferring to the browser if it's still too large after doing the above.
+- After minimizing size of the content downloaded to clients, you can look at minimizing the effect of the network.
+  - Minimize number of network hops that occur between client and server.
+  - A content delivery network (CDN) can help; it removes some of the network hops between client and server and takes a portion of the load off your server.
+- **Bundling**
+  - Create single file form multiple files to limit number of connections needed for downloading files. 
+  - Will save download time only the first time the file is downloaded (since usually cached afterwards)
+  - However, you have slightly increased the amount of time it takes to find the necessary function or other item from within that file. 
+  - This increase takes place every time the file is accessed, not just the first time it is downloaded. You get a one-time gain in network speed for some contiual impact on acess performance. It becomes a balancing act.
+  - BundleConfig.cs
+  - The bundle functionality gives you another path to put this script into your page: @BundleTable.Bundles.ResolveBundleUrl()
+    - This code creates the script link for you and generates the hashtag for the script. 
+    - This means the browser will store the script longer and the client will have to download it fewer times. 
+    - With the hashtag, browsers get the new script only if the hashtag is different or if it hits the internal expiration date, which is generally a year. 
+- **Minification**
+  - Runs through JS files and CSS files and removes all instances of extraneous content such as comments and whitespace, and replaces variable names. 
+  - Purpose is to make the file smaller so it is faster to download.
+  - Unlike bundling, there is no sideeffects or extra costs for using minificaiton.
+  - Enabling minification is simple; youc an enable it in your configuration file by setting the compilation elements debug attribute to false.
+    - <compilation debug="false" />
+- **Compressing and decompressing data**
+  - Accept-Encoding: gzip, defalte (These are in the headers of the request)
+  - These are compression types. The easiest way to take advantage of this is to confiugure compression in IIS. 
+  - The server automatically compresses files before sending the response to the Internet. 
+  - Can compress static or dynamic content, can also set a minimum size of the file before the server will compress it etc.
+  - You can have your application zip up content before providing it to users, which is appropriate for needs such as reports and documents. 
+    - Users have to decompress the compressed file.
+  - IIS enables you to configure your web server to send compressed content to users whose browsers accept gzipped content.
+  - There is a tradeoff between sending a smaller file and the extra amount of time it takes on the client to unzip the content.
+    - It becomes a choice between savings in download time vs the extra client cost to decompress the file. 
+- **Planning a content delivery network (CDN) strategy**
+  - CDNs provide a way to distribute your content from sources other than your server. The delivery nodes might be within your network or external, but they are not part of the server system running your .NET MVC app.
+  - Server several purposes: 
+    - Take the work load of serving images, CSS files, JS files, and other static content off your app server. 
+    - Get content closer to the client. The client can download the files from much closer locations (nodes closer).
 
-
+## TODO: Look at the Troubleshoot and debug web applications chapter.
+- **Summary**
+  - The Performance Wizard in Visual Studio enables you to configure profiling to capture information on CPU usage, memory usage, and resource/threading information.
+  - The Visual Studio profiler performs a complete trace of all the calls in an application enabling you to monitor and evaluate the process and logic flow within your app. Can find problems such as methods being called too often and other potential performance impacts.
+  - Performance Monitor comes with Windows Operating System and provides information about many different characteristics of the running application.
+  - Tracing is functionality in the System.Diagnostics namespace that enables you to write information to one or more TraceListeners. 
+    - A listener writes info to a text file, XML file, or another format. 
+    - Can call the functionality to write this info by using Trace object and the static methods for Write, WriteIf, WriteLine and WriteLineIf or Create a custom TraceListener if necessary. 
+  - Logging third party tools: NLog and log4net. 
+  - Code contracts are a way to make a method responsible for defining and publicizing its own internal conditions (pre, invariant, and post).
+    - Throw exceptions if their rules are violated. 
+  - Health monitoring is a system that is part of ASP.NET that tracks various events ocurring within your application. 
+    - You add it through configuration. 
+    - Also can capture limited information about an applications state as it runs. 
+    - There are specific mappings for all errors, infrastructure errors, processing errors, failures and other events. 
