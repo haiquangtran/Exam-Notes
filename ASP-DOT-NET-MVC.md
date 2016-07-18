@@ -664,3 +664,17 @@ multicultural, and the timing of your conversion is important.
       - Creates new copies of Models, Views, and Controllers directories in an Areas directory so you can split functionality in an appropriate way. 
       - Each has its own route management features as well, so one area can define a route different from another area. 
       - The areas are split in the application by AreaName/Controller/Action
+
+## MVC Filters and controller factories
+- **Authorization**
+  - An authorization filter makes a security based evaluation about whether an action method should be executed, and it can perform custom or other security needs and evaluations.
+- **Action**
+  - Enables the developer to wrap the execution of the action method. 
+  - Also enables the system to perform an additional workaround, providing extra information into the action method
+  - Or it can inspect the information coming out of the action and also cancel an action methods execution.
+- **Result**
+  - Is a wrapper around an action result. It enables the developer to do extra processing of the results from an action method.
+- **Exception**
+  - Is run when there is an unhandled exception thrown in the processing of an action method. 
+  - Covers the whole lifetime of the action, from the initial authorization filters through the result filter.
+
