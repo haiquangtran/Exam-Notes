@@ -809,3 +809,55 @@ multicultural, and the timing of your conversion is important.
   - Unit tests focus on a single method and attempt to test only taht function without any dependencies. 
   - Integration test examines more than one item at a time, such as retrieving known information from a database and performing some business logic on it. 
   - Can use VS Ultimate 2012 edition to create and run web performance and load tests. 
+
+## TODO: Look at Debug a Windows Azure application chapter
+- **Collecting diagnostic information**
+  - Tracing, debugging errors, watching on performance issues, and monitoring system resource usage. 
+- **Choosing log types**
+  - The diagnostics library within Windows Azure offers a tremendous number of tools designed to support trace and debug process flows within applications running in Windows Azure. 
+- **Summary**
+  - When you have deployed your app into Windows Azure, you will find your traditional ways of gathering diagnostic information are not available or give unexpected results. To compensate this, Microsoft provided a special Windows Azure-specific diagnostics API, Microsoft.WindowsAzure.Diagnostics.
+  - Getting diagnostics running in your Azure-deployed app requires several steps. The first is adding information into your ServiceDefinition.csdef file so that you can import the Diagnostics module. You also need to make sure that information is added into your ServiceConfiguration.cscfg file so that the diagnositc module can access databases or other business needs.
+  - After diagnostics are fully available in your Windows Azure application, you can either code your calls to the diagnostics or use the built-in event monitors. To cinfugre the event monitors, create a new file: Diagnostics.wadcfg. This file contains the configuration entries that will set up the appropriate counters. After diagnostic information is being saved, you can programmatically download the information from the server or get it on demand.
+  - Azure also enables you to configure the role to run IntelliTrace on the app. You need to deploy the app using VS Ultimate 2012, and amke configuration chagnes during publish process. After IntelliTrace is logging the role, you can download and review this info through VS. 
+
+## TODO: Look at Chapter Summary.
+
+## TODO: Design and Security Chapter
+
+## TODO: Authentication
+- Authenticating users
+  - There are 2 parts of Authentication: IIS and the .NET framework. They work together to manage the authentication process.
+  - **IIS authentication**
+    - Challenge-based authentication method
+      - Occurs when client must respond to server's demand for credentials. 
+      - Examples of these include Basic, Digest, Windows, Client Certificate Mapping, and IIS client certificate mapping. 
+    - Login redirection-based authentication method
+      - When the client sends login credentials to the application without being required by the server. 
+      - The application takes the login information and uses it to determine where the user should be redirected. Forms authentication is the primary example. 
+    - Anonymous authentication
+      - Does not require any crednetials from the user. 
+  - **.NET authentication**
+- **Summary**
+  - IIS is the primary mechanism for authentication because it comes bundled with seven providers. However, with IIS 7, only Anonymous authentication provider comes installed by default. If you want to use any of the other providers, you need to install them separately. 
+  - **Anonymous authentication**
+    - users do not require login credentials
+  - **Basic authentication**
+    - requires credentials that are validated against the domain, but the information is not sent securely
+  - **Digest authentication**
+    - Similar to Basic, but the credentials are sent hashed. 
+  - **Forms authentication**
+    - One of the most commonly used, because it enables you to authenticate users whatever way you want. 
+  - **Windows authentication**
+    - Uses credentials from Windows logged-in users and sends them with the HTTP request.
+  - **Client Certificate authentication**
+    - Matches certificates between the client and the server and uses it to access user information.
+  - **IIS Client Certificate authentication**
+    - Allows validation against both Active Directory and the local server store.
+  - The main way to enforce authentication in ASP.NET MVC 4 is through the use of attributes. The Authorize attribute tells the system that any users calling the controller or the action need to be authenticated. The AllowAnonymous attribute tells the system that it is permissible for the users to not be authenticated. 
+  - Can use custom authentication in MVC 4. The best method is to implement the IIdentity and IPrincipal interfaces (Enables you to work with all the default authentication mechanisms).
+  - MVC 4 introduced SimpleMembership and SimpleRoles. These enable you to customize access to data storage by specifying the table, unique identifier, and username in the initialization. 
+  - You can create custom membership providers by subclassing AuthorizeAttribute or by deriving from the Forms authentication provider and overriding the applicable methods.
+  - Choosing the appropriate authentication type depends on several factors. The primary factor is the user store that contains the login info that will be used to verify the website user, If you are using an Active Directory-based authentication system, you should use one of the standard challenge-based methods. 
+    - If you are using a different technology for your user store, you need to use an overridden provider or a custom provider. 
+    - If you do not have a provider or need a special one just for the website, Forms authentication can be the best way to implement your authetnication requirements. 
