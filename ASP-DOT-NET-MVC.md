@@ -750,3 +750,62 @@ multicultural, and the timing of your conversion is important.
     - You add it through configuration. 
     - Also can capture limited information about an applications state as it runs. 
     - There are specific mappings for all errors, infrastructure errors, processing errors, failures and other events. 
+
+## TODO: Look at Design an exception handling strategy
+- **Handling exceptions across multiple layers**
+  - Multiple layers require you to understand layer rules.
+  - A layer should know only about the layer it communicates with, and it should have no knowledge about layers that might be calling it. 
+  - A traditional three-tier app has a data layer, business layer and a user interface layer. The data layer doesn't know anything about the other layers, the business layer knows about the data layer but nothing about the UI layer, and UI only knows about the business layer. 
+  - The same approach is appropriate
+- **Displaying custom error pages, creating your own HTTPHandler, and setting Web.config attributes**
+  - Need to determine which errors will have custom pages and what kind of information should be displayed on the pages: one to handle 404 page errors and a more generic error display page. 
+  -  The Global.asax page is one of the ways you can support custom error pages. Can use the Application_Start method and the Application_Error methods, a global error handler that is called when an unhandled error makes it through the application stack. 
+- **Handling first chance exceptions**
+  - First chance exceptions are exceptions before they have been handled by an error handler. 
+  - Every error that occurs in an application begins the error-handling process as a first chance exception. 
+- **Summary**
+  - What you need to do with the exceptions varies based on where in your application the error occurs. Typically, a layer in a multilayer application handles two sets of exceptions: its own and the exceptions from the layer below it in the stack. A layer does not handle exceptions thrown in the data layer. Those exceptions should be handled by the business layer.
+  - You can create custom error pages for display in your application. You can create custom error pages like any other controller/view combination. You define the error handling controller and then you create the view(s) to manage the various errors. You can add the pointers to the error files in both code and in configuration.
+  - First chance exceptions are exceptions that are immediately thrown, before they have been handled. You can add first chance exception handler to your application.
+    - Can add logging or other diagnostic or cleanup items in this handler.
+    - However, you need to make sure the first chance exception handler is exception-free, as exceptions will cascade and could easily cause a stack overflow. 
+
+## **TODO: Look at Testing chapter again**
+- **Creating and running web tests**
+  - ASP.NET allows you to do both Load and performance web testing:
+    - Add a web test and load project to your solution
+    - Configure the test flows taht will be used to perform the test
+    - Easiest way to provide the test flow is to record a series of actions taken within your web application.
+    - Should have a .webtest file available in your new project. Open the file and start recording and exercise the application as needed. The system will record your path. 
+    - You can use the recorded test as needed, based on the type of load test you will run. The load test runs a set of web tests. 
+- **Types of load tests**
+  - Constant
+    - Enable you to set a constant number of users.
+    - The testing process uses the same users through the entire test run.
+    - Using a large number of users in constant mode, however, can place an unrealistic demand on the application and servers.
+  - Step
+    - steadily adds users to the testing process. 
+    - There are four values you need to consider when using a stepped performance approach:
+      - Initial user count
+      - Maximum user count
+      - Step duration
+      - Step user count
+  - Goal-based
+    - Similar to step-load test, however, differs because it doesn't count the running users as the key point of information. Rather it uses the user count as a way of getting to other goals: percent of CPU usage and percent of memory usage etc. i.e. With goal-based load tests you can run various types of tests, such as determining how many concurrent users will push the CPU to 75 percent usage. 
+    - The data acquired from ogal-based load tests is important over time. 
+- **Test planning**
+  - Smoke
+    - Generally puts a light load on the application over a shorter period of time.
+    - You might use a smoke test immediately after deploying to a new environment to make sure the application runs correctly.
+  - Stress
+    - Runs your app under a heavy load for a long time to reveal your apps behaviour under stress. Where a smoke test may last a matter of minutes and is generally more concerned with breadth of coverage than depth of coverage, a stress test generally lasts hours and is concerned with both breadth and depth of test coverage.
+  - Performance
+    - Tests the responsiveness of your application. This kind of test keeps careful records of when requests started, when the first piece of data is returned to the client, and the length of time and amount of data that was transferred.
+  - Capacity planning
+    - Uses a testing process to support the correctness of the application and to help plan for deployment. This approach uses the number of expected visitors as a metric and applies it to the application
+    - This will be combined with the CPU limits, to determine how many or what type of servers need to be used to support the expected usage. 
+- **Summary**
+  - Unit tests enable you to validate your app repeatedly.
+  - Unit tests focus on a single method and attempt to test only taht function without any dependencies. 
+  - Integration test examines more than one item at a time, such as retrieving known information from a database and performing some business logic on it. 
+  - Can use VS Ultimate 2012 edition to create and run web performance and load tests. 
