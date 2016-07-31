@@ -861,3 +861,40 @@ multicultural, and the timing of your conversion is important.
   - Choosing the appropriate authentication type depends on several factors. The primary factor is the user store that contains the login info that will be used to verify the website user, If you are using an Active Directory-based authentication system, you should use one of the standard challenge-based methods. 
     - If you are using a different technology for your user store, you need to use an overridden provider or a custom provider. 
     - If you do not have a provider or need a special one just for the website, Forms authentication can be the best way to implement your authetnication requirements. 
+
+
+## TODO: Configure and apply authorization 
+- **Summary**
+  - To add roles, you must create a UI and invoke the Roles API. When launching a new app, you can ensure role creation occurs as part of the database creation script. If you will support user-created roles in your app, you need to write this functionality yourself. 
+  - You can check the validity of roles in several ways:
+    - Through attributes on the controller or action [Authorize(Roles="Admin")], or in code by using IsUserInRole or GetRolesForUser: RoleProvider.GetRolesForUser, HttpContext.User.IsInRole, and RoleProvider.IsUserInRole. 
+    - Can create custom role providers by implementing RoleProvider. Custom role providers enable you to manage role access when standard role providers don't meet your needs. You might want to create a custom role provider to get information from nonstandard databases, or when you want to use a different database schema from the standard .NET implementation. 
+    - When your app consumes WCF services, you must often manage authentication between your app and the service. To manage authetnication, you can use the Credentials collection on the client proxy (created by using the Add Service Reference command in Visual Studio). You can create a credential using a user name and password, or the WindowsIdentity fromt he principal. 
+
+
+## TODO: Design and implement claims-based authentication across federated identity stores 
+- **Summary**
+  - Windows Azure Access Control Service (ACS) enables you to implement federated authetnication. The four primary participants int he ACS authentication process are the relying party (your app), the client browser, the identity provider, and the ACS.
+  - OAuthWebSecurity.VerifyAuthentication is the main process used to create the external callback for authentication. As you are calling it, you can determine whether you want to create a persistent cookie. This cookie will let you determine in subsequent calls whether the user is still authenticated. 
+  - WIF is part of the .NET framework and can be used to build identity-aware applications. You can use it to manage any of the built-in token handlers, as well as the tokens that provide the information.
+  - You can create custom tokens as well as custom token handlers to read tokens. Custom token handlers are useful wheny ou need to create custom tokens. They are also necessary when you use a token where support is not already built in to the framework, such as SWT and JWT. 
+
+## TODO: Manage data integrity
+- **Summary**
+  - Encryption is process of turning text input into an illegible format that is decipherable only to applications that have the decryption key. 
+  - Salting is the process of adding a random string to input text before the hashing or encryption process. A salt adds unpredictability to the conversion from text to hash to help prevent unauthorized access of the text. 
+  - Symmetric and assymmetric algorithms are used for encryption. 
+    - Symmetric encryption uses same key to encryp and decrypt data. 
+    - Asymmetric encryption uses two different keys: A public key is widely distributed and is used for encryption, whereas a private key is kept on the decryption side and is used with the public key to decrypt the data.
+  - When using encryption, protect the keys by storing them separate from the encrypted data. You should switch your keys on a defined basis, which includes redefining the process of decrypting and encrypting data. 
+  - You can encrypt sections fo a web.config file using the aspnet_regiis.exe command with the -pe, -app, and -prev options. Encrypting areas of a web.config file protects the file's content in case the file is served to users inadvertently. Decryption of the file can be handled with the -pd option.
+  - Signing app data provides authentication, authorization, and nonrepudiation. This enables you to verify your communications partner and gives you confirmation that the signed application data came from your partner rather than someone else. 
+
+## TODO: Implement a secure site with ASP.NET
+- **Summary**
+  - SSL is used by browser and server to establish a secure communications. Uses a PKI in which the public key is bound through a trusted 3rd party or CA. 
+  - Before you use SSL, ensure your web server has HTTPS: bindings enabled. You then need to send identifying information and your server-created public key, with the Certificate Signing Request (CSR) to the certificate authority for validation. After your information has been validated and your request approved, the CA will send you a data document containing your certificate that you can load into your server for usage. 
+  - Storing your user passwords should be salted and hased before persistence. 
+  - The AntiXSS lib takes an accepted-list approach to encoding characters for display to prevent XSS attacks, in which hackers injects their own JS into a website. This prevents embedded JS.
+  - SQL injection attack occurs when a hacker inserts SQL commands into unprotected queries in an attempt to alter or view data or cause other damage. You can control this by parameterizing your queries using SQLParamaters. Entity SQL has the same risk. Linq-to Entities does not have the same problem because it uses the object  model. 
+  - CSRFs play on the trust that a server has for its clients. It happens when a user takes information from the server, alters it, and then sends it back to the server. This could enable the user to affect orders placed by another user, or add things to a shopping cart without paying for them. The AntiForgery method ont he form and the ValidateAntiForgeryToken on the controller/action work together to make sure that the page returned to the server is the same as the one that was sent to the client. 
