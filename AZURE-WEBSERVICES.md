@@ -47,7 +47,28 @@
   - LINQ-to-SQL was on eof the first Microsoft initiatives to build an ORM tool. 
   - The primary benefit is that it enables developers to manipulate data as domain-specific objects without regard to the underlying structure of the data store. 
   - From a developer's point of view, Entity Framework enables developers to work with entities (such as Customers, Accounts etc), known as the conceptual model. Entity Framework is responsible for mapping these entities and their corresponding properties to the underlying data source. 
-  - **Entity Framework Modelling**
-  
+  - **Entity Framework Modeling**
+  - The 3 parts of the EF model:
+    - **The Conceptual Model**
+      - Handled via the conceptual schema defintion language (CSDL). In older versions of EF, it existed in a file with a .csdl extension. 
+    - **Data Storage**
+     - The data storage aspect is handled through the store schema definition language (SSDL). In older versions of EF, it existed in a file with a .ssdl file extension. 
+    - **Mapping specification language**
+      - The mapping between the CSDL and SSDL is handled via the mapping specification language (MSL). In older versions of EF, it existed in a file with an .msl file extension. However, all 3 are in a single file, it is important to understand differences between the three. 
+    - The back-end components can be completely changed without affecting the conceptual model by allowing the changes to be absorbed by the MSL's mapping logic.
+    - Compare this with ADO.NET. If you took any of the samples provided and have to change them to use an Oracle DB, there would be major changes necessary to all the code written. In the EF, you'd simply focus on the business objects and let the storage model and mappings handle the change to how the data came from and got back to the DB. 
+    - **Creating a new Entity Framework Project**
+      - **Entity Model Designer**
+        - Creates the .edmx file and enables manipulation of almost every aspect of the model (create/update/delete entities), manipulate associations and mappings, modify inheritance relationships etc.
+      - **Entity Data Model Wizard** 
+        - It is the true starting point of building your conceptual model. Enables you to use an existing data store instance.
+      - **The Create Database Wizard**
+        - Enables you to do exact opposite of the previous item. Instead of starting with a database, it enables you to fully  build and manipulate your conceptual model, and it takes care of building the actual DB based on the conceptual model. 
+      - **The Update Model Wizard**
+        - After your model is built, it enables you to fully modify every aspect of the conceptual model. It can let you do the same for both the storage model and the mappings that are defined between them.
+    - **T4 Code Generation**
+      - T4 text template files can be often identified by the .tt extension.
+      - T4 is the templating and code generation engine that Entity Framework uses to generate code so you don't have to manage it yourself. 
+      - These are generated based from the conceptual model in the .edmx file.
 - **WCF Data Services**
   
