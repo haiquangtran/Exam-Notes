@@ -4,9 +4,10 @@
 - **Entity Framework**
 - **ADO.NET**
   - Designed to support large loads and to excel at security, scalability, flexibility, and dependability.
-  - Has a bias toward a disconnect model. For example, when using individual commands such as INSERT, UPDATE, or DELETE Statements, you simply open a connection to the database, execute the command, then close the connection as quickly as possible etc. Use local version then push changes back to DB.  
+  - Has a bias toward a disconnect model. For example, when using individual commands such as INSERT, UPDATE, or DELETE Statements, you simply open a connection to the database, execute the command, then close the connection as quickly as possible etc. On the query side, use a select and close the connection, using only the local version then push changes back to DB.  
+  - Take advantage of the benefits of ADO.NET by minimizing unnecessary connections to the database. If you open it, you should close it. Close() should be in the finally block of a try/catch/finally. 
   - **Connected vs Disconnected Model**
-    - Connections are expensive for a RDBMS to maintain. (Consumes processing and networking resources, and DB's can only maintain finite number of connections at once). Keeping connections closed and opening them only for short perods will help mitigate many of database-focused performance problems. 
+    - Connections are expensive for a RDBMS to maintain. (Consumes processing and networking resources, and DB's can only maintain finite number of connections at once). Also connections can hold locks on data, causing concurrency problems. Keeping connections closed and opening them only for short periods will help mitigate many of database-focused performance problems. 
     - To improve efficiency, ADO.NET uses connection pooling. Since ADO.NET opens and closes connections at a high rate, the minor overheads in establishing connection and cleaning up a connection begin to affect performance. Connection pooling helps combat this problem.
     - Connection Pooling
       - Creates a few connections (let's say 50). 
@@ -15,5 +16,38 @@
       - This means each of these 50 connections would have to handle 200 requests in order to process all 10,000 requests within that minute.
       - Manages the number of active connections for you. You can specify the max number of connections in a connection string. 
       	- With ADO.NET 4.5 accessing SQL server 2012, this limit defaults to 100 simultaneous connections and can scale anywhere between that and 0 without you as a developer having to think about it.
+  - **Why choose ADO.NET?**
+    - Consistency, ADO.NET as a data access technology has been around longer than other options available. Unless it's a relatively new application or an older application that has been updated to use one of the newer alternatives, ADO.NET is already being used to interact with the database.
+    - Stability, both in terms of evolution and quality of technology. ADO.NET is firmly established and is unlikely to change in any way other than feature additions. 
+    - ADO.NET is an easy library to learn and understand. It's been around for ages, there are providers for almost every well-known database, and many lesser-known database vendors ahve providers available for ADO.NET.
+    - Can use ADO.NET against Windows Azure's SQL databases with essentially no difference in coding. 
+- **.NET Framework data providers*
+  - .NET Framework data providers are described as "components that have been explicitly designed for data manipulation and fast, forward-only, read-only access to data."
+  - **.NET Framework data provider overview**
+    - DbConnection = Necessary for nay DB interaction. Care should be taken to close connections as soon as possible after using them.
+    - DbCommand = Necessary for all DB interactions in addition to Connection. Parameterization should be done only through the Parameters collection (You should always do parameterization for security reasons). Concatenated strings should never be used for the body of the query or as alternatives to parameters.
+    -  DbDataReader = Ideally suited to scenarios in which speed is the most critical aspect because of its forward-only nature, similar to a Stream. This provides read-only access to the data.
+    - DbDataAdapter = Used in conjunction with a Connection and Command object to populate a DataSet or an individual DataTable, and can also be used to make modifications back to the database. Changes can be batched so that updates avoid unnecessary roundtrips to the database.
+    - DataSet = In-memory copy of the RDBMS or portion of RDBMS. Collection of DataTable objects with their relationships, metadata and commands to interact with it. 
+    - DataTable = Corresponds to specific view of data, whether from a SELECT query or generated from .NET code. Similar to RDBMS tables but it is partially populated. It tracks state of data stored in it so, when data is modified, you can tell which records need to be saved back into the database.
+- **DataSet vs DataReader**
+  - When querying data, you can use one these two mechanisms: DataAdapter (which uses DataSet) or DataReader.
+  - Every SELECT query operation you employ in ADO.NET uses a DataReader. A DataAdapter uses a DataReader to populate the returned DataSet or DataTable.
+  - Using a DataReader produces faster results than using a DataAdapter to return the same data. 
+  - DataReaders provide multiple asynchronous methods taht can be employed. DataAdapters on the other hand, essentially have only synchronous methods. With small-sized record sets, differences in performance of using asynch methods are trivial. On large queries that take time, a DataReader, with asynch methods can greatly enhance the UX. 
+  - The Fill method of DataAdapter only lets you populate DataSets and DataTables. (Writing for custom business objects may impact on app responsiveness and memory because of this)
+  - The Fill method of DataAdapter comples onyl when all data has been retrieved and added to the DataSet or DataTable. This enables you to immediately determinet he number of records in any given table. However, a DataReader can indicate whether data was returned (via HasRows property), but the only way to know the exact record count returned is to iterate through and count it specifically.
+  - Can iterate through DataReader only once and only in a forward-only fashion. You can iterate through a DataTable any number of times in any manner you see fit.
+  - Both enable you to execute multiple queries and retrieve multiple return sets, but only the DataSet lets you closely mimic the behaviour of a relational DB (i.e. relationships between tables, or enforce constraints on properties etc).
+  -  DataSets can be loaded directly from XML and can be persisted to XML natively. They are consequently inhernetly serializable, which affords many features not natively available to DataReaders. Can also easily pass DataSets or DataTables between tiers becuase it is already serializable, but you can't do the same with DataReader. 
+  - DataSet is also an expensive object with a large memory footprint. It is generally ill-advised to store it in a Session or Viewstate variables, or pass it across multiple application tiers because fo the expensive nature of the object. If you serialize a DataSet, process with caution!
+  - Using any of the asynchronous methods available with the SqlDataReader, you can provide feedback (although somewhat limited) to the client application.
+- **Entity Framework**
+  - Entity Framework = allows developers to focus on application code, not the underlying plumbing code necessary to communicate with a DB efficiently and securely.
+  - LINQ-to-SQL was on eof the first Microsoft initiatives to build an ORM tool. 
+  - The primary benefit is that it enables developers to manipulate data as domain-specific objects without regard to the underlying structure of the data store. 
+  - From a developer's point of view, Entity Framework enables developers to work with entities (such as Customers, Accounts etc), known as the conceptual model. Entity Framework is responsible for mapping these entities and their corresponding properties to the underlying data source. 
+  - **Entity Framework Modelling**
+  
 - **WCF Data Services**
   
