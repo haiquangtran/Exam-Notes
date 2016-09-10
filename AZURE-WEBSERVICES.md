@@ -1,7 +1,6 @@
 # Developing Windows Azure and Web Services
 
 # Accessing Data
-- **Entity Framework**
 - **ADO.NET**
   - Designed to support large loads and to excel at security, scalability, flexibility, and dependability.
   - Has a bias toward a disconnect model. For example, when using individual commands such as INSERT, UPDATE, or DELETE Statements, you simply open a connection to the database, execute the command, then close the connection as quickly as possible etc. On the query side, use a select and close the connection, using only the local version then push changes back to DB.  
@@ -21,7 +20,7 @@
     - Stability, both in terms of evolution and quality of technology. ADO.NET is firmly established and is unlikely to change in any way other than feature additions. 
     - ADO.NET is an easy library to learn and understand. It's been around for ages, there are providers for almost every well-known database, and many lesser-known database vendors ahve providers available for ADO.NET.
     - Can use ADO.NET against Windows Azure's SQL databases with essentially no difference in coding. 
-- **.NET Framework data providers*
+- **.NET Framework data providers**
   - .NET Framework data providers are described as "components that have been explicitly designed for data manipulation and fast, forward-only, read-only access to data."
   - **.NET Framework data provider overview**
     - DbConnection = Necessary for nay DB interaction. Care should be taken to close connections as soon as possible after using them.
@@ -70,5 +69,35 @@
       - T4 text template files can be often identified by the .tt extension.
       - T4 is the templating and code generation engine that Entity Framework uses to generate code so you don't have to manage it yourself. 
       - These are generated based from the conceptual model in the .edmx file.
+  - **Entity Data Model Designer**
+    - When you have EDMX Designer open, View -> Other Windows -> Entity Data Model Browser. This is useful as your .edmx begins to cover a large number of tables and you have difficulty locating a particular one. 
+    - Inheritance and Complex type options can be done in the .edmx file. 
+    - **Table per Hierarchy (TPH)**
+      - Is the default mapping strategy.
+      - It creates a single table for all objects in an inheritance hierarchy, and it simply has nullable columns for fields that aren't common across all types. It also adds a Disciminator column so EF can keep track of the type of each individual record.  - This strategy is often the best balance of tradeoffs available because it provides the best performance. 
+        - The primary disadvantage is that your data is slightly denormalized.
+    - **Table per Type (TPT)**
+      - Alternative strategy
+      - Creates a table for your base type that has all common fields in it, a table for each child type that stores the additional fields, as well as an ID to the base type's record that stores the common fields. The multiple inheriting types' tables are linked to one another via a foreign key that has a shared primary key value. In this case, EF has to perform a join across multiple tables. 
+        - The primary disadvantage is that your performance suffers.
+    - **Table per Concrete Type (TPC) and Mixed Inheritance**
+      - These are the other options. These are not usually the most practical choice because of the limited tooling support for them.
+      - **Currently not supported in the EDM Designer, although the EF runtime does support them**
+    - **Complex Type**
+      - A complex type is a logical designation for a common group of fields on multiple entities. Used for reusability, as it allows you to use repeated groups of fields (e.g. a date range). 
+    - **Stored Procedure Mapping**
+      - based on the STored Procedures defined in the database. It enables you to specify an Update, and Delete function. SElect queries are already handled by the langauge semantics of LINQ.
+    - **ObjectContext vs DbContext** 
+      - Olders versions of EF did not have DbContext but had ObjectContext.
+      - Modern versions still support the ObjectContext object, and you can even consume modern EF in much the same way as the older versions. 
+      - If you want to work in an ObjectContext scenario, you have 3 primary options:
+        - Legacy approach
+          - Follow similar steps using VS 2008 or 2010 to create an .edmx file and its corresponding ObjectContext and entities
+        - Downgrading your entities
+          - Take the .edmx file that was generated, open the properties window, and set focus in the Design'ers canvas. 
+          - Change the Code Generation Strategy from None to default in the Properties window.
+          - Delete the two .tt files listed as children to your .edmx file in the Solution explorer window
+        - Hybrid Approach
+          - Get the ObjectContext (via a nonobvious approach) from the DbContext and work with the ObjectContext directly. Note that even with modern versions of EF, in some rare and advanced scenarios this is still required. 
 - **WCF Data Services**
   
