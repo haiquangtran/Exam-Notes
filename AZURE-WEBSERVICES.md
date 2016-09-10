@@ -87,17 +87,38 @@
       - A complex type is a logical designation for a common group of fields on multiple entities. Used for reusability, as it allows you to use repeated groups of fields (e.g. a date range). 
     - **Stored Procedure Mapping**
       - based on the STored Procedures defined in the database. It enables you to specify an Update, and Delete function. SElect queries are already handled by the langauge semantics of LINQ.
-    - **ObjectContext vs DbContext** 
-      - Olders versions of EF did not have DbContext but had ObjectContext.
-      - Modern versions still support the ObjectContext object, and you can even consume modern EF in much the same way as the older versions. 
-      - If you want to work in an ObjectContext scenario, you have 3 primary options:
-        - Legacy approach
-          - Follow similar steps using VS 2008 or 2010 to create an .edmx file and its corresponding ObjectContext and entities
-        - Downgrading your entities
-          - Take the .edmx file that was generated, open the properties window, and set focus in the Design'ers canvas. 
-          - Change the Code Generation Strategy from None to default in the Properties window.
-          - Delete the two .tt files listed as children to your .edmx file in the Solution explorer window
-        - Hybrid Approach
-          - Get the ObjectContext (via a nonobvious approach) from the DbContext and work with the ObjectContext directly. Note that even with modern versions of EF, in some rare and advanced scenarios this is still required. 
+  - **ObjectContext vs DbContext** 
+    - Olders versions of EF did not have DbContext but had ObjectContext.
+    - Modern versions still support the ObjectContext object, and you can even consume modern EF in much the same way as the older versions. 
+    - If you want to work in an ObjectContext scenario, you have 3 primary options:
+      - Legacy approach
+        - Follow similar steps using VS 2008 or 2010 to create an .edmx file and its corresponding ObjectContext and entities
+      - Downgrading your entities
+        - Take the .edmx file that was generated, open the properties window, and set focus in the Design'ers canvas. 
+        - Change the Code Generation Strategy from None to default in the Properties window.
+        - Delete the two .tt files listed as children to your .edmx file in the Solution explorer window
+      - Hybrid Approach
+        - Get the ObjectContext (via a nonobvious approach) from the DbContext and work with the ObjectContext directly. Note that even with modern versions of EF, in some rare and advanced scenarios this is still required. 
+  - **ObjectContext management**
+    - Two things happen when ObjectContext constructor is called:
+      - The generated context inherits several items from the ObjectContext base class, including a property known as ContextOptions and an event named OnContextCreated.
+      - The ContextOptions class has five primary properties you can manipulate:
+        - ** LazyLoadingEnabled**
+          - If let unspecified, the default is true
+          - Lazy loading enables entities to be loaded on-demand without thought by the developer. Although this can be handy, this behaviour can have very serious performance implications depending on how relationships are set up. 
+          - Feature development and even app architecture might change one way or another based on the use of this feature. 
+          - ** In EF, lazy loading is triggered based on a Navigation Property being accessed. By simply referencing a navigation property, that entity is then loaded **
+            - Accessing a navigation property causes another roundtrip to the database to fetch that data. 
+            - If you loop through a collection of entities, an individual roundtrip is made to the database for each entity. 
+          - If you have LazyLoadedEnabled to false, you ahve two options:
+            - Can either use explicit lazy loading with the ObjectContext's LoadProperty() method or you can use eager loading with the ObjectSet's Include() method.  
+            - With eager loading, you must specify up front what related data you want loaded.
+            - Explicit lazy loading, like regular lazy loading, can reduce the amount of data flowing back and forth, it's a chatty pattern, whereas eager loading is a chunky pattern. 
+            - **Chatty vs Chunky Pattern**
+        - ** ProxyCreationEnabled **
+        - ** UseConsistentNullReferenceBehaviour **
+        - ** UseCSharpNullComparisonBehaviour **
+        - ** UseLegacyPreserverChangesBehaviour **
+    - 
 - **WCF Data Services**
   
