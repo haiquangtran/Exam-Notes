@@ -129,6 +129,30 @@
         - ** UseCSharpNullComparisonBehaviour **
           - Main implication of this property is that it changes queries that require null comparisons.
         - ** UseLegacyPreserverChangesBehaviour **
-    - 
+  - **ObjectContext entities**
+    - Each entity you define int he conceptual model gets a class generated.
+    - There are few options for the types of entities that can be generated.
+      - In EF 4, the default base class for entities was EntityObject.
+      - Two other types of entities could also be created: POCO entities (no required base class for these) and Self-Tracking entities (STEs) (no base class, but they implemented IObjectWithChangeTracker and INotifyPropertyChanged). 
+    - Attributes (In the generated classes): 
+      - **EdmEntityTypeAttribute**
+        - Contains the item's namespace and the Name.
+        - Does little more than tell the world that the class is an EDM type and then provides a basic amount of supporting information about it. 
+      - **SerializableAttribute**
+        - The entity class needs to be serializable, if you want to persist the object locally, pass it between tiers, or do much else with it. 
+      - **DataContractAttribute**
+        - Must decorate the class (required for WCF's default serialization)
+      - Look at the definition of each class that's generated corresponding to each entity and as much as possible in the .edmx. 
+        - Each property needs to be marked with the DataMember attribute
+        - The EdmScalarProperty attribute decorates each property definition
+        - The two main properties that it definares are EntityKeyProperty and IsNullable.
+  - **Why choose the Entity Framework (EF)**
+    - Microsoft has made a tremendous investment in the EF and continues to, which is indicative of its future plans and where it intends data access to go. 
+    - The toolset has matured, the following are the benefits:
+      - There is a tremendous tooling support that enables you to build and maintain the data access elements of your application in a much shorter time than ADO.NET would
+      - You can focus on dealing with business objects of your application and don't have to spend your time voerly concerned about the underlying data store. 
+      - It allows for a clear separation of concerns between the conceptual model and the underlying data store. 
+      - The data store can be changed (quite dramatically) without having to rewrite core application logic. Microsoft has made a tremendous investment into the EF, and all indiciations point to the fact it has made a firm commitment to the success of the EF.
+      - Built to fit right in with WCF, which makes them complementary technology.
 - **WCF Data Services**
   
