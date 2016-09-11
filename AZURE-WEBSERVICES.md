@@ -194,3 +194,31 @@
   - By using Entity Framework, developers can focus on the conceptual model (solving business logic) without being overly concerned with the underlying data store. EF is specifically focused on working with an entity, but not quite as much as working with bulk data all at once
   - With EF, the underlying data stores can be easily modified and changed without requiring changes of the client code. 
   - WCF Data Services let your applications provide universal data access. The consumption of WCF Data Services is not ited to any proprietary technology, so can be consumed by both Microsoft and non-Microsoft technologies. WCF Data Services are meant to be used in conjunction with the EF on the backend. They provide a very fast and easy way to build apps and make the data easily accessible to any consumer.
+- **Caching**
+  - **Windows Azure-provided Caching Options**
+    - **Shared or Co-Located Caching**
+      - Windows Azure takes a sliver of your Web Role or Worker Role instance's resources (memory being one of the most important resources) and uses that to store the cached data. 
+      - Don't have to pay anything extra in terms of price: just a slight performance hit. 
+      - If your cache needs to store only a few MB of data, this is a very good option.
+    - **Dedicated Caching**
+      - You add a new Cache Worker Role role to your project, which results in an instance whose entire purpose in life is to manage and host the cache. 
+      - Benefits is that you can easily manage the number of these instances independent of other instances, and hosting very large amounts of cahced data doesn't directly afect performance on your other servers or your app.
+  - **Using the ObjectCache**
+    - Use the MemoryCache Default property to get an instance of ObjectCache (since constructor is protected)
+    - ObjectCache class alone provides nearly all functionality for caching
+    - As noted, the items in the cache are stored as key/value pairs. The three primary properties in the CacheItem base class are, key, value and regionName. 
+    - The cache implementation si allowed to store the cached data in any internal format it wants. The only restrictions are that the APIs provide that the data is represented in CacheItem objects, not that those CacheItem objects are actually stored internally. 
+  - **CacheItemPolicy**
+    - Once you instantiate an instance of it, you'll then want to set an expiration policy by using either an AbsoluteExpiration or a SlidingExpiration. 
+    - AbsoluteExpiration
+      - The CacheItem is purged after a specified amount of time
+    - SlidingExpiration
+      - The CahceItem is purged only if it has not been accessed after a specified amount of time. 
+  - **CacheItemPriority**
+    - Only 2 options: Default (no priority for removing this entry), and Not Removable (never be removed from the cache)
+  - **Using the HttpContext.Cache**
+    - In ASP.NET you can use Application State, SEssion State, and View State to store values and thereby minimize roundtrips to the database. In a typical ASP.NET web application or service that's hosted in ASp.NET, the cache is accessed through the HttpContext.Current object. 
+      - The Cache class was built specifically for use with ASP.NET applications
+      - If you need caching functionality in another type of application (for instance, a windows forms app), you should specifically use the ObjectCache class instead. 
+      - This class is only created once per AppDomain. Once created, it remains alive (even if it's empty) as long as the AppDomain is still active. 
+      - Cache items are implemented as name/value pairs where the name is implemented as string and value is object. You can put any serializable object in the cache. 
