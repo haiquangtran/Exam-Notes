@@ -186,5 +186,11 @@
       - OData feeds can take several different forms including Atom, JSON, or XML. All thsoe formats can be represented as text, so many problems with firewalls, security, installing applications and so forth immediately disappear.
       - Very powerful queries can be constructed with simple semantics. Do not need to know SQL. (Can do it via URLs)
       - To take full advantage of WCF Data Services, the EF is meant to be used. But the EF can get its data from just about anywhere, and the tooling support makes it very easy to swap out or modify underlying data sources.
-
-  
+- **Summary of Choosing Data Access Technology**
+  - ADO.NET has been around the longest and has several advantages. 
+    - Does not require persistent connections to the underlying data store
+    - Enables you to access virtually all major database implementations
+    - Enables you to access data through custom objects (DataSet and DataTable)
+  - By using Entity Framework, developers can focus on the conceptual model (solving business logic) without being overly concerned with the underlying data store. EF is specifically focused on working with an entity, but not quite as much as working with bulk data all at once
+  - With EF, the underlying data stores can be easily modified and changed without requiring changes of the client code. 
+  - WCF Data Services let your applications provide universal data access. The consumption of WCF Data Services is not ited to any proprietary technology, so can be consumed by both Microsoft and non-Microsoft technologies. WCF Data Services are meant to be used in conjunction with the EF on the backend. They provide a very fast and easy way to build apps and make the data easily accessible to any consumer.
