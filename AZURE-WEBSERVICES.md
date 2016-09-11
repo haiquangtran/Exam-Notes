@@ -103,21 +103,31 @@
     - Two things happen when ObjectContext constructor is called:
       - The generated context inherits several items from the ObjectContext base class, including a property known as ContextOptions and an event named OnContextCreated.
       - The ContextOptions class has five primary properties you can manipulate:
-        - ** LazyLoadingEnabled**
-          - If let unspecified, the default is true
+        - ** LazyLoadingEnabled (VERY IMPORTANT) **
+          - If left unspecified, the default is true
           - Lazy loading enables entities to be loaded on-demand without thought by the developer. Although this can be handy, this behaviour can have very serious performance implications depending on how relationships are set up. 
           - Feature development and even app architecture might change one way or another based on the use of this feature. 
           - ** In EF, lazy loading is triggered based on a Navigation Property being accessed. By simply referencing a navigation property, that entity is then loaded **
             - Accessing a navigation property causes another roundtrip to the database to fetch that data. 
             - If you loop through a collection of entities, an individual roundtrip is made to the database for each entity. 
-          - If you have LazyLoadedEnabled to false, you ahve two options:
+          - If you have LazyLoadedEnabled to false, you have two options:
             - Can either use explicit lazy loading with the ObjectContext's LoadProperty() method or you can use eager loading with the ObjectSet's Include() method.  
             - With eager loading, you must specify up front what related data you want loaded.
             - Explicit lazy loading, like regular lazy loading, can reduce the amount of data flowing back and forth, it's a chatty pattern, whereas eager loading is a chunky pattern. 
             - **Chatty vs Chunky Pattern**
+              - Chatty is taking into consideration the latency or delay of making a roundtrip. It is doing parts at a time to get to the whole. i.e. Making multiple calls to the DB to sum the result or something.
+              - Chunky pattern is doing it all at once type. i.e. Making 1 call to the database. 
+              - The best option depends on different factors such as the transfer time and the delay with the roundtrips. Typically favour CHUNKY over chatty!
         - ** ProxyCreationEnabled **
+          - Determines whether proxy objects should be created for custom data classes that are persistence-ignorant, such as a plan old common object (POCO) entities. 
+          - Default is set to true. (Generally isn't something you need to be concerned about if you set to false).
+          - Only available in .NET Framework 4.5.
         - ** UseConsistentNullReferenceBehaviour **
+          - When set to false, you can attempt to set navigation property to null and nothing will happen when you try and save it. 
+          - When set to true, Allows you to set navigation property to null (which may throw error if the field is not nullable)
+          - LOOK THIS UP. 
         - ** UseCSharpNullComparisonBehaviour **
+          - Main implication of this property is that it changes queries that require null comparisons.
         - ** UseLegacyPreserverChangesBehaviour **
     - 
 - **WCF Data Services**
