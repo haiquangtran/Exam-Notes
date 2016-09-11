@@ -155,4 +155,36 @@
       - The data store can be changed (quite dramatically) without having to rewrite core application logic. Microsoft has made a tremendous investment into the EF, and all indiciations point to the fact it has made a firm commitment to the success of the EF.
       - Built to fit right in with WCF, which makes them complementary technology.
 - **WCF Data Services**
+  - **Choosing WCF Data Services as the data access technology**
+    - Highly notable changes :
+      - Open Data Protocol (OData)
+      - REST
+      - JSON
+    - WCF Data Services, originally called ADO.NET Data services, is the main mechanism of Microsoft to deal with exposing these features to developers. 
+    - WCF data services are well-suited to applications that are exposed via Service-Oriented Architecture (SOA). 
+    - Web Services and Windows Communication Foundation (WCF) were big steps forward, but WCF Data Services takes it all one step farther in making the whole process a much easier endeavor.
+  - **OData**
+    - Abbreviated form of the "Open Data Protocol"
+    - Web protocol for querying and updating data. 
+    - Does this by applying and building upon Web Technologies such as HTTP, Atom Publishing Protocol (AtomPub) and JSON to provide access to information from a variety of applications, services and stores. 
+    - OData is being used to expose and access information from a variety of sources (relational databases, file systems, CMS's and traditional websites etc)
+    - Is consistent with the way the Web works - makes a deep commitment to URIs for resource identification and commits to an HTTP-based, uniform interface for interacting with those resources (just like the web). 
+    - This commitment to core Web principles allows OData to enable a new level of data integration and interoperability across a broad range of clients, services, and tools.
+  - **WCF Data Services as data access mechanisms** 
+    - Because MS moved its Web Services implementation (.asmx) to WCF, service names now end in the .svc extension. 
+    - Name was originally ADO.NET Data Services and has since changed WCF Data Services. 
+    - **Build a WCF Service**
+      - Create a ASP.NET web app
+      - Use the EF to define an EDM
+      - Add a Data Service to the Web Application (which is there just to host the application and expose it over the web)
+      - Enable access to the service.
+  - **Why choose WCF Data Services**
+    - Uses EF as a foundation, most (but not all) scenarios that were appropriate for one would be appropriate for another
+    - WCF Data Services would be overkill for simple 1-user scenarios. On the other hand, it provides several out-of-the-box benefits that ADO.NET and the EF do not. These include the following:
+      - When using OData, resources are addressable via URIs. That makes it very nonproperitary and opens the service up to be consumed by everyone
+      - WCF Data Services are accessed over HTTP, and almost everyone is familiar with HTTP theese days and has access to it. 
+      - OData feeds can take several different forms including Atom, JSON, or XML. All thsoe formats can be represented as text, so many problems with firewalls, security, installing applications and so forth immediately disappear.
+      - Very powerful queries can be constructed with simple semantics. Do not need to know SQL. (Can do it via URLs)
+      - To take full advantage of WCF Data Services, the EF is meant to be used. But the EF can get its data from just about anywhere, and the tooling support makes it very easy to swap out or modify underlying data sources.
+
   
