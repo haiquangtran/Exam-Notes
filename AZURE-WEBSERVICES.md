@@ -213,16 +213,17 @@
     - AbsoluteExpiration
       - The CacheItem is purged after a specified amount of time
     - SlidingExpiration
-      - The CahceItem is purged only if it has not been accessed after a specified amount of time. 
+      - The CacheItem is purged only if it has not been accessed after a specified amount of time. 
   - **CacheItemPriority**
-    - Only 2 options: Default (no priority for removing this entry), and Not Removable (never be removed from the cache)
+    - Only 2 options in the System.Runtime.Caching namespace: Default (no priority for removing this entry), and Not Removable (never be removed from the cache)
+    - More options in the System.Web.Caching namespace: Low, BelowNormal, Normal, AboveNormal, High, NotRemoveable, Default.
   - **Using the HttpContext.Cache**
     - In ASP.NET you can use Application State, Session State, and View State to store values and thereby minimize roundtrips to the database. In a typical ASP.NET web application or service that's hosted in ASp.NET, the cache is accessed through the HttpContext.Current object. 
       - The Cache class was built specifically for use with ASP.NET applications
       - If you need caching functionality in another type of application (for instance, a windows forms app), you should specifically use the ObjectCache class instead. 
       - This class is only created once per AppDomain. Once created, it remains alive (even if it's empty) as long as the AppDomain is still active. 
       - Cache items are implemented as name/value pairs where the name is implemented as string and value is object. You can put any serializable object in the cache. 
-    - Abbrieviated to System.Web.Caching.Cache
+    - Abbrieviated System.Web.Caching.Cache usage is the instance of that implementation that lives in the app domain.
   - **Cache Best Practice**
     - Production code should minimize the use of quoted strings, particularly in cases where the string values are being used as keys to collections (such as caches). There are several reasons for this including performance, maintainability, and ease of use.
     - Defining the string literals using the const keyword at class level is often appropriate. (It is often advisable to create strings as constants or properties and keep them in classes of their own)
