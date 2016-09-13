@@ -223,7 +223,9 @@
       - If you need caching functionality in another type of application (for instance, a windows forms app), you should specifically use the ObjectCache class instead. 
       - This class is only created once per AppDomain. Once created, it remains alive (even if it's empty) as long as the AppDomain is still active. 
       - Cache items are implemented as name/value pairs where the name is implemented as string and value is object. You can put any serializable object in the cache. 
-    - Abbrieviated System.Web.Caching.Cache usage is the instance of that implementation that lives in the app domain.
+    - Abbrieviated System.Web.Caching.Cache 
+    - System.Web.Caching.Cache.Cache is the implementation of .NET caching.
+    - HttpContext.Cache is the instance of that implementation, that lives in the application domain.
   - **Cache Best Practice**
     - Production code should minimize the use of quoted strings, particularly in cases where the string values are being used as keys to collections (such as caches). There are several reasons for this including performance, maintainability, and ease of use.
     - Defining the string literals using the const keyword at class level is often appropriate. (It is often advisable to create strings as constants or properties and keep them in classes of their own)
