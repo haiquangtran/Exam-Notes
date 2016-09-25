@@ -213,15 +213,40 @@
     - AbsoluteExpiration
       - The CacheItem is purged after a specified amount of time
     - SlidingExpiration
-      - The CahceItem is purged only if it has not been accessed after a specified amount of time. 
+      - The CacheItem is purged only if it has not been accessed after a specified amount of time. 
   - **CacheItemPriority**
-    - Only 2 options: Default (no priority for removing this entry), and Not Removable (never be removed from the cache)
+    - Only 2 options in the System.Runtime.Caching namespace: Default (no priority for removing this entry), and Not Removable (never be removed from the cache)
+    - More options in the System.Web.Caching namespace: Low, BelowNormal, Normal, AboveNormal, High, NotRemoveable, Default.
   - **Using the HttpContext.Cache**
-    - In ASP.NET you can use Application State, SEssion State, and View State to store values and thereby minimize roundtrips to the database. In a typical ASP.NET web application or service that's hosted in ASp.NET, the cache is accessed through the HttpContext.Current object. 
+    - In ASP.NET you can use Application State, Session State, and View State to store values and thereby minimize roundtrips to the database. In a typical ASP.NET web application or service that's hosted in ASp.NET, the cache is accessed through the HttpContext.Current object. 
       - The Cache class was built specifically for use with ASP.NET applications
       - If you need caching functionality in another type of application (for instance, a windows forms app), you should specifically use the ObjectCache class instead. 
       - This class is only created once per AppDomain. Once created, it remains alive (even if it's empty) as long as the AppDomain is still active. 
       - Cache items are implemented as name/value pairs where the name is implemented as string and value is object. You can put any serializable object in the cache. 
+    - Abbrieviated System.Web.Caching.Cache 
+    - System.Web.Caching.Cache.Cache is the implementation of .NET caching.
+    - HttpContext.Cache is the instance of that implementation, that lives in the application domain.
+  - **Cache Best Practice**
+    - Production code should minimize the use of quoted strings, particularly in cases where the string values are being used as keys to collections (such as caches). There are several reasons for this including performance, maintainability, and ease of use.
+    - Defining the string literals using the const keyword at class level is often appropriate. (It is often advisable to create strings as constants or properties and keep them in classes of their own)
+  - **SqlCacheDependency**
+    - Using the CacheDependency class enables you to monitor and respond to a wide variety of changes to underlying objects.
+    - If you are caching data sourced from a SQL Server database (versions 7.0, 2000, 2005+ are supported), you can use the SqlCacheDependency class. 
+    - SqlCacheDependency monitors the underlying table the data orginally came from. If any changes are made to the table, the items added to the Cache are removed, and a new version of the item is added to the cache.
+      - To create a SQLCacheDependency, you can use either of two overloads:
+        - Provide a SqlCommand instance. This initializes a new instance of the SqlCacheDependency class and, coupled with the command, creates a cache-key dependency.
+        - You provide two strings. The first string is the name of the database defined in the databases element of the application's web config file. The second string is the name of the table that the SqlCacheDependency will be associated with.
+    - Creating a dependency carries overhead and is laden with nuances you need to be careful about.
+      - It's worth noting that the baggage that comes with using the SqlCacheDependency is so significant that many consider it too substantial to justify the benefits.
+      - **LOOK AT CHAPTER IF YOU ARE INTERESTED IN USING**
+- **Summary of Caching**
+  - Caching data isn't a magic wand to fix performance problems, most applications have very obvious aspects that lend themselves well to data caching.
+  - ObjectCache is the primary mechanism you can use to cache data
+  - The Cache property of HttpContext can be used to provide caching functionality in ASP.NET applications
+  - When using ObjectCache, the two most high profile elements are ExpirationPolicy and ChangeMonitoring
+  - A specific date and time can trigger cache expiration, which is known as AbsoluteExpiration. For instance, by using AbsoluteExpiration, you can wipe out the cache or remove an item from it at midnight everyday, once an hour, or whatever makes sense.
+  - Expiration can be handled so that an object is removed from the cache only if it has not been accessed for a certain specified interval using SlidingExpiration. For instance, you can remove an item from the cache if it has not been accessed for two hours.
+
 - **Implement Transactions**
   - To provide reliable units of work that allow correct recovery from failures and keep a database consistent even in cases of system failure, when execution stops, and many operations upon a database remain uncompleted, with unclear status. 
   - To provide isolation between programs accessing a database concurrently. 
