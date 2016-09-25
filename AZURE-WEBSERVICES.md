@@ -301,4 +301,81 @@
   - TransactionScope is often the quickest and easiest way to work with transactions in .NET
   - IsolationLevel is common to every form of transaction and is the one thing that has the biggest effect on transaction behaviour. Its importance is often taken for granted, but it is probably the most important aspect of any transaction besides committing and rolling back.
   - Transactions can take two forms: simple and distributed. You can often identify distributed transactions by seeing multiple or different types of connection objects.
-
+- **Implement data storage in Windows Azure**
+  - Accessing data storage in Windows Azure
+    - Apps ported to Azure are dependent on network access (internet).
+    - If you use local storage with Azure, existing code and methodologies are almost identical (apart from Table and Blob storage).
+  - There are either five or three storage offerings in Azure:
+    - Local Storage
+    - Windows Azure Storage (Blob, Table, Queue)
+    - SQL Database (the three options)
+  - **Windows Azure platform storage options (the five options)**
+    - Local Storage
+      - Per-instance temporary storage
+      - Capacity: <20GB-2TB
+    - Blob
+      - Durable storage for large binary objects (audio, video, image files)
+      - Capacity: 200 GB-1TB (1 TB per page Blob, 100 TB per account)
+      - **Blob storage**
+        - Advantage is that once stored, the information can be accessed anywhere using HTTP/HTTPS protocols. If you have internet access, you can retrieve and manipulate these tiems. 
+        - Blob storage is ideally suited to large sizes and unstructured data. 
+        - Blob storage is dieally suited for the following:
+          - Images that can be directly viewed in a browser
+          - Document storage
+          - Secure backups as part of a disaster recovery plan
+          - Streaming video and audio
+        - Structural makeup of Blob storage:
+          - Highest level is a storage account
+          - Storage accounts hold containers
+          - Containers contain blobs
+        - A blob is merely a file. Windows Azure has two distinct categories of blobs:
+          - Blocks (200 GB size limit)
+          - Pages (1 TB size limit)
+        - Accessing blob data:
+          - Through URL: <storage account name>.blobl.core.windows.net/<container>/<blob>
+          - or through using an API
+        - REREAD THIS CHAPTER FOR MORE.
+    - Table
+      - Tabular or structured data
+      - Capacity: 100 TB
+      - **Table storage**
+        - Use API's to access it. 
+        - start with CloudStorageAccount object to access and use CreateCloudTableClient method. 
+        - Tables are always private.
+        - You can search the data and interact with it in Tables using TableOperation for single records or use TableQuery to fetch many records etc. 
+    - Queue
+      - Items you normally store in a Message Queue (MSMQ)
+      - Capacity: 100 TB
+      - **Queue storage**
+        - Use API's to access it. 
+         - start with CloudStorageAccount object to access and use CreateCloudQueueClient method. 
+        - Queues and tables are always private.
+        - When you get a message, it does not actually performa  pop for that message. It just makes it invisible for a period of time (defaults to 1 minute, but you can specify it). 
+        - During this period, you're guaranteed nobody else will retrieve the message. 
+        - If it takes you longer than this time to process the message, you should periodically update the message to keep it hidden while you continue processing it. 
+        - After you finish processing the message you should delete it from the queue. 
+    - SQL Database
+      - Exactly what you expect: an online version of SQL server
+      - Capacity: 150 GB
+  - **Choosing a data storage mechanism in Windows Azure**
+    - SEE CHAPTER FOR MORE INFO.
+  - Distribute data by using the Windows Azure Content Delivery Network (CDN)
+    - CDN is a way to cache Azure blobs and static content. 
+    - Helps with performance and bandwidth because of where the nodes are placed.- Main benefits:
+      - Better performance and user experience for end users who are far from a content source, and are using applications in which many internet trips are required to load content
+      - Large distributed scale to better handle instantaneous high load, say at the start of an event such as a product launch.
+    - Has a 1 time performance hit prior to the performance gains if it's first time hitting the CDN. (Since it's caching it)
+  - Manage Windows Azure Caching
+    - Caching in Azure context has 1 additional advantage over traditional caching. In the Azure context, it reduces cost associated with DB transactions when using SQL DB's. If you cache an item that is accessed 10k times, that's 10k fewer requests to the SQL DB that is being made. 
+    - Caching in Azure is known as **Role-based caching** because it enables you to host caching within any Windows Azure role. Any given cache can be used by any of the other roles within the same cloud service deployment.
+    - There are two main mechanisms or topologies: dedicated topology, and co-located topology. 
+      - Dedicated topology: define a role that is designated to handle the caching. The worker role's available memory is dedicated to cahcing items in it and the necessary overhead to manage access to and from it.
+      - Co-located topology: You assign specific thresholds, and only those thresholds or amounts under them can be used to facilitate the caching. If you had 4 Web Role instances, you could assign 25 percent to each of them.'
+      - Outside these options is an optional service known as Windows Azure shared caching: They exist in a group of servers in a multitenant environment, and do not exist in your own roles.  
+- **Data storage in Windows Azure Summary**
+  - Windows Azure offers a variety of storage options. some of these are similar to what on-premises servers utilize; others are very different.
+  - Local storage is available on most Windows Azure hosting offerings, including all cloud services and VMs.
+  - Blob sotrage is available for storing files in a durable file store. Blob storage can be empowered by CDN to provide faster downloads and lower latencies for end users downloading files during heavy loads.
+  - Queue storage is similar to MSMQ and is the storage mechanism of choice for messages that need guaranteed delivery, even when the receiving system is down for hours at a time. 
+  - Table storage is Azure's NoSQL implementation. It allows for some very high-volume and high-speed inserts and accesses, much higher than what SQL DB's allow if architected properly.
+  - Windows Azure offers you additional caching framework that is very easy to use and can grow as your number of servers grow or can remain stable with dedicated instances. 
