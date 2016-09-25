@@ -103,11 +103,11 @@
     - Two things happen when ObjectContext constructor is called:
       - The generated context inherits several items from the ObjectContext base class, including a property known as ContextOptions and an event named OnContextCreated.
       - The ContextOptions class has five primary properties you can manipulate:
-        - ** LazyLoadingEnabled (VERY IMPORTANT) **
+        - **LazyLoadingEnabled (VERY IMPORTANT)**
           - If left unspecified, the default is true
           - Lazy loading enables entities to be loaded on-demand without thought by the developer. Although this can be handy, this behaviour can have very serious performance implications depending on how relationships are set up. 
           - Feature development and even app architecture might change one way or another based on the use of this feature. 
-          - ** In EF, lazy loading is triggered based on a Navigation Property being accessed. By simply referencing a navigation property, that entity is then loaded **
+          - **In EF, lazy loading is triggered based on a Navigation Property being accessed. By simply referencing a navigation property, that entity is then loaded**
             - Accessing a navigation property causes another roundtrip to the database to fetch that data. 
             - If you loop through a collection of entities, an individual roundtrip is made to the database for each entity. 
           - If you have LazyLoadedEnabled to false, you have two options:
@@ -118,17 +118,17 @@
               - Chatty is taking into consideration the latency or delay of making a roundtrip. It is doing parts at a time to get to the whole. i.e. Making multiple calls to the DB to sum the result or something.
               - Chunky pattern is doing it all at once type. i.e. Making 1 call to the database. 
               - The best option depends on different factors such as the transfer time and the delay with the roundtrips. Typically favour CHUNKY over chatty!
-        - ** ProxyCreationEnabled **
+        - **ProxyCreationEnabled**
           - Determines whether proxy objects should be created for custom data classes that are persistence-ignorant, such as a plan old common object (POCO) entities. 
           - Default is set to true. (Generally isn't something you need to be concerned about if you set to false).
           - Only available in .NET Framework 4.5.
-        - ** UseConsistentNullReferenceBehaviour **
+        - **UseConsistentNullReferenceBehaviour**
           - When set to false, you can attempt to set navigation property to null and nothing will happen when you try and save it. 
           - When set to true, Allows you to set navigation property to null (which may throw error if the field is not nullable)
           - LOOK THIS UP. 
-        - ** UseCSharpNullComparisonBehaviour **
+        - **UseCSharpNullComparisonBehaviour**
           - Main implication of this property is that it changes queries that require null comparisons.
-        - ** UseLegacyPreserverChangesBehaviour **
+        - **UseLegacyPreserverChangesBehaviour**
   - **ObjectContext entities**
     - Each entity you define int he conceptual model gets a class generated.
     - There are few options for the types of entities that can be generated.
@@ -222,3 +222,58 @@
       - If you need caching functionality in another type of application (for instance, a windows forms app), you should specifically use the ObjectCache class instead. 
       - This class is only created once per AppDomain. Once created, it remains alive (even if it's empty) as long as the AppDomain is still active. 
       - Cache items are implemented as name/value pairs where the name is implemented as string and value is object. You can put any serializable object in the cache. 
+- **Implement Transactions**
+  - To provide reliable units of work that allow correct recovery from failures and keep a database consistent even in cases of system failure, when execution stops, and many operations upon a database remain uncompleted, with unclear status. 
+  - To provide isolation between programs accessing a database concurrently. 
+  - Fundamental concept: Serve to make database interactions all-or-nothing propositions. Once executed, they need to completely successfully, or need to be completely undone (left as they were).
+  - **ACID**
+    - Atomic = 
+    - Consistent
+    - Isolated
+    - Durable
+  - **Transaction Isolation levels**
+    - One transaction needs to be kept from, or isolated from, all other transactions. 
+    - The IsolationLevel enum is used to manage how multiple transactions interact with one another (controls the locking behaviour). There are two Isolation enums:
+      - One in System.Data.IsolationLevel 
+      - Another in System.Transaction.IsolationLevel
+      - Both have the same values, so there isn't much to remember between the two other than the fact they exist; sometimes you need 1, and sometimes you need the other. (Serve same purpose but for two different sets of classes).
+    - **System.Data.IsolationLevel**
+      - Unspecified
+        - Transaction level being used cannot be determined.
+      - Chaos
+        - The pending changes from more highly isolated transactions cannot be overwritten. Not supported in SQL Server or Oracle
+      - ReadUncommitted 
+        - No shared locks are issued; exclusive locks are not honored. The important implication is that this isolated level can result in a dirty read (Bad).
+      - ReadCommitted
+        - Shared locks are held during reads. Avoids dirty reads, however, the data can be changed before the end of the transaction, resulting in nonrepeatable reads or phantom data.
+      - Repeatable Read
+        - Locks are placed on all data used in the query, completely preventing others from updating any data covered by the lock. Stops nonrepeatable reads, but the phantom data problem is still possible
+      - Serializable
+        - Range lock is placed specifically on a DataSet. Noone else can update the data or insert rows into the set until transaction has completed. Although very powerful and robusy, this state can cause major problems if not used quickly.
+      - Snapshot
+        - An effective copy of the data is made, so one version of the application can read the data while another is modifying the same data. You can't see data from one transaction in another one, even if you run the query again. The size of them can also cause problems if overused. 
+    - Changing the isolation level during execution
+      - If you encounter a situation in which a different isolationLevel is desired for different phases of the transaction's execution, the default isolationLevel of one set initially remains in effect for the life of the transaction, unless explicitly changed. 
+      - It can be changed at anytime the transaction is alive.
+      - The new value takes effect at execution time, not parse time, so if the isolationLevel is changed somewhere midstream in execution, it applies to all remaining statements.
+  - **Distibuted Transactions**
+    - For example, using 3 third-party hosted applications for transactions (external services), sometimes these databases are not supported.
+    - Therefore microsoft made tools for distributed transactions. The core Transactions objects exist in the System.Transactions namespace. The two other relevant ones are the System.Data.SqlClient and System.Data.EntityClient namespaces (the latter being from the System.Data.Entity assembly).
+  - Managing transactions by using the API from the System.Transactions namespace
+    - TransactionScope class was introduced in version 2.0 of the .NET framework.  - Only thing you need to know is it has a method named Completed() that you should call if you are satisfied it completed successfully.
+      - Complete() tells the transaction manager that everything should be committed. If it isn't called, the transaction is automatically rolled back. Also when called correctly in a using block, if an exception is thrown during execution inside the TransactionScope, the transaction will be rolled back too.
+    - RELOOK AT THIS PART.
+  - Using the EntityTransaction
+    - Main purpose of this class is to specify a transaction for an EntityCommand or to use in conjunction with an EntityConnection. 
+    - Has methods:
+      - Commit()
+      - Rollback()
+      - Dispose(), CreateObjReference(), ToString() etc.
+  - Using the SqlTransaction
+    - Smilar to EntityTransaction but with different names.
+- **Transaction Summary**
+  - There are several ways to implement database transactions in the current .NET framework, including using the EF SaveChanges method, the EntityTransaction, the SqlTransaction, and the TransactionScope. 
+  - TransactionScope is often the quickest and easiest way to work with transactions in .NET
+  - IsolationLevel is common to every form of transaction and is the one thing that has the biggest effect on transaction behaviour. Its importance is often taken for granted, but it is probably the most important aspect of any transaction besides committing and rolling back.
+  - Transactions can take two forms: simple and distributed. You can often identify distributed transactions by seeing multiple or different types of connection objects.
+
