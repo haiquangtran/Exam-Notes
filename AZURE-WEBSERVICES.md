@@ -379,3 +379,9 @@
   - Queue storage is similar to MSMQ and is the storage mechanism of choice for messages that need guaranteed delivery, even when the receiving system is down for hours at a time. 
   - Table storage is Azure's NoSQL implementation. It allows for some very high-volume and high-speed inserts and accesses, much higher than what SQL DB's allow if architected properly.
   - Windows Azure offers you additional caching framework that is very easy to use and can grow as your number of servers grow or can remain stable with dedicated instances. 
+- **Create and implement a WCF Data Services service**
+  - **Addressing resources**
+    1. Create an ASP.NET app (this serves as a host for the Data Service)
+    2. Use the EF tools to build an EntityModel
+    3. Add a WCF Data Service to the ASP.NET app
+    4. 
