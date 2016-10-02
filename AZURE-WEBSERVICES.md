@@ -384,4 +384,39 @@
     1. Create an ASP.NET app (this serves as a host for the Data Service)
     2. Use the EF tools to build an EntityModel
     3. Add a WCF Data Service to the ASP.NET app
-    4. 
+    4. Specify a type for the Service's definition (which is the name of the model container created in your EF project).
+    5. Enable access to the Data Service. This is accomplished by explicitly setting specific properties of the DataServiceConfiguration (SetEntitySetAccessRule, SetServiceOperationAccessRule and DataServiceBehaviour).
+  - **SetEntityAccessRule (Member name/Behaviour)**
+  	- None of these override permissions are set by the DBA or defined at the DB level.
+    - None, All rights to the data are explictly revoked
+    - ReadSingle, Single data items can be read.
+    - ReadMultiple, Entire sets of data can be read.
+    - WriteAppend, New items of this type can be added to data sets.
+    - WriteReplace, Data can be updated or replaced.
+    - WriteDelete, Data can be deleted
+    - WriteMerge, Data can be merged
+    - AllRead, Across-the-board access to the read data of this type
+    - AllWrite, Across-the-board access to the write data of this type
+    - All, All Creation, read, update and delete operations can be performed.
+  - **OData Filter Operators**
+    - These go at the end of the url: e.g. http://hai.world/Questions?$top=5
+    - $orderby
+    - $top - The number of entities to return in the feed
+    - $skip - Indicates how many records should be ignored before starting to return values.
+    - $filter - specifies a condition/s to filter on. e.g: /Questions?$filter=Id gt 5
+    - $expand - Indicates which related entities are returned by the query. They will be included either as a feed or as an entry inline return with the query: $expand = Answers
+    - $select
+    - $inlinecount - Returns the number of entries returned (in the <count> element). e.g. /Questions?$inlinecount=allpages
+  - **Interceptors**
+    - ChangeInterceptors: used for NON-Query operations (have no return type). They must accept two parameters: Type, UpdateOperations.
+    - QueryInterceptors: used for Query operations.
+      - According to MSDN, Query Interceptors must meet the following conditions:
+        - Entity set authorization and validation is handled by methods decorated with the QueryInterceptor attribute.
+        - Entity set access control and validation is enabled through query operations by using composition.
+- **Summary** 
+  - WCF Data Services provide easily accessible adata operations through OData.
+  - WCF Data Services can make use of both JSON and Atom.
+  - The SetEntitySetAccessRule controls how an entity can be queried.
+  - The EntitySetRights enumeration is created with the Flags attribute and is intended to be used as such. In many or most cases, you'll specify more than one value for such access rules.
+  - Queries can be performed using URIs, and tremendous functional enhancements can be implemented by small changes.
+  - QueryOperations are denoted by the $ at the beginning of an operation and can control a wide variety of functions, including the number of items returned to specifying the TOP x of the resultset.
