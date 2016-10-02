@@ -420,3 +420,23 @@
   - The EntitySetRights enumeration is created with the Flags attribute and is intended to be used as such. In many or most cases, you'll specify more than one value for such access rules.
   - Queries can be performed using URIs, and tremendous functional enhancements can be implemented by small changes.
   - QueryOperations are denoted by the $ at the beginning of an operation and can control a wide variety of functions, including the number of items returned to specifying the TOP x of the resultset.
+- **XML**
+  - **LINQ to XML**
+    - TODO:
+- **XML Summary**
+  - The XElement and XDocument classes are the primary or topmost objects you'll typically be working with, although XElements is frequently the better choice.
+  - Although very similar in most regards, the XDocument represents an entire XML document, whereas the XElement represents an XML Fragment. The practical differences between those two are often trivial or nonexistent, but it's worth noting. 
+  - Escaping reserved characters and dealing with namespaces are the two other nuances you'll probably encounter on the exam. You don't need to be an expert in either, but you should at least be familiar with the XmlConvert and XmlNamespace classes and what they are used for.
+  - Although there are different classes and methodologies in the .NET Framework regarding XML manipulation, don't think that you have to use either one approach (System.Xml) or the other (System.Xml.Linq). LINQ is built into the Framework, as its name indicates, and you can certainly use an XmlWriter class and then query a structure using LINQ-to-XML features. (The point is you can mix and match as you see fit or as needed)
+  - Make sure that you understand the difference in behaviour between the Elements and Descendants methods of the XContainer class.
+- **Chapter Summary**
+  - Microsoft provides developers with several different ways to access and manipulate data. These range from the older and more traditional to more cutting edge. ADO.NET, the EF, and ADO.NET Data Services are the three core areas that handle data access.
+  - Each of the data access methods provides many of the same features (with limited exceptions), buit the ease with which they do it and tooling support varies greatly.
+  - Constantly querying the DB for items that are relatively static just produces unnecessary overhead on the DB, network resources, and server resources. (Can reduce this by using caching)
+  - Caching, although beneficial in many cases, must be carefully considered, and the costs and benefits must be weighed carefully. You can fix one type of problem while introducing serious other types of problems (stale data). 
+  - In complex distributed systems, transactions are more a necessity than a luxury. Transactions allow things to happen in an all-or-nothing fashion and enable you to walk back failures and mistakes without having to resort to costly and serious measures such as database restores.
+  - Two types of transactions: simple and distributed. Simple transactions cover 1 connction to 1 data source; distributed transactions cover connections to one or more sources.
+  - You can implement transactions with the TransactionScope class or SqlTransaction class. 
+  - Windows Azure provides several means for data storage when requirements dictate cloud-based storage. For structured data, you have TableStorage for nonrelational data and SQL dB's for relational data. For large unstructured binary data, you have Blob storage. Also have local storage that provides per instance temporary storage.
+  - WCF Data Services are the latest incarnation of ADO.NET data services. Using the EF as a backdrop to manipulate entities in the form of .NET classes, Data services enables you to build fully functioning data services that enable users to employ a full array of options in data manipulation. It has the elegance of allowing queries to be URL addressable and has a rich variety of ofrmats that data can be transmitted with, including Atom and JSON.
+  - There are existing well-established libs for manipulating XML data, and there are many more modern libs, too. On the one hand, you have the System.Xml namespace items; on the other you have System.Xml.Linq. The beauty is that they can almost always be used in conjunction with each other if you prefer, so you're never bound to just one or the other. 
