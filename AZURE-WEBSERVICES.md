@@ -167,6 +167,8 @@
       - The client waits for the answer from the service.
     - **Duplex/Callback Message Exchange Pattern**
       - Both the client and the service can initiate communicate. The client calls a method of the service. The service can then use a client callback to call a method in the client. You can use this pattern when you want the service to send a notification or alert to the client after the client has called the service.
+  - **netTCPBindings**
+    -  netTcpBinding is used for communicating with WCF clients in an intranet environment and provides transport security and Windows authentication by default.
   - **WCF Instancing modes**
     - PerCall
       - Is the default instance.
