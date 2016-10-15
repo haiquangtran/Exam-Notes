@@ -155,6 +155,19 @@
       - The data store can be changed (quite dramatically) without having to rewrite core application logic. Microsoft has made a tremendous investment into the EF, and all indiciations point to the fact it has made a firm commitment to the success of the EF.
       - Built to fit right in with WCF, which makes them complementary technology.
 - **WCF Data Services**
+  - **WCF Messaging patterns**
+    - One-way message exchange
+      - A client application sends a message to a WCF service but the service does not send a reply message to the client. You can use this pattern when a client requests the service take an action but does not need to wait for a reply
+      - Some scenarios include:
+        - Logging in and out
+        - Maintenance tasks etc
+  - ***Request/Reply Message Exchange pattern*
+    - A client application sends a message to a WCF service and then waits for a reply.
+    - This is commonly used, because the client sends a message to the Service and expects an answer i.e. GetStockPrice() or if something has successfully completed/errored.
+    - The client waits for the answer from the service.
+  - **Duplex/Callback Message Exchange Pattern**
+    - Both the client and the service can initiate communicate. The client calls a method of the service. The service can then use a client callback to call a method in the client. You can use this pattern when you want the service to send a notification or alert to the client after the client has called the service. 
+  - 
   - **Choosing WCF Data Services as the data access technology**
     - Highly notable changes :
       - Open Data Protocol (OData)
