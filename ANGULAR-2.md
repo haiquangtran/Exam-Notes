@@ -41,3 +41,7 @@
     - BehaviourSubject
     - PublishSubject
     - ReplaySubject
+- **Observable**
+  - An observer subscribes to an Observable
+  - That observer reacts to whatever item or sequence of items the Observable emits.
+  - This pattern facilitates concurrent operations because it does not need to block while waiting for the Observable to emit objects, but instead it creates a sentry in the form of  an observer that stands ready to react appropriately at whatever future time the Observable does so. 
