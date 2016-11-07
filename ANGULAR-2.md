@@ -24,3 +24,20 @@
 - Form of JavaScript which knows types and classes and can be compiled to JavaScript. 
 - Open source
 - Has Inheritance, interfaces, generics and lambdas.
+
+## RxJs
+- **Subject**
+  - http://reactivex.io/documentation/subject.html
+  - Acts as both an observer and an Observable.
+  - It can subscribe to 1 or more Observables (since it's an observer)
+  - It can also pass through items it observes by reemtting them, and it can also emit new items (Since it's an observable)
+  - Since a Subject subscribes to an observable, it will trigger that observable to begin emitting items 
+    - If an observable is "cold" (waits for a subscription before it begins to emit items)
+    - This can have the effect of making the resulting subject a "hot" observable variant of the original cold observable.
+  - There are 4 subjects
+    - AsyncSubject
+      - Emits the last value (and only the last value) emitted by the source Observable, and only after that source Observable completes 
+      - If the source Observable does not emit any values, the AsyncSubject also completes without emitting any values.
+    - BehaviourSubject
+    - PublishSubject
+    - ReplaySubject
