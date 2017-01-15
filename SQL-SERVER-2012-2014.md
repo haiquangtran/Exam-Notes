@@ -21,4 +21,4 @@
     - Uses three-valued predicate logic. True/False/Null. When a predicate comapres two values, if both are present, the result evaluates to either true or false, but if one is NULL, the result evalutes to a third logical value - Unknown.
     - NOTE: T-SQL provides tools/features to still do it the relational way. 
 
-## **Logical Query Processing**
+## Logical Query Processing
