@@ -1,6 +1,6 @@
 # Querying Microsoft SQL Server 2012
 
-- **Transact-SQL (T-SQL)**
+## Transact-SQL (T-SQL)
   - T-SQL is the main language used to manage and manipulate data in Microsoft SQL Server. SQL Server also supports other languages, like C# and VB but T-SQL is usually the preferred language for data management and manipulation. 
     - T-SQL is a dialect of standard SQL. 
     - T-SQL is based on strong mathematical foundations. (Based on standard SQL, which in turn is based on the relational model, which is based on set theory and predicate logic.)
@@ -21,3 +21,4 @@
     - Uses three-valued predicate logic. True/False/Null. When a predicate comapres two values, if both are present, the result evaluates to either true or false, but if one is NULL, the result evalutes to a third logical value - Unknown.
     - NOTE: T-SQL provides tools/features to still do it the relational way. 
 
+## **Logical Query Processing**
