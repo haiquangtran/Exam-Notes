@@ -19,4 +19,5 @@
     - Allows defining result columns based on an expression without assigning a name to the target column. e.g. Select empid, firstname + ' ' + lastname FROM HR.EMployees. (We do not have to set the column name for firstname + lastname AS fullname, it just shows up empty for the column heading)
     - Allows a query to return multiple result columns with the same name. 
     - Uses three-valued predicate logic. True/False/Null. When a predicate comapres two values, if both are present, the result evaluates to either true or false, but if one is NULL, the result evalutes to a third logical value - Unknown.
+    - NOTE: T-SQL provides tools/features to still do it the relational way. 
 
