@@ -40,3 +40,5 @@
   - T-SQL eavluates all expressions that appear in the same logical query processing phase in an all-at-once manner. 
     - SQL server won't necessarily physically process all expressions at the same point in time, but it has to produce a result as if it did (conceptually). This is different to other programming languages where it's usually evaluated from left to right. But T-SQL is different.
 
+## Querying and Managing XML Data
+  - 
