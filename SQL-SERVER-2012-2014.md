@@ -22,7 +22,7 @@
     - NOTE: T-SQL provides tools/features to still do it the relational way. 
 
 ## Logical Query Processing
-  - T-SQL is a declarative English-like language - You define what you want (the "what" part, the DB engine will figure out the "how" part) as opposed to how to achieve what you want. 
+  - T-SQL is a declarative English-like language - You define what you want (the "what" part, the DB engine will figure out the "how" part) as opposed to how to achieve what you want. Therefore the keyed-in order of the query starts with the SELECT clause.
   - **Phases (In keyed-in order)**
     - SELECT
     - FROM
@@ -30,7 +30,7 @@
     - GROUP BY
     - HAVING
     - ORDER BY
-  - **Conceptual interpretation order is different for the above; it processes it like this:**
+  - **Conceptual interpretation order (Logical query processing) is different for the above; it processes it like this**
     - FROM
     - WHERE (Cannot refer to aliases here because SELECT is after this)
     - GROUP BY
