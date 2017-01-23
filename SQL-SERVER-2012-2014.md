@@ -41,4 +41,44 @@
     - SQL server won't necessarily physically process all expressions at the same point in time, but it has to produce a result as if it did (conceptually). This is different to other programming languages where it's usually evaluated from left to right. But T-SQL is different.
 
 ## Querying and Managing XML Data
-  - 
+  - **XML**
+    - Element-centric means that the attributes are all nested in their own elements
+    - Attribute-centric means their are attributes on the element, rather than the attributes being nested. 
+  - SQL Server includes support for XML:
+    - Creating XML from relational data with a query and shredding XML into relational tabular format
+    - SQL Server has native XML data type, can index it with specialized XML indexes, manipulate it using XML data type methods
+  - **Producing XML from Relational Data**
+    - **FOR XML RAW**
+      - Does not give additional level of nesting.
+      - In RAW mode, every row from returned rowsets converts to a single element named row, and columns translate to the attributes of this element. 
+        - i.e. <row custid="1" companyname="YOLO" /> etc
+      - You can enhance the RAW mode by renaming the row element, adding a ROOT element, including NAMESPACES, and making the XML returned element-centric.
+        - i.e. <CustomerOrders> <Order custid="1" companyname="YOLO" /> </CustomerOrders> 
+    - **FOR XML AUTO**
+      - Gives you nice XML documents with nested elements.
+      - In AUTO and RAW modes, you can use the keyword ELEMENTS to produce element-centric XML.
+      - The WITH NAMESPACES clause, preceding the SELECT part of the query, defines namespaces and aliases in the returned XML. 
+    - FOR XML clause comes after the ORDER BY clause in a query.
+    - ORDER BY clause is important, without it the order of rows returned is unpredictable (weird XML document with repeated elements multiple times with just part of nested elements everytime etc). 
+    - Order of the columns in the SELECT clause also influences the XML returned. SQL Server uses column order to determine the nesting of elements. The order should follow 1 to * relationships. 
+    - XSD schema is called the inline schema. You return XSD with the **XMLSCHEMA(target_namespace)** directive. This schema is included inside the XML that is returned, before the actual XML data. If you only need schema, without the data, simply include a WHERE condition that no row can satisfy.
+    - **FOR XML PATH**
+      - The FOR XML clause has options of: the EXPLICIT and PATH options - you can manually define the XML returned. 
+        - The EXPLICIT mode is included for backward compatibility only; it uses proprietary T-SQL for formatting XML.
+        - The PATH mode uses standard XML XPath expressions to define the elements and attributes of the XML you are creating. 
+      - In PATH mode, column names and aliases serve as XPath expressions. 
+        - By default, every column becomes an element; if you want to generate attribute-centric XML - prefix the alias name with @
+    - If you want to create XML with nested elements for child tables, you have to use subqueries in the SELECT part of the query in the PATH mode. 
+  - **Shredding XML to Tables**
+    - Converting XML to relational tables is known as shredding XML.
+    - **OPENXML function**
+      - Provides a rowset over in-memory XML documents by using DOM presentation. Before parsing the DOM, you need to prepare it. To prepare it, call the system stored procedure sys.sp_xml_preparedocument. After you shred the document, you must remove the DOM presentation by using the procedure sys.sp_xml_removedocument. 
+      - Uses the following parameters:
+        - An XML DOM document handle (int), returned by sp_xml_preparedocument
+        - An XPath expression (rowpattern) to find the nodes you want to map to rows of a rowset returned
+        - A description of the rowset returned
+        - Mapping between XML nodes and rowset columns
+      - Can map XML elements or attributes to rows and cols by using the WITH clause of the OPENXML function. 
+      - LOOK UP THIS PART AGAIN
+  - **Using the FOR XML Clause**
+    - 
