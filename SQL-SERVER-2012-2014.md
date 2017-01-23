@@ -22,3 +22,21 @@
     - NOTE: T-SQL provides tools/features to still do it the relational way. 
 
 ## Logical Query Processing
+  - T-SQL is a declarative English-like language - You define what you want (the "what" part, the DB engine will figure out the "how" part) as opposed to how to achieve what you want. 
+  - **Phases (In keyed-in order)**
+    - SELECT
+    - FROM
+    - WHERE
+    - GROUP BY
+    - HAVING
+    - ORDER BY
+  - **Conceptual interpretation order is different for the above; it processes it like this:**
+    - FROM
+    - WHERE (Cannot refer to aliases here because SELECT is after this)
+    - GROUP BY
+    - HAVING (Evaluated per group, whereas WHERE is evaluated before rows are grouped; Therefore is evaluated per row.)
+    - SELECT
+    - ORDER BY
+  - T-SQL eavluates all expressions that appear in the same logical query processing phase in an all-at-once manner. 
+    - SQL server won't necessarily physically process all expressions at the same point in time, but it has to produce a result as if it did (conceptually). This is different to other programming languages where it's usually evaluated from left to right. But T-SQL is different.
+
