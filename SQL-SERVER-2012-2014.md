@@ -116,3 +116,12 @@
     - XQuery supports its own data types and functions
     - You use XPath expressions to navigate through an XML instance.
     - The real power of XQuery is in the FLWOR expressions
+  - **Using the XML Data Type**
+    - XML is the standard format for exchanging data among different applications and platforms. Databases simply have to deal with it.
+    - **When to use the XML Data type (RELOOK AT THIS)**
+      - DB schema is sometimes volatile (dynamic/changes often). 
+      - Data definition language (DDL) triggers and extended events returning different event information; each event returns data with a different schema. A conscious design decision was that DDL triggers return event information in XML format via the eventdata() function
+      - XML showplan - can generate execution plan information in XML format by using the SET SHOWPLAN_XML and SET STATISTICS XML statements - It's easy to request and parse now. 
+      - Another case is when data is sparse - you can represent it in XML. (Your data might have alot of nulls etc, in relational you might need to create unnecessary tables for these etc)
+      - Could have reasons to use an XML model, since it supports hierarchical and sorted data.
+      - RELOOK AT THE REST
