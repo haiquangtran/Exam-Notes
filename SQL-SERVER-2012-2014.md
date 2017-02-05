@@ -41,6 +41,8 @@
     - SQL server won't necessarily physically process all expressions at the same point in time, but it has to produce a result as if it did (conceptually). This is different to other programming languages where it's usually evaluated from left to right. But T-SQL is different.
 
 ## Querying and Managing XML Data
+  - You can use the FOR XML clause of the SELECT T-SQL statement to product XML.
+  - Use the OPENXML function to shred XML to tables.
   - **XML**
     - Element-centric means that the attributes are all nested in their own elements
     - Attribute-centric means their are attributes on the element, rather than the attributes being nested. 
@@ -79,6 +81,11 @@
         - A description of the rowset returned
         - Mapping between XML nodes and rowset columns
       - Can map XML elements or attributes to rows and cols by using the WITH clause of the OPENXML function. 
+      - Accepts an optional third parameter: flags
+        - A flag of 1 means attribute-centric mapping
+        - 2 means element-centric
+        - 3 means both, however, flag value 3 is undocumented - best practice not to use it. 
+        - Flag value 8 can be combined with values 1 and 2 (flag value of 11) with a bitwise logical OR operator to get both attribute and element centric mapping.
       - LOOK UP THIS PART AGAIN
-  - **Using the FOR XML Clause**
+  - **Querying XML Data with XQuery**
     - 
