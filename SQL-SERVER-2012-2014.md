@@ -87,5 +87,32 @@
         - 3 means both, however, flag value 3 is undocumented - best practice not to use it. 
         - Flag value 8 can be combined with values 1 and 2 (flag value of 11) with a bitwise logical OR operator to get both attribute and element centric mapping.
       - LOOK UP THIS PART AGAIN
-  - **Querying XML Data with XQuery**
-    - 
+  - **Querying XML Data with XQuery (RELOOK AT THIS SECTION)**
+    - **XQuery**
+      - Standard language for browsing XML instances and returning XML
+      - Much richer than XPath expressions, an older standard, which you can use for simple navigation only.
+      - XQuery allows you to navigate, loop over nodes, shapre the returned XML instance and more.
+      - SQL Server DB engine processes XQuery inside T-SQL statements through XML data type methods. (Not all XQuery features are supported in SQL Server).
+      - XQuery has it's own type system, has all of the commonly used types you would expect, and that you can use specific functions on specific types only. 
+    - **Navigation**
+      - Plenty of ways to navigate through an XML document with XQuery. Basic approach is to use XPath expressions. With XQuery can specifcy relative or absolute paths. 
+        - for example: Node-name/child::element-name[@attribute-name=value]
+        - **Axis**
+          - Specifies the direction of travel. In the example the axis is child::, which specifies child nodes of the node from the previous step.
+        - **Node test**
+          - Specifies the criterion for selecting nodes. In the example, element-name is the node test; it selects only nodes named element-name
+        - **Predicate**
+          - Further narrows downt he search. In the example, there is one predicate: [@attribute-name=value], which selects only nodes that have an attribute named attribute-name with value value, such as [@orderid=10952]
+          - Note: for the predicate example, there is a reference to the attribute:: axis; the at sign (@) is an abbreviation for the axis attribute::.
+          - Can do predicates in sequences. However, if in sequences if one of them is true, then it returns in the whole sequence returning true
+            - i.e. (1, 2, 3) = (2, 4) -- true, (1, 2, 3) = 1 -- true etc.
+            - if this is confusing use value comparison operators (lt, gt, etc). These can only be used by themselves and not in sequence.
+          - Supports conditional statements if, then, else etc
+    - **FLWOR Expressions (XQuery)**
+      - for, let, where, order by, and return (return lets you format the XQuery)
+      - FLWOR expressions are actually a for each loop.
+  - **Lesson Summary**
+    - You can use the XQuery language inside T-SQL queries to query XML data
+    - XQuery supports its own data types and functions
+    - You use XPath expressions to navigate through an XML instance.
+    - The real power of XQuery is in the FLWOR expressions
