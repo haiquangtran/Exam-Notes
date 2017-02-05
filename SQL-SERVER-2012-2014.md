@@ -140,3 +140,7 @@
         - Useful if queries are value-based and the path is not fully specified or it includes a wildcard. 
       - **Property**
         - Useful for queries that retrieve one or more values from individual XML isntances by using the value() method.
+  -**Lesson Summary**
+    - XML data type is useful for many scenarios inside a relational database.
+    - You can validate XML instances against a schema collection.
+    - You can work with XML data through XML data type methods. 
