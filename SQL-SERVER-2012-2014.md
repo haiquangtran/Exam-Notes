@@ -116,12 +116,27 @@
     - XQuery supports its own data types and functions
     - You use XPath expressions to navigate through an XML instance.
     - The real power of XQuery is in the FLWOR expressions
-  - **Using the XML Data Type**
-    - XML is the standard format for exchanging data among different applications and platforms. Databases simply have to deal with it.
-    - **When to use the XML Data type (RELOOK AT THIS)**
-      - DB schema is sometimes volatile (dynamic/changes often). 
-      - Data definition language (DDL) triggers and extended events returning different event information; each event returns data with a different schema. A conscious design decision was that DDL triggers return event information in XML format via the eventdata() function
-      - XML showplan - can generate execution plan information in XML format by using the SET SHOWPLAN_XML and SET STATISTICS XML statements - It's easy to request and parse now. 
-      - Another case is when data is sparse - you can represent it in XML. (Your data might have alot of nulls etc, in relational you might need to create unnecessary tables for these etc)
-      - Could have reasons to use an XML model, since it supports hierarchical and sorted data.
+
+- **Using the XML Data Type**
+  - XML is the standard format for exchanging data among different applications and platforms. Databases simply have to deal with it.
+  - **When to use the XML Data type (RELOOK AT THIS)**
+    - DB schema is sometimes volatile (dynamic/changes often). 
+    - Data definition language (DDL) triggers and extended events returning different event information; each event returns data with a different schema. A conscious design decision was that DDL triggers return event information in XML format via the eventdata() function
+    - XML showplan - can generate execution plan information in XML format by using the SET SHOWPLAN_XML and SET STATISTICS XML statements - It's easy to request and parse now. 
+    - Another case is when data is sparse - you can represent it in XML. (Your data might have alot of nulls etc, in relational you might need to create unnecessary tables for these etc)
+    - Could have reasons to use an XML model, since it supports hierarchical and sorted data.
       - RELOOK AT THE REST
+      - The easiest way to create XML Schemas is to create relational tables first, then use the XMLSCHEMA option for the FOR XML clause.
+  - **XML Indexes**
+    - XML data type is actually a large object type. There can be up to 2 GB of data in every single column value. Scanning through the XML data sequentially is not a very efficient way of retrieving info.
+    - Creating an index on a filtered column does a index seek operation rather than table scan.
+    - Can also index XML columns with specialized XML indexes. 
+    - Primary XML index: the first index you create on an XML column. This index contains a shredded persisted representation of the XML values. For each value in the column, the index creates several rows of data. After creating the primary index, you can create up to three other types of secondary xml indexes.
+      - Can be created only on tables with a clustered primary key.
+    - Secondary XML indexes: 
+      - **PATH**
+        - Useful if queries specify path expressions. It speeds up the exist() method better than the primary xml index. Also speeds up queries that use value() for a fully specified path.
+      - **VALUE**
+        - Useful if queries are value-based and the path is not fully specified or it includes a wildcard. 
+      - **Property**
+        - Useful for queries that retrieve one or more values from individual XML isntances by using the value() method.
