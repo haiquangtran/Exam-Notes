@@ -144,3 +144,13 @@
     - XML data type is useful for many scenarios inside a relational database.
     - You can validate XML instances against a schema collection.
     - You can work with XML data through XML data type methods. 
+
+**T-SQL Querying Notes and Functions**
+- PIVOT
+  - Used to change table-valued expressions into another table.
+  - Rotates a table-valued expression by turning the unique values from one column in the expression into multiple columns in the output. 
+  - Performs aggregations where they are required on any remaining column values that are wanted in the final output
+  - SELECT ..., FROM ..., PIVOT (... FOR ... IN ()) AS ..., <Optional order by>
+- UNPIVOT
+  - Performs opposite operation to pivot
+  - Rotates columns of a table-valued expression into column values. 
