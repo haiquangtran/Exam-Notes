@@ -177,6 +177,8 @@
      - Is materialized and the definition has been computed with the resulting data stored just like a table
      - Create a unique clustered index on it to do this
      - Indexed views work best for queries that aggregate many rows but are not suited for underlying datasets that are frequently updated.
+  - **Partitioned views**
+    - Partitioned view joins horizontally partitioned data from a set of member tables across one or more servers. 
 **Work with Data section**
 - PIVOT
   - Used to change table-valued expressions into another table.
