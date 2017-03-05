@@ -278,3 +278,14 @@
       - Statements cannot read data that has been modified but not yet committed by other transactions.
       - No other transactions can modify data that has been read by the current transaction until the current transaction completes.
       - Other transactions cant insert new rows with key values that would fall in the range of keys read by any statements in the current statements in the current transaction until the current transaction completes.
+- **CURSORS**
+  - A mechanism to work with one row or a small block of rows at a time. Cursors are an extension to result sets that provide that mechanism. 
+  - Allow positioning at specific rows of the result set.
+  - Retrieving one row or block of rows from the current position in the result set.
+  - Supporting different levels of visibility to changes made by other users to the database data that is presented in the result set.
+  - Providing Transact-SQL statements in scripts, stored procedures, and triggers access to the data in a result set.
+  - DECLARE CURSOR which can be used in scripts, stored procedures, and triggers.
+  - declare the cursor, open cursor, fetch rows etc, close the cursor, deallocate. (Can use it like a for loop kinda)
+  -  DECLARE cursor_name CURSOR
+  - http://www.dotnettricks.com/learn/sqlserver/sql-server-basics-of-cursors
+  - https://msdn.microsoft.com/en-us/library/ms180169.aspx
