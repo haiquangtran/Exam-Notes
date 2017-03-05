@@ -232,12 +232,49 @@
   - Views are updateable, but it is possible when you insert a new or update a record that the record does not logically belong to the view any longer. 
   - Setting the CHECK OPTION causes any changes to the view which causes the records to disappear from the view raises a trappable runtime error. 
   - http://www.devx.com/vb2themax/Tip/18579
+- **MERGE**
+  - Performs insert, update or delete operations on a target table based on the results of a join with a source table. For example, you can sychronize two tables by inserting, updating, or deleting rows in one table based on differences found in the other table.
+  - MERGE ... USING table_source ON .... [WHEN MATCHED ... THEN merge_matches] [WHEN NOT MATCHED .... THEN merge_not_matched] etc...
+  - https://msdn.microsoft.com/en-us/library/bb510625.aspx
+
+**Modify data section**
 - **STORED PROCEDURES**
   - Can accept input parameters and return multiple values in form of output parameters to the calling procedure
   - Can call other procedures
   - Return a status value to a calling procedure
   - http://stackoverflow.com/questions/1179758/function-vs-stored-procedure-in-sql-server
-- **MERGE**
-  - Performs insert, update or delete operations on a target table based on the results of a join with a source table. For example, you can sychronize two tables by inserting, updating, or deleting rows in one table based on differences found in the other table.
-  - MERGE ... USING table_source ON .... [WHEN MATCHED ... THEN merge_matches] [WHEN NOT MATCHED .... THEN merge_not_matched] etc...
-  - https://msdn.microsoft.com/en-us/library/bb510625.aspx
+
+**Troubleshoot and optimize section**
+- **Optimize queries**
+  - DMV's
+  - HASH
+  - MERGE
+  - LOOP
+- **Manage transactions**
+  - TRAN
+  - TRANCOUNT
+   - Used for checking if the transactions have been committed etc.
+  - COMMIT { TRAN | TRANSACTION } 
+    - Marks end of a successfull transaction
+    - If @@TRANCOUNT is 1, Commit transaction makes all data modifications performed since the start of the transaction a permanent part of the database, frees the resources held by the transaction and decrements the @@TRANCOUNT to 0. 
+    - If @@TRANCOUNT is more than 1, it just decrements it and the transaction stays active.
+  - ROLLBACK
+  - ISOLATION LEVELS
+    - Controls the locking and row versioning behaviour of T-SQL statements issued by a connection to SQL Server.
+    - READ UNCOMMITED
+      - Can read rows that have been modified by other transactions but not yet committed
+      - Allows for dirty reads 
+      - No locks etc
+    - READ COMMITTED
+      - Cannot read data that has been modified but not committed by other transactions
+      - Prevents dirty reads
+      - Still can result in nonrepeatable reads or phantom data because data can be changed by other transactions between individual statements within the current transaction.
+    - REPEATABLE READ
+      - Cannot read data that has been modified but not yet committed by other transactions and that no other transactions can modify data that has been read by the current transaction until the current trasnaction completes. 
+      - Shared locks are placed on all data read by each statement and held until finished
+    - SNAPSHOT
+      - Data read by any statement in a transaction will be transactionally consistent version of the data that existed at the start of the transaction. 
+    - SERIALIZABLE
+      - Statements cannot read data that has been modified but not yet committed by other transactions.
+      - No other transactions can modify data that has been read by the current transaction until the current transaction completes.
+      - Other transactions cant insert new rows with key values that would fall in the range of keys read by any statements in the current statements in the current transaction until the current transaction completes.
