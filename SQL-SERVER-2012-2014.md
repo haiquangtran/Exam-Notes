@@ -145,7 +145,39 @@
     - You can validate XML instances against a schema collection.
     - You can work with XML data through XML data type methods. 
 
-**T-SQL Querying Notes and Functions**
+**Create Database Objects section**
+- Types of tables
+  - Partitioned tables
+    - data has been horizontally divided into units which may be spread across more than one filegroup in a database. 
+    - By default, SQL Server 2016 supports up to 15,000 partitions.
+  - Temporary Tables
+    - stored in tempdb
+    - There are local and global temporary tables.
+    - **local**
+      - have single number sign (#) as the first character of their names
+      - Only visible to the current connection for the user and are deleted when the user disconnects to the instance of the SQL server
+    - **global**
+      - have two number signs (##) as the first characters of their names
+      - deleted when all users referencing the table disconnect from the instance of the SQL Server. 
+  - System tables
+    - Users cannot directly query or update the system tables
+    - special set of tables that defines the configuration of the server
+    - Info made available through views
+  - Wide tables
+    - Use sparse columns to increase the total of columns that a table can have to 30,000. 
+    - Sparse columsn are ordinary cols that have an optimized storage for null values. 
+    - They reduce the space requirements for null values at the cost of more overhead to retrieve nonnull values.
+    - Most of the data in any particular row should be NULL. 
+ - Views
+   - virtual table whose contents are defined by a query.
+   - Unless indexed, a view does not exist as a stored set of data values in a database.
+   - Rows and cols of data come from tables referenced in the query defining the view, and are produced dynamically whent he view is referenced.
+   - Can be used as security mechanism by letting users access data through the view, without granting the users permissions to directly access the underlying base tables of the view. 
+   - **Indexed views**
+     - Is materialized and the definition has been computed with the resulting data stored just like a table
+     - Create a unique clustered index on it to do this
+     - Indexed views work best for queries that aggregate many rows but are not suited for underlying datasets that are frequently updated.
+**Work with Data section**
 - PIVOT
   - Used to change table-valued expressions into another table.
   - Rotates a table-valued expression by turning the unique values from one column in the expression into multiple columns in the output. 
