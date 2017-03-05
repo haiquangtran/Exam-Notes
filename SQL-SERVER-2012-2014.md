@@ -179,6 +179,16 @@
      - Indexed views work best for queries that aggregate many rows but are not suited for underlying datasets that are frequently updated.
   - **Partitioned views**
     - Partitioned view joins horizontally partitioned data from a set of member tables across one or more servers. 
+ - Index
+   - **Clustered index**
+     - Special type of index that reorders the way the rows in the table are physically stored on the disk in the same order as the index.
+     - Therefore a table can have only one clustered index
+     - Generally faster to read from a clustered index if you want to get back all the columns. You do not have to go first to the index and then to the table.
+     - Can be more than one column, but by default a column with a primary key already has a clustered index
+     - Writing to a table with a clustered index can be slower, if there is a need to rearrange the data
+   - **Non clustered index**
+     - There is a second list that has pointers to the physical rows. You can have many non clustered indexes, although each new index will increase the time it takes to write new records.
+
 **Work with Data section**
 - PIVOT
   - Used to change table-valued expressions into another table.
