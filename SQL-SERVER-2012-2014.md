@@ -180,6 +180,7 @@
   - **Partitioned views**
     - Partitioned view joins horizontally partitioned data from a set of member tables across one or more servers. 
  - Index
+   - The first index created on a view must be a UNIQUE CLUSTERED INDEX. After the unique clustered index has been created, you can create more nonclustered indexes. Creating a unique clustered index on a view improves query performance since the view is stored in the DB the same way a table with a clustered index is stored.
    - **Clustered index**
      - Special type of index that reorders the way the rows in the table are physically stored on the disk in the same order as the index.
      - Therefore a table can have only one clustered index
@@ -216,3 +217,27 @@
     - When a GUID col is used as a row identifier, newsequentialid can be faster than using newid function (because newid function causes random activity and uses fewer cached data pages)
     - NEWSEQUENTIALID also helps to compeltely fill the data and index pages
     - If privacy is a concern do not use this function as it's possible to guess the next value generated.
+- **APPLY function**
+  - APPLY operator eNables you to invoke a table-valued function for each row returned by an outer table expression of a query.
+  - CROSS APPLY returns only rows from the outer table that produce a result set from the table-valued function. 
+  - OUTER APPLY returns both rows that produce a result set, and rows taht do not, with NULL values in the columns produced by the table-valued function
+- **Optimize for ad hoc workloads Server configuration option**
+  - Improves the efficency of a plan cache for workloads that contain many single use ad hoc batches. 
+  - When set to 1, the DB engine storse a small compiled plan stub in the plan cache when a bache is compiled for the first time, instead of the full plan. This saves memory pressure by not allowing the plan cache to become filled with compiled plans that are not reused.
+- **WITH SCHEMABINDING**
+  - Can be used for views and Functions but not in Stored procedures
+  - Objects referenced by schema bound objects cannot have their definition changed but the schema bound object definition can be change.
+  - i.e. A view with schemabinding referencing a table. The view definition can be changed but the referenced table cannot.
+- **WITH CHECK OPTION**
+  - Views are updateable, but it is possible when you insert a new or update a record that the record does not logically belong to the view any longer. 
+  - Setting the CHECK OPTION causes any changes to the view which causes the records to disappear from the view raises a trappable runtime error. 
+  - http://www.devx.com/vb2themax/Tip/18579
+- **STORED PROCEDURES**
+  - Can accept input parameters and return multiple values in form of output parameters to the calling procedure
+  - Can call other procedures
+  - Return a status value to a calling procedure
+  - http://stackoverflow.com/questions/1179758/function-vs-stored-procedure-in-sql-server
+- **MERGE**
+  - Performs insert, update or delete operations on a target table based on the results of a join with a source table. For example, you can sychronize two tables by inserting, updating, or deleting rows in one table based on differences found in the other table.
+  - MERGE ... USING table_source ON .... [WHEN MATCHED ... THEN merge_matches] [WHEN NOT MATCHED .... THEN merge_not_matched] etc...
+  - https://msdn.microsoft.com/en-us/library/bb510625.aspx
