@@ -2,6 +2,96 @@
 
 ## Sections of the exam
 ## **Create and manage Azure Resource Manager (ARM) Virtual Machines**
+  - Virtual Machines
+    - Manage through Portal, PowerShell (mainly for DevOps) or REST API.
+    - Consists of Virtual Network, a Cloud Service wrapper with a Virtual Machine in that wrapper, with a storage account that contains an Image, OS Disk, and Data Disk(s).
+  - Deployment
+    - Do it in the Azure market place.
+    - Can select existing VM images
+    - Can use PowerShell and deploy using PowerShell too
+    - There are also JSON ARM Templates which allow for intelliSense and fast set up
+  - ARM Templates Portal 
+    - Custom deployment allows you to create a template from scratch
+  - Desired State Configuration
+    - Allows you to preset/set the VM to a desired state
+    - Usually will be seen in the template.
+  - Uploading Images
+    - Create a custom image from an existing machine using Sys prep or the system preparation tool
+    - This allows you to create a template of an existing machine that we can continue to use within Azure as a new virtual machine
+  - Availability Sets
+    - Availability sets are NOT created by default
+    - You have to create the Availability Set WITH the virtual machine
+    - VMs may be impacted by unplanned outages such as power cuts, networks etc. Or during planned maintenance, we need to understand were patching the underlying host OS. These will run as a VM but we yet we still need to patch the Host we still need the VMs to be available. When you create a availability set you will have upgrade domains and fault domains. 
+    - Planned vs unplanned maintenance
+      - Configure multiple VMs in an availability set for redundancy
+      - Configure each application tier into separate availability sets
+      - Combine a Load Balancer with availability sets
+      - Use multiple storage accounts for each availability set
+    - Upgrade domains
+      - Is for underlying patching
+      - Five (non-user configurable) domains by default
+      - Groups of VMs and hardware that can be rebooted at the same time
+    - Fault domains
+      - Separate hardware & network (Incase of a network switch, or power outage, or hardware failure)
+      - Three domains by default
+      - Group of VMs that share a common power source and network switch 
+  - Storage replication options
+    - Locally redundant
+	  - Default
+	  - up to 3 nodes in same data center
+	- Zone redundant storage
+	  - up to 3 data centers in the same region
+	- Geo-redundant storage
+	  - Data center in a different region
+	- Read-access geo-redundant storage
+	  - Data center in a different region 
+	  - Secondary data can be read (read-only not write).
+  - ARM VM Storage
+    - Configure disk caching
+      - Input/output operations per second (IOPS)
+      - Throughput (Mbps)
+      - Read/write vs Read and striping
+  - Storage capacity
+    - Sizing and egress traffic limits (there are scalability and performance targets regarding storage for a VM)
+  - Azure File Service
+    - SMB file shares from the VM
+    - Can be used from the File system I/O APIs
+  - Premium vs Standard
+    - Prem: high-performance, low-latency disk support for I/O intensive workloads
+  - VM Networking
+    - Network Security Group (NSG)
+      - A virtual network device which has ACL rules that allow/deny network traffic
+      - Can only be applied to resources within the region it was created
+      - Diagnostic logging capability
+      - Associating (NSG to Network Interface Card (NIC), NSG to subnet) - ONE NSG to a NIC or subnet
+    - User Defined Routes (UDRs) / Route tables
+      - Specify the next hop for packets flowing to a specific subnet
+      - Force tunnelling to the internet via your on-premises network
+      - Network Virtual Appliance
+      - Routes selected in order of 1. UDR, 2. BGP (with ExpressRoute), 3. System Route
+      - Use of virtual appliances in your Azure environment
+      - System Routes
+        - 3 Default Rules: Local vNet, On-premises, Internet
+          - Any subnet to another w/in a VNet.
+          - From VMs to the internet
+          - From VNet to another VNet via VPN gateway
+          - From a VNet to another VNet through VNet Peering
+          - From a VNet to on-premises network via VPN gateway
+    - Application Gateway
+      - Load balancing
+        - Websocket traffic
+        - Sticky session apps
+        - SSL offload
+  - VM Scale Sets
+    - Identical set of VMs
+      - PaaS-like autoscale
+      - Focus is load and elastic in and out (can scale up and down)
+    - Scaling
+      - PaaS-like autoscale using autoScaleSettings in ARM template
+        - Rules using metricTriggers
+      - Can combine Desired State Configuration extension
+      - Initial scale setting using ARM template: "sku" : { "name" : "Standard_A0", "tier": "Standard", "capcity": 3 }
+        - Can configure a Vms scale set's scaling capabilites in the template.
 ## **Design and implement a storage and data strategy**
   - Azure Storage and Azure SQL Database are important in Microsoft Azure PaaS strategy for storage. 
   - Azure Storage 
