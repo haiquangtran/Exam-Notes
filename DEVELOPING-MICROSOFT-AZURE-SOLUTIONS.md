@@ -171,3 +171,17 @@
 	  - i.e. If you want the encryption you have to enable it at the beginning right away.
 ## **Manage identity, application, and network services**
 ## **Design and implement Azure PaaS compute and web and mobile services**
+  - Web & Mobile
+    - App Service (Web apps, Mobile apps, API apps and logic apps)
+      - Features:
+        - Auto-patching and auto-scale
+        - .NET, Java, Node.js, PHP, Python
+        - Integrate with SaaS and on-premises
+        - Continuous integration with VSTS, Github, BitBucket and more.
+      - Web apps
+      - Mobile apps
+      - API apps
+      - logic apps
+    - API Management
+    - Service Fabric
+    - Functions
