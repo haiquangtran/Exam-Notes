@@ -100,5 +100,74 @@
     - Documents, media in the Blob service, Table service for NoSQL data, queue service for reliable messages, file service for server message block file share scenarios. 
   - Azure SQL Database
     - Provides classic relational database features as part of an elastic scale service. 
+  - Storage
+  	- Blobs / Files 
+  	  - A blob is acced from a container within a storage account. From there, we actually access the particular blob. 
+  	  - A SAS token is the gateway that allows us with security to access our particular blob. (Like a valet key in a car that allows you to access a particular storage location)
+  	  - Types
+	  	  - Block Blob
+	  	  - Page Blob
+	  	  - Append Blob
+	  - Files
+	    - Files are accessible via SMB interface as a file share
+	    - Can also access those files using the RESTful APIs
+	  - Azure Blobs vs Azure Files
+	    - Accessibility: Blob = REST APIs, Files = REST APIs, or SMB interface
+	    - Endpoints: Blob = myaccount.blob.core.windows.net/mycontainer/myblob, Files = myaccount.file.core.windows.net\myshare\myfile.txt
+	    - Capacity: Blob = Up to 500TB containers, Files = 5TB file shares
+	    - Throughput: Blob = Up to 60 MB/s per blob, Files = Up to 60 MB/ps per share
+	    - Billed capacity: Blob = based on bytes written, Files = based on file size
+  	- Tables
+  	  - Uses ODATA interface or a TableClient to interface with the Table storage
+  	  - Uses an account that has tables, which has individual entities within it - you access the entities
+  	  - Uses a SAS token as a gateway into the account for security
+  	- Queues
+  	  - QueueClient which interfaces to the Queue storage
+  	  - Stored within an account, within a table, within a entities (entities are inside the queue)
+  	  - Uses a SAS token as a gateway into the account for security 
+  	- Redis Cache
+  	  - Tiers: Basic, Standard & Premium
+  	  - Concurrency
+  	    - Optimistic vs pessimistic
+  	  - Distributed app caching
+  	    - Shared vs Private
+  	    - Data persistence 
+  	    - Clustering
+  	- Monitoring 
+  	- SQL DB
+  	  - Tiers: Basic, Standard, Premium versions etc. You can migrate between the tiers using the Portal, PowerShell or REST API
+  	  - SQL DB maintains global mapping information about all shards (DBs) in a shard set
+  	  - Metadata used to route based on sharding key
+  	- Search
+  	  - Index: Persistent store of documents
+  	  - Add data (Push JSON data with .NET SDK or REST API, Pull with indexers supporting Azure sotrage and .NET SDK or REST API)
+  	  - Handle Results
+  	    - Total hits and page counts
+  	    - Layout results
+  	    - Sorting and filtering
+  - Access control with Shared Access Signature (SAS)
+    - Application requests a SAS Token from the SAS Service
+    - SAS Token gets generated and gets handed to Application
+    - Application then makes a storage request to Azure Storage with the SAS Token
+    - Azure Storage responds
+  - Storage Access
+    - Access through RESTFUL api:
+    - Blobs: //[account].blob.core.windows.net/[container]/[blob]
+    - Files: //[account].file.core.windows.net/[file]
+    - Tables: //[account].table.core.windows.net/[table]([paritition key], [row key])
+    - Queues: //[account].queue.core.windows.net/[queue]
+  - Azure Storage Service Encruption (SSE)
+    - Features
+      - 256 BIT AES Encryption 
+      - Block, Page and Append Blobs
+      - General purpose and Blob Storage Accounts
+      - All redundancy levels and all regions
+      - Only applicable for ARM, not ASM
+    - Limitations
+      - The following are not encryped:
+	      - Classic storage and classic migrated are not included. 
+	      - Existing data before turned on is not included. 
+	      - Tables, Queues, and Files data 
+	  - i.e. If you want the encryption you have to enable it at the beginning right away.
 ## **Manage identity, application, and network services**
 ## **Design and implement Azure PaaS compute and web and mobile services**
