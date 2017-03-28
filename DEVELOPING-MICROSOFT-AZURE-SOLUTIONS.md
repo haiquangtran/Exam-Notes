@@ -176,12 +176,82 @@
       - Features:
         - Auto-patching and auto-scale
         - .NET, Java, Node.js, PHP, Python
-        - Integrate with SaaS and on-premises
+        - Integrate with SaaS and on-premises (resources)
         - Continuous integration with VSTS, Github, BitBucket and more.
       - Web apps
+        - Deployment
+          - Hosting
+            - Need to establish a resource group that has an App service plan.
+            - From there you are going to deploy and host your Web application.
+        - Diagnostics
+          - Azure Application Insights
+            - Monitor: WebApps, ASP.NET, Java Apps, Windows Services, Docker apps, JS, SharePoint Sites, Node, PHP, Ruby, Python, Objective-C etc.
+          - DevOps Cycle
+            - Azure Applications Insights helps devops.
+            - Detect, Triage, Diagnose
+            - Monitor performance, failures, usage
+        - Web Jobs
+          - Can be run using On-Demand or Scheduled initiation
+          - A Web Job runs inside a web app (Runs on the same process)
+          - Creating WebJobs
+            - Uploaded in a zip file
+            - Types: Python, Batch, PowerShell, Java, .NET
+            - Scheduling: settings.job file at root of zip file or just use the Azure UI 
+          - Configuration of WebJobs
+            - Run it continously, or one time, or on-demand
+        - Scaling
+          - Azure Traffic Manager
+          	- Can have multiple instances of these storage solutions and scale between them by using Azure Traffic Manager
+          	- Azure Traffic Manager routes the traffice to different instances/websites
+          - Scalable and global web app and database
+            - Scale quickly with a slider bar, from a schedule, or based on CPU load
+            - Route users globally to copies of Web Apps and SQL Databases
+            - Improve performance by using a distributed cache layer
+        - Resillience
+          - Isolating a web app
+            - Web app with Personally Identifiable Information (PII) and database
+              - Secure the web app with the PII from malicious requests etc
+              - Host resources isolated and securely
+              - Block malicious requests through active defense firewalls
+              - Access on-premises resources from a cloud environment with a secure connection'
       - Mobile apps
+       	  - Adding mobile features to a web app
+            - Native or Xamarin-native mobile client app that connects to an Azure Mobile App backend and shares data and APIs with an Azure Web App
+          	  - Create cross-platform mobile clients easily and consistently
+          	  - Share data and APIs as-is across mobile and web
+          	  - Enable mobile back-end featuers for push notifications, offline data sync, and auto-scaling
       - API apps
       - logic apps
     - API Management
+      - Create Managed APIs
+        - Think of it as an area to host the APIs
+        - API Gateway + Developer Portal + Publisher Portal
+          - Gateway is like a proxy providing rate limits, applying policies, customize the developer portal
+          - Developer Portal - developers come to a developer portal to access the API
+          - Can add caching
+          - Can trace API calls using the API Inspector 
     - Service Fabric
-    - Functions
+      - Service fabric can run on the public clolud, private cloud, hosted cloud, or on-premises.
+      - Modernization with microservices
+        - Individually built and deployed
+        - Small, independently executing services
+        - Integrate using published API calls for overall application's functionality
+        - Fine-grained, loosely coupled application
+      - Manager microservices at scale
+      - CI/CD pipeline endpoint
+      - 24x7 service availability
+      - Stateful services
+      - Containers and Docker
+      - Multi-cloud
+      - How to deploy and configure Service Fabric?
+    - Cloud services
+      - PaaS with VM control
+        - Simple .NET runtime
+        - Health, discovery, updates
+        - OS Patching
+        - The original PaaS offering from 2010. Best used when low-level OS access is required, but consider the newer PaaS models first.
+    - Azure Functions
+      - Async, event-driven, serverless experience
+      - Respond to events occurring in other Azure services, SaaS products, on-premises systems
+      - Only pay while function is executing 
+      - Fully open source
