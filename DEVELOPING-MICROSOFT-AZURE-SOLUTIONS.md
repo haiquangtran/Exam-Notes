@@ -169,7 +169,6 @@
 	      - Existing data before turned on is not included. 
 	      - Tables, Queues, and Files data 
 	  - i.e. If you want the encryption you have to enable it at the beginning right away.
-## **Manage identity, application, and network services**
 ## **Design and implement Azure PaaS compute and web and mobile services**
   - Web & Mobile
     - App Service (Web apps, Mobile apps, API apps and logic apps)
@@ -255,3 +254,64 @@
       - Respond to events occurring in other Azure services, SaaS products, on-premises systems
       - Only pay while function is executing 
       - Fully open source
+## **Manage identity, application, and network services**
+  - Azure AD
+    - For the cloud and hosted within Azure
+    - Supports SharePoint Online, Exchange online etc
+    - Can interface to Azure AD using the Graph API (different to on-opremises solutions with AD which uses LDAP to interface with it)
+    - Azure Active Directy is separate from Active Directory but can be synchronized to have single sign on etc.
+    - **AD On-premises vs Azure AD**
+      - Graph API (Azure AD)
+        - Programmatic Access to Azure AD | RESTful
+        - CRUD | Application must be registered and configured
+        - Requests use standard HTTP Methods
+      - OAuth (Azure AD)
+        - AuthZ web apps and web APIs in Azure AD Tenant 
+        - Access authorization, role-based assignment
+        - For app and user authorization
+      - OpenID Connect (Azure AD)
+        - authorize etc
+        - AuthZ protocol for SSO
+        - Extends Oauth 2.0 for use as AuthN protocol
+  - AD B2B/B2C
+    - AD B2C:
+      - How does Business 2 Consumer fit in?
+      - What is it for?
+        - Developers working on Consumer and citizen-facing mobile and web apps that reach out to the customers directly
+      - Using social accounts such as FB, twitter etc using OAuth 
+      - Manageability: Self-service and seamless identity experience
+      - Can use Graph API to access Azure AD to look for that info
+      - Can enable multi-factor authentication
+      - Has protocol support (OAuth2 etc)
+    - AD B2B:
+      - What is Business 2 Business used for?
+        - Mainly for IT pros providing access to their organisations data and application to partner organizations and collaborators
+        - It's for partner users that are acting or behalf of representatives or employees from their orgnaisation
+      - Manageability: Access reviews, email verification, allowlist/denylist, etc... govern access to host application and resources
+  - Communicate
+    - Azure Service Bus
+      - Queues
+        - FIFO Queues
+        - Simple Client
+      - Topics
+        - Targeting Messages
+        - Work with Queues
+      - Relay
+        - Expose OnPrem service to public
+        - Leverage WCF
+      - Notification Hubs 
+        - Push notification infrastructure
+        - Support for non-MSFT targets
+      - **Service Bus Queue vs Storage Queue**
+        - Service bus queues
+          - FIFO guaranteed
+          - Delivery once and only once
+          - 60 second default locks can be renewed
+          - Messages are finalized once consumed
+          - Native integration with WCF and WF
+        - Storage queues
+          - Order not guaranteed
+          - Delivery at least once, maybe multiple times
+          - 30 second default locks, extendable to 7 days
+          - In-place updates of content
+          - Can integrate with WF through custom activity
