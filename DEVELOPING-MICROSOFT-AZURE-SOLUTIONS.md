@@ -92,6 +92,8 @@
       - Can combine Desired State Configuration extension
       - Initial scale setting using ARM template: "sku" : { "name" : "Standard_A0", "tier": "Standard", "capcity": 3 }
         - Can configure a Vms scale set's scaling capabilites in the template.
+   - Notes:
+     - All deployment slots for the same Web App are hosted within the same Virtual Machine (VM). This is especially important to remember when stress testing a non-production deployment slot before swapping it into production. A significant amount of load on a non-production deployment slot can affect the performance of the live, production Web App.
 ## **Design and implement a storage and data strategy**
   - Azure Storage and Azure SQL Database are important in Microsoft Azure PaaS strategy for storage. 
   - Azure Storage 
@@ -201,7 +203,7 @@
         - Scaling
           - Azure Traffic Manager
           	- Can have multiple instances of these storage solutions and scale between them by using Azure Traffic Manager
-          	- Azure Traffic Manager routes the traffice to different instances/websites
+          	- Azure Traffic Manager routes the traffic to different instances/websites
           - Scalable and global web app and database
             - Scale quickly with a slider bar, from a schedule, or based on CPU load
             - Route users globally to copies of Web Apps and SQL Databases
