@@ -30,10 +30,12 @@
     - Upgrade domains
       - Is for underlying patching
       - Five (non-user configurable) domains by default
+      - The upgrade domains are groups of VMs that are rebooted at the same time for patching.
       - Groups of VMs and hardware that can be rebooted at the same time
     - Fault domains
+      - A fault domain is a rack of servers. So 2 VMs in the saem availability set means Azure will provision them into 2 different racks. 
       - Separate hardware & network (Incase of a network switch, or power outage, or hardware failure)
-      - Three domains by default
+      - 2 domains by default
       - Group of VMs that share a common power source and network switch 
   - Storage replication options
     - Locally redundant
