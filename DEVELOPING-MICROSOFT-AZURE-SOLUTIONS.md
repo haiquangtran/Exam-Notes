@@ -106,12 +106,65 @@
     - Provides classic relational database features as part of an elastic scale service. 
   - Storage
   	- Blobs / Files 
-  	  - A blob is acced from a container within a storage account. From there, we actually access the particular blob. 
+      - You can use a blob naming convention similar to folder paths to create a logical hierarchy for blobs, which is useful for query operations.
+  	  - A blob is accessed from a container within a storage account. From there, we actually access the particular blob.
+      - In a blob account you can have many containers which are similar to folders. You can set security on the entire container. Each blob account can store up to 500 TB of data. 
+        - Container access permissions 
+          - Can be changed through the management portal, or Windows PowerShell or by configuring it programmatically.
+          - Private: all access to the container and its blobs require authentication
+          - Public container: All access to the container and its blobs are anonymous
+          - Public blob: You cannot list blobs in the container without authentication, but you can navigate to the blob URL, if you have it, read it anonymously.
   	  - A SAS token is the gateway that allows us with security to access our particular blob. (Like a valet key in a car that allows you to access a particular storage location)
+      - Uploading a blob
+        - Many approaches:
+          - Using the AzCopy tool
+          - Directly using Storage API and writing HTTP requests
+          - Using Storage Client Library
+          - Using PowerShell cmdlets
+      - AzCopy is a useful utility for activities such as uploading blobs, transferring blobs from one container or storage account to antoher, and performing these and other activities related to blob management in scripted batch operations.
+      - Reading data
+        - Can anonymously read blob storage content directly using a browser if public access to blobs is enabled .The URL to your blob content takes this format: https://<your account name>.blob.core.windows.net/<your container name>/<your path and filename>
+        - Can also read it in Azure.portal by navigating tot he container.
+        - Can also read it using Visual Studio
+      - Changing data
+        - Modify contents of a blob or delete using Storage API directly, but its more common to do it programmatically as part of an application, e.g. using the Storage Client Library.
+      - Streaming data using blobs
+        - Can stream blobs by downloading to a stream using the DownloadToStream() API method. 
+        - Avoids loading the entire blob into memory, e.g. before saving it to a file or returning it to a web request.
+      - **Authentication for storage account and content**
+        - has HTTP and HTTPS
+        - Shared Key: made from set of fields related to the request. Computed with SHA-256 algorithm and encoded in Base64.
+        - Shared Key Lite: Similar to Shared Key, but compatible with previous versions of Azure Storage. Provides backward compatibility, allowing migration to newer versions with minimal changes.
+        - Shared Access Signature: Grants restricted access rights to containers and blobs. You can provide a shared access signature to users you don't trust with your storage account key. Gives them specific permissions to the resource for a specified amount of time.
   	  - Types
-	  	  - Block Blob
-	  	  - Page Blob
-	  	  - Append Blob
+	  	  - **Block Blob**
+          - Block blobs allow you to upload, store, and download large blobs in blocks up to 4 MB each. The size of the blob can be up to 200GB.
+          - Great for non-sequential reads and writes, like the VHD on a hard disk 
+          - Blobs that are divided into blocks. Each block can be up to 4 MB. 
+          - You can set the final order of the block blob at the end of the upload process.
+          - For large files, you can upload blocks in parrallel.
+          - Can upload blocks and then assemble the block blob after the fact. 
+          - Any blocks uploaded that are not committed to a blob will be deleted after a week. Block blobs can be up to 200GB. 
+	  	  - **Page Blob**
+          - Blobs comprised of 512-byte pages. Unlike block blobs, page blob writes are done in place and are immediately committed to the file. 
+          - The max size of a page blob is 1 TB. 
+          - Closely mimic how hard drives behave, in fact, Azure VMs use them for that purpose. Most of the time you will use block blobs.
+	  	  - **Append Blob**
+      - Configuring the CDN
+        - By default, blobs have a 7 day time to live at the CDN edge node. After that, the blob is refreshed from the storage account to the edge node. Blobs that are shared via CDN must support anonymous access. 
+        - It can take 60 minutes before the CDN is ready for use on the storage account!
+        - Azure portal: 
+          - https://docs.microsoft.com/en-us/azure/cdn/cdn-create-a-storage-account-with-cdn
+          - Create storage account
+          - Create a new CDN profile
+          - Create a new CDN endpoint
+          - Access CDN content
+          - Remove content from the CDN
+      - Configuring custom domains
+        - By default, the URL for accessing the Blob service in a storage account is https://<account name>.blob.core.windows.net. You can map your own domain or subdomain to the Blob service for your storage account so that users can reach it using the custom domain or subdomain.
+      - Scaling Blob Storage
+        - Blobs are partitioned by container name and blob name, which means each blob can have its own partition. 
+        - Blobs, therefore, can be distributed across many servers to scale access even though they are logically grouped within a container. 
 	  - Files
 	    - Files are accessible via SMB interface as a file share
 	    - Can also access those files using the RESTful APIs
