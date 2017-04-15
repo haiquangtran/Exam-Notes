@@ -116,6 +116,36 @@
         - Can configure a Vms scale set's scaling capabilites in the template.
    - Notes:
      - All deployment slots for the same Web App are hosted within the same Virtual Machine (VM). This is especially important to remember when stress testing a non-production deployment slot before swapping it into production. A significant amount of load on a non-production deployment slot can affect the performance of the live, production Web App.
+  - Defining and using request handler mappings
+    - Request handler mappings, or handler,s instruct websites how to handle requests for files with particular file extensions by running a script that processes the request. 
+    - These handlers are invoked instead of websites performing furter processing on the request (e.g. if handler is configured, the request does not get to ASP.NET).
+    - Set these in the azure portal in your website settings/application settings and scroll down to handler mappings.
+      - Note: the processor path has to be an absolute path. 
+  - Defining and using Virtual directories and virtual applications
+    - Use virtual directories to define a hierarchy of web content that is potentially different from the physical directory structure of the web content as it appears on disk. 
+    - Can change how the hierarchy is exposed to the brwoser without altering the file structure, and you can collapse deeply nested directory strcutures by reprsenting them with a top-level virtual directory. i.e. you can create a VD such as /images to map to the physical path of the iamges site/wwwroot/static/content/current/images etc 
+    - Can also isolate a VD within it's own w3wp.exe worked process by making it an application. i.e. Might ahve 3 separate web applications: /website, /blog, /store (configure and run as virtual applications under the same website)
+    - Create under website settings: to make this a virtual application, select the application checkbox.
+  - Custom domain names:
+    -  The IP address that you get by following the preceding steps will change if you move your website to a Free web hosting plan, if you delete and re-create it, or if you subsequently enable SSL with the IP-based type. This can also happen unintentionally if you reach your spending limit and the website is changed to the Free web hosting plan mode. If the IP address changes and you are using an A record to map your custom domain to your website, you will need to update the value of the A record to use the new IP address. 
+  - Using certificates with your custom domain
+    - Custom domain names and SSL certificates are linked. To create a certificate, you need a custom domain name. High level steps:
+      - Complete steps for enabling custom domain for your website
+      - Create a certifcate signing request (CSR) on a local machine using one of the tools: IIS manager, Open SSL, Makecert, Certreq.exe and CertMgr.msc
+      - Request a certificate from a certificate authority, and submit your CSR as part of that request
+      - Using the tool you used to gerenate the CSR (running on the same machine), export the certficate as a personal information exchange (*.pfx) file that bundles both the private and public keys
+      - Upload the .pfx certifcate to your website using portal
+      - Bind your domain name to the uploaded certificate using the portal
+      - Certificate requirements in Azure:
+        - must contain both public and private keys
+        - needs to be created for key exchange and ultimately must be exportable to a .pfx file
+        - Subject name in the certificate must match the domain used to access the website
+        - The certificate needs to use 2,048-bit encryption at minimum.
+  - Summary
+    - App settings, connection strings, handlers, and Virtual directories can be configured using the management portal under your website settings
+    - Custom domains can be mappyed to your websites, but doing so requires you to validate ownership fot he domain by adding a record to DNS
+    - Websites can be configured to use SSL and support utilizing multiple certificates per website instance
+    - Beyond using the portal, you can manage websites by using the API, PowerShell, and the xplat-cli.
 ## **Design and implement a storage and data strategy**
   - Azure Storage and Azure SQL Database are important in Microsoft Azure PaaS strategy for storage. 
   - Azure Storage 
