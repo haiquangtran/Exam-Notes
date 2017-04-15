@@ -146,6 +146,16 @@
     - Custom domains can be mappyed to your websites, but doing so requires you to validate ownership fot he domain by adding a record to DNS
     - Websites can be configured to use SSL and support utilizing multiple certificates per website instance
     - Beyond using the portal, you can manage websites by using the API, PowerShell, and the xplat-cli.
+  - Diagnostics for websites
+    - Configuring alerts
+      - Navigate to website in portal
+      - Operations and click Alert rules
+      - Add alert
+    - Diagnostic data can be stored locally on the website or in Azure Storage and later retrieved by using SCM, downloading from the website vai FTP, viewed via SCM streaming logs, or retrieved from Azure Storage.
+    - You can use VS to attach a website instance with remote debugging, but you should be careful in doing so because hitting breakpoints will stop your website isntance from responding to all requests
+    - Websites can be configured to use outside-in endpoint monitoring to remotely monitor the availability and responsiveness of your website, and tehse metrics can also be used as alerts sent out via email when configured thresholds are crossed.
+    - You can monitor website resources using the management portal
+    - You can configure alerts for your website 
 ## **Design and implement a storage and data strategy**
   - Azure Storage and Azure SQL Database are important in Microsoft Azure PaaS strategy for storage. 
   - Azure Storage 
