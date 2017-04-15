@@ -10,6 +10,26 @@
     - Can select existing VM images
     - Can use PowerShell and deploy using PowerShell too
     - There are also JSON ARM Templates which allow for intelliSense and fast set up
+  - Deployment slots
+    - Like environments (prod, stage etc)
+    - With each deployment slot, you can create up to four additional deployment slots (for a total of five) that you can swap with the productionslot (or other non-prod slots)
+    - When you swap, the site content and certain slot configurations are exchanged with no downtime. 
+    - All deployment slots for a given website share the same web hosting plan and are created within the same VM hosting the prod slot. Therefore, because when stress testing on a non-prod slot as it can affect the prod slot.
+  - Swapping and website configuration
+    - When you swap deployment slots, all the website content is swapped, but not the configuration. The following configuration items will mvoe to the destination slot:
+      - general settings (e.g. .NET framework version, web sockets etc)
+      - connection strings, handler mappings, application and site diagnostics setting
+      - Monitoring settings
+    - The following configuration does not move to the destination slot:
+      - Publishing endpoints, custom domain names, SSL certificates and bindings
+      - Scale settings
+    - So set everything up properly in prod slot so you don't have to worry about overrides when swapping      
+  - Create new web hosting plan
+    - A web hosting plan is unique to the region, resource group, and subscription. In other words, 2 websites participate in the same web hosting plan only when they are created in the same subscription, resource group, and region (with same pricing tier requirements).
+    - Web hosting plans are created as a part of website creation and not created directly.
+  - Migrating websites between hosting plans
+    - Migrate a website between web hosting plans to change the scale of the website, to leverage the features of a different pricing tier, or to redistribute the website hosting load, all without affecting the other websites belonging to the web hosting plan currently in use. 
+    - Websites can migrated between web hosting plans if they meet two conditions: The website and web hosting plan reside in the same region, and the web hosting plans in qustion must be a part of the same resource group.
   - ARM Templates Portal 
     - Custom deployment allows you to create a template from scratch
   - Desired State Configuration
