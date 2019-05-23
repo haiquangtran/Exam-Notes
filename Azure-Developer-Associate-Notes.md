@@ -11,6 +11,14 @@
 - Enable Auto-shutdown when creating VM (useful)
 - Can use a free domain instead of a IP address for ease of use
 
+### Encrypt a OS/Datadisk in VM
+- Azure by default encrypts files using Secure Storage Encryption but does not encrypt the VM itself by default except the files (VHD is not encrypted, Go to Disks, look for OS disks and see that the Encryption is not enabled)
+- Can use BitLocker to encrypt the Virtual Disk. The keys will be stored in Azure Key Vault
+- Create a Key Vault if you don't have one, search for it
+  - Stores secrets, application keys, certificates
+  - To encrypt the key (needed to encrypt the VHD) using Azure Vault for a VM it has to exist in the same region as the VM
+  - Use powershell to encrypt the VM (see microsoft links online)
+
 ### Connect to VM using RDP/SSH
 - Go to Overtab of VM
 - Go to Connect tab then you can see instructions for RDP or SSH
@@ -21,14 +29,16 @@
     - Network security groups in Network Interface Card (Go to VM, Networking tab, Network interface card)
       - RDP should be an inbound port rule (port 3389), otherwise you will have to add the rule
     - Worse case is Recreate VM if firewall is on Windows...
-    
+
 ## Azure Concepts
 - **Resource group** 
   - A folder that stores resources that are related
   - A way of organising resources
 - **Network Security Groups (NSG)**
 
-## Azure Resource Management (ARM) Tempaltes
+## Azure Resource Management (ARM) Templates
 - Json files that contain all configuration made to create resources
-- Automation so you can recreate it if run
-
+- Automation, can recreate it exactly as it was by redeploying
+- Can modify the json files and deploy to create new resources with similar infrastructure i.e. changing location of data center etc
+- Can Add to library if want it reusable by other projects, give it a name and save it to the library.
+- Add to source control, and you will have a snapshot of the environment that is reproducable
