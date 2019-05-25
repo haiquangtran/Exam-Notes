@@ -24,7 +24,7 @@
 - Azure charges you for when you run your VM, as well as storage etc. If you stop your VM, charges will stop but you will still have to pay for Storage costs
 
 ### Encrypt a OS/Datadisk in VM
-- Azure by default encrypts files using Secure Storage Encryption but does not encrypt the VM itself by default except the files (VHD is not encrypted, Go to Disks, look for OS disks and see that the Encryption is not enabled - Note: Azure had recently updated so Managed disks are encrypted by default at rest)
+- Azure by default encrypts files using Secure Storage Encryption but does not encrypt the VM itself by default except the files (VHD is not encrypted, Go to Disks, look for OS disks and see that the Encryption is not enabled)
 - Can use BitLocker to encrypt the Virtual Disk. The keys will be stored in Azure Key Vault
 - Create a Key Vault if you don't have one, search for it
   - Stores secrets, application keys, certificates
