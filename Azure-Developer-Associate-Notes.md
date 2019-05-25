@@ -22,6 +22,7 @@
 - Enable Auto-shutdown when creating VM (useful)
 - Can use a free domain instead of a IP address for ease of use
 - Azure charges you for when you run your VM, as well as storage etc. If you stop your VM, charges will stop but you will still have to pay for Storage costs
+- By default, Azure recommends using the default VM size of **Standard DS1**
 
 ### Encrypt a OS/Datadisk in VM
 - Azure by default encrypts files using Secure Storage Encryption but does not encrypt the VM itself by default except the files (VHD is not encrypted, Go to Disks, look for OS disks and see that the Encryption is not enabled)
