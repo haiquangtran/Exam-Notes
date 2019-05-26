@@ -63,9 +63,9 @@
 - docker-compose.yaml contains instructions on how to create the container
 - Use command to create containers using the docker-compose file: ``docker-compose up -d``
 - See the created containers: ``docker container ls``
-- Docker runs in a virtual box (which has an IP address).
+- Docker runs (using native virtualisation and it does not require virtual box, or you can run it using virtual box) (which has an IP address).
   - See ip address: ``docker-machine ip Default``
-  - Can now navigate to that ip address and port to see local machine with the copy of the container running
+  - Can now navigate to that ip address and the port to see the container running or use localhost (if not using virtualbox and using native virtualisation)
 - Use command to stop containers: ``docker-compose down``
 - Use command to see images: ``docker images``
 
@@ -107,6 +107,10 @@
   - Provision of an external-ip address takes a few minutes
 - See services running with the command: ``kubectl get service``
 - See more at: https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough
+
+### Deleting Kubernetes cluster
+- When deleting the resource group of the Kubernetes cluster, it does not delete the Service Principal - you will need to do this separately
+  - See url: https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal#additional-considerations
 
 ## Azure Concepts
 - **Resource group** 
