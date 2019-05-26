@@ -90,12 +90,14 @@
   - Only available for use locally
   - For local setup, download azure cli or use powerShell
   - View kubernetes dashboard in Azure Portal and copy the commands
+- Practise: https://github.com/Azure-Samples/aks-dotnet-manage-kubernetes-cluster
 
 ### Create Kubernetes cluster
 - DNS name prefix - used for fully qualified domain name
 - Node size defaults to Standard DS2 v2 (2 cpus, 7 GB memory), 
 - Defaults to 3 nodes
 - Service principal: the accounts in which the nodes are going to run
+- Minimum nodes is 3
 
 ### Deploy Kubernetes cluster
 - Using cloud shell cli
