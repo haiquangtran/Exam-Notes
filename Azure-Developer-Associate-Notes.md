@@ -48,7 +48,7 @@
   - Batched jobs: identical tasks that need to be run multiple times
   - Can run in parrallel etc
 - Separate from Azure Subscription, need to create a batch account for the batch services
-- See Azure Batch examples on github: https://github.com/Azure-Samples/batch-dotnet-manage-batch-accounts
+- See Azure Batch examples on github: https://github.com/Azure-Samples/batch-dotnet-manage-batch-accounts, https://github.com/Azure-Samples/azure-batch-samples/tree/master/CSharp/GettingStarted/01_HelloWorld
 - Can use Batch explorer to see insights on your batch 
 
 ## Containers
@@ -106,6 +106,7 @@
 - Deploy code to cluster using a YAML file (see Kubernetes notes): ``kubectl apply -f {yaml-file-name}.yaml``
   - Provision of an external-ip address takes a few minutes
 - See services running with the command: ``kubectl get service``
+- See more at: https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough
 
 ## Azure Concepts
 - **Resource group** 
