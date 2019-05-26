@@ -79,6 +79,7 @@
 
 ## Azure Kubernetes Service (AKS)
 - Azure Kubernetes is a managed Kubernetes service for Azure
+- Originally created by Google
 - Kubernetes container is a way to package your code and all the dependencies and everything needed to run. 
 - Open source
 - Supports multiple different cloud providers which allows deployment to Azure, AWS, Google Cloud etc
