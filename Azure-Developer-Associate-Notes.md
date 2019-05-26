@@ -169,3 +169,10 @@
   - Continuous - starts with web app and runs continously
   - Trigger - manual (url web hook) or scheduled CRON
 - Supports scripts and programs
+
+### Enable Diagnostics logging
+- In Azure App Service, go to Alerts, Metrics, Diagnostics logs
+- Can turn on application logs for the internal account (locally) or to external account (blob storage etc)
+- Turn on application logs but going to Diagnostics logs and creating a storage account, create a container within the storage account, can create multiple containers for each type of logs (for app itself, for machine, for web logging (IIS) etc)
+- Go to the storage account to see the logs
+- Can also go to the Log stream in the Web App to see real-time logs (file system application logs - this is a temporary as it turns itself off after 12 hours)
