@@ -125,3 +125,47 @@
 - Can Add to library if want it reusable by other projects, give it a name and save it to the library.
 - Add to source control, and you will have a snapshot of the environment that is reproducable
 
+## Azure App Services
+- For web apps, create and package your code, then upload the code to Azure App Service (PaaS)
+- Different to containers as they only support a set amount of languages
+- Web apps only run if the user visits it, if you use web jobs it will run independently regardless of anyone visits it or not...
+- WebJobs are a feature of web apps
+
+### Create an Azure App Service
+- public domain by default
+- If choosing OS as windows, app insights is available, if choosing Linux, app insights is not available.
+- If using publish as Docker Image, you can publish to Azure Container Registry or Kubernetes etc (not based on direct code)
+- Application settings
+  - ARR affinity: have cookies that go to the same server
+
+#### Azure App Service Pricing Tiers
+- Azure App Service plan is similar to a hosting plan, you can have multiple web apps on 1 plan
+  - App plan should be closest to the users who are going to use it to reduce latency etc
+- **Azure Compute Units (ACU)?**
+    - Microsoft has come up with a number/term to describe the performance to compare with other plans
+- **Note:** prices are just for 1 instance, if you scale the number of nodes then you multiple by the cost.   
+- Dev/Test
+  - F1 - Free, 60 mins a day compute time, no bonus features
+  - D1 - Shared, custom domain
+  - B1 - Basic, manual scale, custom domain/SSL
+  - A series equivalent is comparing against a VM
+- Production
+  - S1 (standard 1), custom domain/SSL, auto scale, staging slots, daily backups, traffic manager (load balancer)
+    - up to 5 instances
+  - P1 (premium 1), same as above but more instances, more frequent backups, 
+    - up to 20 instances
+  - If you need premium plan, choose P1V2. It has same features but is cheaper than P1 and the others and has more memory and cpu.
+- Isolated
+  - Running on your own hardware, you are not sharing it with different tenants. Use this if you do not want different users runnning on the same hardware, there is no other traffic running on that machine or tenants slowing you down.
+    - Similar to combination of IaaS and Paas, as you get features of PaaS (deployments, daily backups etc) but with the benefits of IaaS (running in your own machine) 
+  - **IMPORTANT: On-top of the monthly fees presented, there is a $1000 monthly charge for the hardware** 
+  - I1 - similar to production instances but running on own hardware
+
+### Azure Web Jobs
+- Web apps only run if the user visits it, if you use web jobs it will run independently regardless of anyone visits it or not...
+- WebJobs are a feature of web apps, it runs as background processes
+- WebJobs require a Web App 
+- **Types:**
+  - Continuous - starts with web app and runs continously
+  - Trigger - manual (url web hook) or scheduled CRON
+- Supports scripts and programs
