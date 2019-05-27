@@ -211,6 +211,7 @@
 
 ### Azure Function Apps
 - **Hosting plan:** have option to run in App Service plan or as a serverless compute
+- If you create Azure function in Azure Portal, then you cannot use it in IDE/Visual Studio, and vice versa. If you create azure function using Visual Studio and publish it, it uses a dll so you cannot see the code in the portal.
 - **Serverless Consumption plan**
   - Only charged for when it runs
   - Also Total CPU usage charge as well
@@ -223,4 +224,14 @@
 - **Bindings**
   - Bindings have triggers, Inputs, Outputs
   - Integrates to other services through bindings
--
+- **Durable Functions**
+  - Used for complex chains of functions, similar to a logic app
+    - Can have functions calling other async functions, chaining etc
+  - In azure functions, see more templates, you will see the following:
+    - **Durable Functions HTTP starter**
+      - Executes an orchestrator when it receives a trigger
+    - **Durable Functions activity**
+      - Executes the task
+    - **Durable Functions orchestrator**
+      - Functions that invokes the other functions
+  - See design patterns for Durable functions on Microsoft url: https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview
