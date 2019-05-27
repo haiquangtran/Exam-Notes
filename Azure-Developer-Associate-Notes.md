@@ -235,3 +235,36 @@
     - **Durable Functions orchestrator**
       - Functions that invokes the other functions
   - See design patterns for Durable functions on Microsoft url: https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview
+
+## Azure Storage Account
+- Storage accounts can have blobs, queues, tables, files, each will have their own unique URL
+- Can use blobs/files etc as a Static website
+- 
+
+### Creating a Storage account
+- Storage accounts are publicly accessible by default using security keys etc
+- Choose location close to your users
+- **Standard storage**
+  - Choose Storage V2
+    - ARM support 
+  - Storage V1 uses the classic ASM model
+  - Blob storage 
+- **Replication**
+  - Locally-redundant storage
+    - Data kept in 3 total locations within a data center, (1 availability zone)
+  - Zone-redundant storage
+    - High availability/durability, data is stored in 3 copies stored in 3 availability zones
+  - Geo-redundant storage
+    - 6 copies and stored in another region, to maximise availability
+  - Read access geo-redundant storage
+    - Stored in different regions, accessed Read-only
+- **Access tier**
+  - Cool
+    - Keep data atleast 30 days
+    - Higher cost to access, lower cost to store
+    - Good for back-ups and data that you are not going to access frequently
+  - Hot
+    - Data is available whenever needed
+    - Standard read/write, prices, and performance
+- **Virtual networks**
+  - Default is all networks but select "Selected network" for more security 
