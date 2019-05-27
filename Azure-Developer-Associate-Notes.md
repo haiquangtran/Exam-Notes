@@ -176,3 +176,50 @@
 - Turn on application logs but going to Diagnostics logs and creating a storage account, create a container within the storage account, can create multiple containers for each type of logs (for app itself, for machine, for web logging (IIS) etc)
 - Go to the storage account to see the logs
 - Can also go to the Log stream in the Web App to see real-time logs (file system application logs - this is a temporary as it turns itself off after 12 hours)
+
+### Mobile Apps - Notification Hub
+- Allows app developers to easily send notifications to phones
+  - Has options to connect to Apple, Google, Windows, Windows phone, Amazon Kindle, and Baidu
+  - Use SDK to connect and send them.
+- Uses workspaces
+- **Pricing**
+  - F1 - Free tier
+    - 1 million pushes, 500 active devices
+  - B1 - Basic
+    - 10 million pushes, 200k active devices
+  - S1 - Standard
+    - 10 million pushes, 10 million active devices
+    - extra features: bulk operations, Rich telemetry, Scheduled pushes, multi-tenancy (separate classes of applications)
+- **Set up notifications**
+  - Create a mobile app in Azure (or web app)
+  - Go to Mobile after it is created > Data Connection,
+  - Choose storage, (Azure SQL or Storage account)
+  - Allow Azure service to access server (needed if mobile app or web app)
+  - Go to easy tables in tables > add a table which can be used for notifications
+  - Go to Push settings, connect it to notification hub
+
+### API Apps
+- Web apps that do not have a user interface
+- Same as Web App under the scenes (just different image, and name)
+- Distinguishing features for API Apps
+  - **Cross-Origin Resource Sharing (CORS)**
+    - List of Domains that can use your API
+    - Security standard
+  - **API definition**
+    - No UI so you need to know how to interface with it by using API definition
+    - Use Swagger, and put the URL as the API definition
+
+### Azure Function Apps
+- **Hosting plan:** have option to run in App Service plan or as a serverless compute
+- **Serverless Consumption plan**
+  - Only charged for when it runs
+  - Also Total CPU usage charge as well
+  - Get free 1 million executions
+- **Function**
+  - Intended to be short pieces of code
+  - Types: Webhook + API, Timer, Trigger, queue triggers, Event Hub, SendGrid, EventGrid etc
+  - All functions must have a trigger and **ONE** trigger
+- **Bindings**
+  - Bindings have triggers, Inputs, Outputs
+  - Integrates to other services through bindings
+-
