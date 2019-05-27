@@ -217,6 +217,7 @@
   - Get free 1 million executions
 - **Function**
   - Intended to be short pieces of code
+  - Self contained
   - Types: Webhook + API, Timer, Trigger, queue triggers, Event Hub, SendGrid, EventGrid etc
   - All functions must have a trigger and **ONE** trigger
 - **Bindings**
