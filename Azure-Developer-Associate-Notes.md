@@ -231,15 +231,15 @@
     - **Durable Functions HTTP starter**
       - Executes an orchestrator when it receives a trigger
     - **Durable Functions activity**
-      - Executes the task
+      - Executes the tasks
     - **Durable Functions orchestrator**
       - Functions that invokes the other functions
   - See design patterns for Durable functions on Microsoft url: https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview
 
 ## Azure Storage Account
+- **Storage accounts are publicly available (open to internet) unless you tie them to a specific network using network endpoint**
 - Storage accounts can have blobs, queues, tables, files, each will have their own unique URL
-- Can use blobs/files etc as a Static website
-- 
+- Can use blobs/files etc as a Static website 
 
 ### Creating a Storage account
 - Storage accounts are publicly accessible by default using security keys etc
@@ -268,3 +268,8 @@
     - Standard read/write, prices, and performance
 - **Virtual networks**
   - Default is all networks but select "Selected network" for more security 
+
+### Azure Table Storage
+- Relational data
+- Partition key: determines how the data is partitioned/divided/split if the data is large.
+- Querying database: Use TableQuery (similar to LINQ), then use Table.Execute
