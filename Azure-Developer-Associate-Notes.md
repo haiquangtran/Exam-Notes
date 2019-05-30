@@ -240,15 +240,19 @@
 - **Storage accounts are publicly available (open to internet) unless you tie them to a specific network using network endpoint**
 - Storage accounts can have blobs, queues, tables, files, each will have their own unique URL
 - Can use blobs/files etc as a Static website 
+- Managed storage vs Storage account (in terms of pricing)
+  - Managed Storage is provisioned to a size, and you pay for that size whether or not you use it at all.
+  - You Pay storage account per GB, which is what you use. Storage accounts have a fixed maximum size.
+  - Storage Accounts have operation charges, priced per 10,000 operations.
 
 ### Creating a Storage account
 - Storage accounts are publicly accessible by default using security keys etc
 - Choose location close to your users
 - **Standard storage**
-  - Choose Storage V2
+  - Choose Storage V2 (Recommended)
     - ARM support 
   - Storage V1 uses the classic ASM model
-  - Blob storage 
+  - Blob storage (only block blobs)
 - **Replication**
   - Locally-redundant storage
     - Data kept in 3 total locations within a data center, (1 availability zone)
