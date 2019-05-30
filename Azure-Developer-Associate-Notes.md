@@ -278,7 +278,18 @@
 - Partition key: determines how the data is partitioned/divided/split if the data is large.
 - Querying database: Use TableQuery (similar to LINQ), then use Table.Execute
 
-### Cosmos DB
+## Cosmos DB
 - NoSQL
 - Made to be built from ground up for global distribution and made for scaling for large number of transactions per second etc
--   
+- Multi-model database service (can choose different models which can choose different ways it can save data)
+- CosmosDB required a CosmosDB account
+
+### Create a Cosmos DB Account 
+- **Multi-model options: Type of API**
+  - Dictates the way the data is stored
+  - The data is all stored in NoSQL still... but it has different APIs to access it differently i.e. MongoDB, SQL, Graph etc
+- **Geo-redundancy**
+  - Replicates my data into different regions
+- **Multi-region Writes**
+  - Writes to multiple regions (for your replicates to be replicated properly).
+  - Adds complexity in chance of data conflicts where you write to two different regions, and it needs to merge it etc.
