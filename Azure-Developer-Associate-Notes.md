@@ -277,3 +277,8 @@
 - Relational data
 - Partition key: determines how the data is partitioned/divided/split if the data is large.
 - Querying database: Use TableQuery (similar to LINQ), then use Table.Execute
+
+### Cosmos DB
+- NoSQL
+- Made to be built from ground up for global distribution and made for scaling for large number of transactions per second etc
+-   
