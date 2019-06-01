@@ -367,3 +367,29 @@
   - Can also use VCores, where you are adding CPUs to improve performance.
 - Collation
   - Use default one for most situations
+
+## Azure Blob Containers 
+- Unstructered data, a container which you can throw files
+- Billing is based on GB per month.
+- **Access levels for Containers**
+  - Private (no anonymouse access)
+    - Always require authentication for access
+  - Blob (Anonymous read access for blobs only)
+    - Anonymous access for individual files i.e. for images in a website or text files and videos in a website
+  - Container (anonymous read access for containers and blobs)
+    - Anonymous access for whole container and list all files within it. 
+- Containers do not have a real folder structure
+  - Can create a folder strcutre but it just virtually creates the concept of the folder, just acts and looks like a folder
+- Azure Portal doesn't have many options for moving blobs around etc.
+  - Can use **AzCopy program** (Command line tool) to do this
+  - ``Azure Login`` to login to your azure account.
+- **Acquire and Break Leases**
+  - **Acquire Lease**: Locks the blob, so you cannot write, update, or delete unless you have the lease ID.
+  - Leases allow you to prevent modifications to Azure blobs.
+- **Storage Access Tiers**
+  - Blobs can have hot or cool access levels
+    - Hot = access in an isntant but costs more money
+    - Cool = have to keep file for at least 30 days but storage becomes cheaper and access becomes more expensive! i.e. good for storing items where you would only need to access it in emergency
+    - Archive = a lot cheaper, making it more inaccessible, delay in accessing it. Push a request and Azure lets you know when it's available. Stored for at least 180 days.
+
+### Create an Azure Blob Container
