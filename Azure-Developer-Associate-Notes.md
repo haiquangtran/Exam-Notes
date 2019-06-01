@@ -280,6 +280,7 @@
 
 ## Cosmos DB
 - NoSQL
+- One major advantage that Cosmos DB has over Storage Account Table Storage is that is guarantees very fast latency, resulting in a much quicker experience. (Sub 10ms latency guaranteed)
 - Made to be built from ground up for global distribution and made for scaling for large number of transactions per second etc
 - Multi-model database service (can choose different models which can choose different ways it can save data)
 - CosmosDB required a CosmosDB account
