@@ -392,4 +392,32 @@
     - Cool = have to keep file for at least 30 days but storage becomes cheaper and access becomes more expensive! i.e. good for storing items where you would only need to access it in emergency
     - Archive = a lot cheaper, making it more inaccessible, delay in accessing it. Push a request and Azure lets you know when it's available. Stored for at least 180 days.
 
-### Create an Azure Blob Container
+## Azure Active Directory (AD)
+- Azure Active Directory is the default answer when it comes to identity and authentication within the cloud
+- Different to on-premises Active Directory 
+  - Can use Azure AD Connect to sync your on-premises AD to your Azure AD
+  - Can register applications in Azure AD to give users a Single Sign On (SSO) experience 
+- Azure AD can also allow you to create users that are only available in Azure AD and the user won't be synced back to your on-prem AD
+- Can also use third-party websites such as Facebook, Goolge etc to be used to sign in with their credentials.
+- **When you create an Azure Active Directory - it is like a whole new Azure account for your organisation.**
+- **Register an app for Azure AD**
+  1. Create a web app and deploy it so you have the URL.
+  2. Register a new app in the Azure Portal, using the signin URL as the url for the web app
+  3. Once registered, retrieve the App/Client ID and put it in your application code as well as the redirect Uri
+- **Multi-tenant Azure AD**
+  - Affects only the ability to grant access, it doesn't affect any other access.
+  1. Go to the registered app
+  2. Go to Settings > properties, scroll to the bottom where it says Multi-tenanted and set it
+- **OWIN**
+  - Use this for authentication with Azure AD in the development code
+  - OWIN is Open Web Interface for .NET. It is a standard for web apps and web servers to talk to each other.
+  - Using the package, there is a security context inside of that so we can use it to call the challenge etc.
+- **Multi-factor authentication**
+  - Azure AD has built in multi-authentication available
+    - Can choose text message, phone call etc
+  - Requires Premium license: https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks
+
+### Create an Azure Active Directory
+- Organisation name = Your organisation name
+- Initial domain name = the domain of the URL
+- When you create an Azure Active Directory - it is like a whole new Azure account for your organisation.
