@@ -276,6 +276,7 @@
 - Relational data
 - Partition key: determines how the data is partitioned/divided/split if the data is large.
 - Querying database: Use TableQuery (similar to LINQ), then use Table.Execute
+- Developing for Table storage in Visual Studio, use the package WindowsAzure.Storage
 
 ## Cosmos DB
 - NoSQL
@@ -284,17 +285,38 @@
 - CosmosDB required a CosmosDB account
 - Has 99.999 SLA
 - Billing is based on Reads/Writes per RU/s (request units a second) a month, and also for the storage (GB/month)
+- Developing for Cosmos DB in Visual Studio, use the package corresponding to the API you chosen, i.e. for SQL API it is Microsoft.Azure.DocumentDb.
+  - For querying, we would use CreateDocumentQuery<>() method etc
 - **Cosmos Database**
   - Can store multiple collections
   - Provision database throughput option **(affects billing)**
     - Determines the throughput for the database (which affects billing!)
     - Note: collections also have a throughput which affects billing
+- **Cosmos Collections**
+  - Needs a database as it sits within a database
   - Partition key 
     - Determines how data is separated and split when the data gets too large
     - Should be wide range of values that is likely to have evenly distributed access patterns
-- **Cosmos Collections**
-  - Needs a database as it sits within a database
-  - 
+  - Unique keys
+    - Determines uniqueness on fields etc
+- **Data Consistency**
+  - In Azure Portal, Go to settings, default consistency
+  - **Strong Consistency**
+    - When data is written, it gets replicated to all other regions and everyone reading that data will have the most up to date information at that exact moment
+    - Use when you need all data available in regions of the world available when it is written to
+  - **Bounded Staleness Consistency**
+    - Data is consistent, but has a maximum lag time which allows you to have a lag between the data being available in other regions
+  - **Session Consistency** 
+    - Default optin selected
+    - Only consistent data depending on the session
+    - Good for when application should be bound to the client
+  - **Consistent Prefix Consistency**
+    - Always displayed in correct order, but there may be lags between the other regions receiving the data (read throughput similar to eventual consistency)
+    - Use when the order of the data matters, but the time that it is available is not important (slight delay - don't need the updated data straight away etc)
+  - **Eventual Consistency**
+    - No guarentee that the order will be correct when received
+    - Just has a guarentee that the replicas within the group will eventually converge (received the data at some point)
+    - Example, retweets, likes
 
 ### Create a Cosmos DB Account 
 - **Multi-model options: Type of API**
