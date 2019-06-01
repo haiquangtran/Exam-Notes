@@ -1,7 +1,6 @@
 # Microsoft Certified: Azure Developer Associate Notes
 - Exam AZ-203: Developing Solutions for Microsoft Azure
 
-
 ## Azure Learning Resources
 - Azure Code Samples: https://azure.microsoft.com/en-us/resources/samples/?sort=0
 - Official Azure Documentation: https://docs.microsoft.com/en-us/azure/
@@ -283,13 +282,29 @@
 - Made to be built from ground up for global distribution and made for scaling for large number of transactions per second etc
 - Multi-model database service (can choose different models which can choose different ways it can save data)
 - CosmosDB required a CosmosDB account
+- Has 99.999 SLA
+- Billing is based on Reads/Writes per RU/s (request units a second) a month, and also for the storage (GB/month)
+- **Cosmos Database**
+  - Can store multiple collections
+  - Provision database throughput option **(affects billing)**
+    - Determines the throughput for the database (which affects billing!)
+    - Note: collections also have a throughput which affects billing
+  - Partition key 
+    - Determines how data is separated and split when the data gets too large
+    - Should be wide range of values that is likely to have evenly distributed access patterns
+- **Cosmos Collections**
+  - Needs a database as it sits within a database
+  - 
 
 ### Create a Cosmos DB Account 
 - **Multi-model options: Type of API**
   - Dictates the way the data is stored
-  - The data is all stored in NoSQL still... but it has different APIs to access it differently i.e. MongoDB, SQL, Graph etc
+  - The data is all stored in NoSQL still... but it has different APIs to access it differently (assumption) i.e. MongoDB, SQL, Graph etc
 - **Geo-redundancy**
   - Replicates my data into different regions
 - **Multi-region Writes**
   - Writes to multiple regions (for your replicates to be replicated properly).
   - Adds complexity in chance of data conflicts where you write to two different regions, and it needs to merge it etc.
+- **Next steps**
+  - Can now create a new database
+    - Database can have many collections
