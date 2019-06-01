@@ -331,3 +331,38 @@
 - **Next steps**
   - Can now create a new database
     - Database can have many collections
+
+## Azure SQL Database
+- Database as a Service solution
+- Azure provides SQL Database (where you are responsible for managing it i.e. performance) and a Azure SQL Managed instance (where Azure manages it for you i.e. scaling etc)
+- Costs are cheaper compared to using a Virtual machine with SQL Server on it
+  - **Only use SQL Server on a VM in Azure if you need to squeeze every performance or need to configure it to specific settings.**. In addition, it has extra features such as collation, and full text indexing that Azure SQL DB does not support.
+- **Geo-replication**
+  - Can set up geo-replication where you can replicate data to other regions
+    - When doing this, you create a new server for this
+  - Can program the applications to make them geographically aware to get data from the closest region
+  - Can assign a region for **failover**
+    - If primary region crashes, then the secondary region will become the primary until the other region recovers etc.
+- **SQL Database Firewall**
+  - Go to the Server level in Azure portal
+  - Add white listing rules in the Firewall settings to allow other machines to access it i.e. home computer etc
+    - Add IP range etc
+- Can also connect to Azure AD
+  - Allows you to have service accounts for those applications etc
+
+### Create a Azure SQL Database
+- Source options
+  - Can create from a backup or choose blank, or choose sample (AdventureWorks) with sample data already in it.
+- Server
+  - Create a new SQL Server (will be publicly accessible - so need security rules around this)
+- Want to use SQL elastic pool?
+  - This determine if you share resources with the other databases
+  - This saves money as you are sharing all the resources for multiple databases in the pool
+- **Pricing**
+  - Two ways of purchasing:
+    - Can use different plans (Basic, standard, premium)
+    - Or can purchase more cores (Virtual Cores)
+  - Pricing is based on performance
+  - Can also use VCores, where you are adding CPUs to improve performance.
+- Collation
+  - Use default one for most situations
