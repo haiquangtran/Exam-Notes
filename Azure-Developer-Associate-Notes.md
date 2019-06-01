@@ -347,8 +347,9 @@
   - Go to the Server level in Azure portal
   - Add white listing rules in the Firewall settings to allow other machines to access it i.e. home computer etc
     - Add IP range etc
-- Can also connect to Azure AD
+- Can also connect database to Azure AD
   - Allows you to have service accounts for those applications etc
+- Can perform queries by issuing SqlCommand() in Visual Studio using System.Data.SqlClinet etc
 
 ### Create a Azure SQL Database
 - Source options
