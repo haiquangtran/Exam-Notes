@@ -499,3 +499,43 @@
   - P1 Premium
     - has Hsm backed keys which is a hardware security solution that uses the hardware element to generating the randomness etc
 - Virtual Network Access can be used to restrict access
+
+## Scaling of Azure App Services
+- **Scale up** = Moving pricing tier plans either up or down
+  - This is seamless, doing this actually doesn't bring down your site
+- **Scale out** = Adding/removing instances (adding/removing copies that are running in the same service plan)
+  - You are charged for these instances
+- **Manual Scaling of Azure App Service**
+  - This is available in Basic tier and up
+  - It means you manually configure how many instances you want in your App Service plan
+- **Automatic Scaling of Azure App Service**
+  - Only available in production tiers and up
+  - Can add rules to determine when to scale up or down
+    - Can choose scale based on metric (service plan, length of storage queue, service bus, application insights etc)
+    - Or choose to scale to a specific instance count
+
+## Scaling of Virtual Machines (Virtual Machine Scale Sets)
+- **Use Virtual Machine Scale Sets**
+  - Provides a load balancer, a group of identical virtual machines running in their own type of availability set
+  - Can set the scalability rules for when to scale up and when to scale down (can set by schedule or performance etc)
+  - Support up to 1000 virtual machine instances
+- Deploy as low priority option
+  - Microsoft gives you those machines when they're available, when they're not then Microsoft takes them away from you 
+- Virtual machine sets have a type of availability set that are called **Placement groups.**
+  - Up to 100 virtual machines can be in a placement group. This is to ensure they are distributed so if something goes wrong, they all don't go down together etc.
+- **Autoscale**
+  - Can choose min and max number of VMs
+  - Can choose the rules based on CPU threshold etc
+  - Can also set this up based on time (scheduling)
+- **Scaling a single virtual machine**
+ - If not using Virtual Machine Scale sets, then you can do the below:
+ - **Resize of the VM**
+   - Go to Settings > Size > then choose a new virtual machine size
+   - By switching VM size, it is disruptive operation so do it at least disruptive time possible 
+ - **Create new identical VM with larger size**
+   - Then you can start directing traffic to the new VM
+   - Can create load balancer to direct the traffic to two or more VMs (simplier and makes more sense)
+ - **Can set up automation**
+   - using ARM templates and scripting
+   - Setup automation that detects an alert when CPU reaches a certain threshold then fires off a script that does it all in PowerShell
+     - Powershell creates a new virtual machien and sets it up with everything it needs and adds it to the load balancer
