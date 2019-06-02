@@ -613,3 +613,9 @@
    2. **Put a version number in the file name**
      - You will also need to update the references to reference the correct versions in the CDN
      - This way avoids having to purge your CDN
+
+## Azure Monitor
+- Central dashboard for all of your hardware infrastructure and reporting services coming into a single location
+- Can add queries/conditions to create graphs for monitoring and pinning to your dashboard etc
+- Azure monitor has a concept of Workspaces where all the logs can be sent to etc.
+- Azure monitor is the recommended approach for a centralized solution to monitor all of the visibility of your applications, virtual machines, all other computer options, networking and infrastructure.
