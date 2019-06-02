@@ -689,3 +689,16 @@
       - CORS
       - and more...
 - See options for an API Gateway: https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway
+
+## Event Grid and Event Hub
+- The Service Bus is the enterprise grade queue system in Azure
+- The second way for applications to communicate to each other are events.
+- **Events vs Messages**
+  - Something occurring but does not contain a lot of information, typically smaller pieces of information i.e. email alert which leads to to go and read the full email etc, whereas messages are fuller pieces of information (don't need to go off to get more information) i.e. email itself that contains the body etc
+- **Event Grid (for events inside of Azure)**
+  - Allows different Azure services to be triggered and picked up by other services
+  - A connector between Azure services that create events and things that are available to do the work and listen to events. The Event Grid sits in-between.
+- **Event Hub (for events outside of Azure)**
+  - Different types of Event Hubs such as IoT Hub, Irregular Hub etc
+  - Allows for external sources to push events into Azure
+  - Listens for events outside of Azure (can be millions of requests per second etc) and can push events into Azure using Event Grid, or push it into a database or Blob, or a type of receiver etc.
