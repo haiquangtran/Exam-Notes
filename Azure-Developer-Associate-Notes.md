@@ -417,6 +417,36 @@
     - Can choose text message, phone call etc
   - Requires Premium license: https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks
 
+### Azure Access Control
+- **Role Based Access Control (RBAC)**
+  - Grant users the **LEAST** amount of permissions that they need to get their work done (Give them minimum privileges)
+  - **To check the access users have (IAM) do the following**
+    - Go to your Azure subscription, click Access control (IAM), go to Role assignments
+      - All Azure resources should have Access control tab (IAM), so you can see Role assignments etc
+    - Assign roles to users based on what they need
+      - **Roles**
+        - Owner = full access and can grant other people permissions etc
+        - Contributor = access to everything, but can't give access to anyone else
+        - Reader = read only account
+        - Many more...
+    - Can also create custom roles if need be
+- **Shared Access Signatures (SAS)**
+  - Another way of giving people access to storage resources is by using SAS
+  - **Access keys**
+    - Anyone who has access keys has full access to your account
+    - Microsoft gives you two keys:
+      - Reason is for recylcing keys and regenerating keys without any downtime
+      - If there was only 1 key, then makes it hard to keep application secure when you regenerate it as you will need to copy the key into your application and redeploy etc.
+  - **Shared Access Signatures (SAS)**
+    - Allows you to restrict the access based on a token
+    - Sign the SAS with a key, which will generate the SAS tokens you can use
+      - The signature and the combination of the key can validate the values
+      - Once it's generated the SAS token, it's immediately forgotten (it doesn't store it).
+        - It uses the signature to validate the contents
+    - **Can't revoke the SAS token without regenerating the Access Key**
+      - You cannot revoke the SAS token because Azure does not keep a list of the tokens and uses the signature to validate the token
+      - **Regenerate the access key used to sign the SAS token to revoke the SAS token**. All SAS tokens that were signed with the key become invalid!
+
 ### Create an Azure Active Directory
 - Organisation name = Your organisation name
 - Initial domain name = the domain of the URL
