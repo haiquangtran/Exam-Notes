@@ -23,6 +23,16 @@
 - Azure charges you for when you run your VM, as well as storage etc. If you stop your VM, charges will stop but you will still have to pay for Storage costs
 - By default, Azure recommends using the default VM size of **Standard DS1**
 
+### Virtual Machine Logging
+- **Azure monitor**
+  - Centralized way of monitoring applications that takes log files, alerts, metrics, from various services
+    - Can run queries on it
+- **Guest-level monitoring (Needs to be enabled)**
+  - Virtual machine extension that is installed into the running VM and is able to pull out CPU utilization, disk, and network usage
+  - Enables you to monitor the VM outside of the VM (using Azure Monitor or Application Insights)
+  - Go to VM settings > Diagnostics settings > Enable guest-level monitoring
+  - Once this is enabled, you can configure the type of information you want collected inside it.
+
 ### Encrypt a OS/Datadisk in VM
 - Azure by default encrypts files using Secure Storage Encryption but does not encrypt the VM itself by default except the files (VHD is not encrypted, Go to Disks, look for OS disks and see that the Encryption is not enabled)
 - Can use BitLocker to encrypt the Virtual Disk. The keys will be stored in Azure Key Vault
@@ -234,6 +244,9 @@
     - **Durable Functions orchestrator**
       - Functions that invokes the other functions
   - See design patterns for Durable functions on Microsoft url: https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview
+
+### Function App Logging
+- Turn on Application Insights to turn on logging for function apps.
 
 ## Azure Storage Account
 - **Storage accounts are publicly available (open to internet) unless you tie them to a specific network using network endpoint**
