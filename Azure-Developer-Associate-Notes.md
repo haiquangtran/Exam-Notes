@@ -619,3 +619,73 @@
 - Can add queries/conditions to create graphs for monitoring and pinning to your dashboard etc
 - Azure monitor has a concept of Workspaces where all the logs can be sent to etc.
 - Azure monitor is the recommended approach for a centralized solution to monitor all of the visibility of your applications, virtual machines, all other computer options, networking and infrastructure.
+
+## Azure Logic Apps
+- Logic app is the connector. IFTTT (if this then that) - same type of logic where you can connect anything that has an API with anything else that has an API
+- Workflow program that is used to connect different components or do integration (Azure equivalent to SSIS in database world)
+- All logic apps have to have a trigger
+    - Http trigger
+    - Monitoring location, message queue, new tweet etc
+    - Timer trigger
+    - More...
+- Logic app designer
+  - Point and click
+  - Has multiple templates
+- Logic apps can be used for complex functions with 10-20 steps and so on.
+  - Logic apps can call azure functions for custom functions
+  - Since azure functions are meant to be small pieces of code, you can string together multiple azure functions in Logic apps
+
+## Azure Search
+- Provides search capability within your own solution
+- Application surfaces the data you care about, builds the index based on prioritizations you specify. 
+- **Pricing Tiers**
+  - Free
+    - Shared resources, 3 indexes, 50 mb, no scaling
+  - Basic
+    - Dedicated resources, up to 3 search units, up to 3 replicas (Load balancing), 15 indexes, 2 GB
+  - Standard S-S3
+    - Up to 12 replicas
+      - Full copies of your index
+      - provides the high availability
+    - Has up to 12 partitions
+      - Areas within a serach engine that do the work
+      - This is where it does the rebuilding of the index to give near real time results
+    - Pricing is per unit so if you add more replicas or partitions then the price goes up with it.
+
+## API Management (APIM)
+- Your API's should be protected by a front-end so access is controlled for the API. Can have front-end protect multiple backend APIs
+  - Without a front-end for your API anyone can make calls to your API and do thousands of requests per second or unintentionally cause a DDoS attack or affect your production environment
+- APIM = API frontend that's a developer portal and management tool that connects into your back-end APIs
+  - Can create API documentation
+  - Allow them to register and apply, so you can approve them
+  - Can put limits, throttles and quotas on your APIs
+  - Can see who is calling your APIs
+  - Monitor health of your APIs and identify errors
+  - Run reports
+- **Creating APIM Service**
+  - Organisation name = the name users will see when they go to your portal/site
+  - **Pricing Tiers (No free tiers)**
+    - Developer
+    - Basic
+    - Standard
+    - Premium
+    - Consumption (serverless)
+      - New tier
+      - 1,000,000 calls free (public preview pricing - could change)
+  - Creating this gives you a website at the URL
+  - You will then need to configure it to point to your backend APIs
+- **Configure API Management**
+  - See Quickstart in Azure Portal
+  - Create new subscriptions (new products) for each group you want to give access to. This allows you to restrict users from accessing your API
+   - New products = new groups/subscriptions
+     - Can give different access levels and so on
+  - Go to APIs to configure APIM frontend to point to our backend APIs
+    - Can add rules and policies (i.e. inbound or outbound processing policies such as adding headers on response, or filters any requests before they can go to backend)
+    - Can add inbound policy
+      - Filter IP addresses
+      - Limit call rate
+      - Mock responses
+      - Set query params
+      - CORS
+      - and more...
+- See options for an API Gateway: https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway
