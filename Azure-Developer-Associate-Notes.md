@@ -539,3 +539,21 @@
    - using ARM templates and scripting
    - Setup automation that detects an alert when CPU reaches a certain threshold then fires off a script that does it all in PowerShell
      - Powershell creates a new virtual machien and sets it up with everything it needs and adds it to the load balancer
+
+## Transient Faults (Add Resiliency to Applications)
+- **Cloud disadvantage**
+  - Service downtime or slowdowns (slightly more likely to have these)
+  - Applications don't get to complete their execution every time i.e. when scaling down 
+    - This is called a transient fault
+- **Transient Faults**
+  - Temporary one-time errors such as network error, slowdown of a service, or timeout issues to database or I/O storage etc
+- **Handling Transient Faults**
+  - **Expect that API calls will not always work and handle errors gracefully**
+  1. Retry/back-off logic
+    - If some stage of the process fails, retry multiple times.
+    - If it keeps failing either rollback all the applied changes back to initial state, or save the state and continue where you left off.
+  2. Use queues, databases, and other messages systems (to decouple applications)
+    - Do not have such a tightly coupled application. i.e. an application directly calling a third party API and expecting it to be there is tightly coupled, if the third party is down then your application fails. Instead use a queue as a middle tier between the two to handle this.
+    - Can also put in a dead letter queue or poison queue if messages aren't working multiple times that will notify support etc.
+
+
