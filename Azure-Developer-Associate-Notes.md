@@ -556,4 +556,47 @@
     - Do not have such a tightly coupled application. i.e. an application directly calling a third party API and expecting it to be there is tightly coupled, if the third party is down then your application fails. Instead use a queue as a middle tier between the two to handle this.
     - Can also put in a dead letter queue or poison queue if messages aren't working multiple times that will notify support etc.
 
+## Backend Caching
+- **Redis Cache**
+  - Is meant to be a temporary data store by default
+    - Do not put data into redis that you could not potentially lose
+    - Typically for back-end caching
+  - In memory Cache, doesn't actually write anything to disk
+  - Guaranteed to be low latency and designed for it.
+  - Put redis cache location as close to your application as possible
+  - **Pricing**
+    - Basic (C0-C6)
+      - Shared infrastructure, No SLA, 
+    - Standard (C0-C6)
+      - Shared infrastructure, 99.9% SLA, SSL etc
+    - Premium (P1-P5)
+      - Has extra features (Redis cluster, 99.9% SLA, can store session onto disk for layer etc)
+      - Can use Availability zones allowing you to put it in specific data center for Redis to be running in
+      - Can use Virtual Network, Redis cluster etc
+- **Reading and Writing to Redis in .NET**
+  - Use StackExchange.Redis NuGet package (this is the industry standard for walking with Redis, the microsoft pacakage has less installs and less documentation and examples)
+  - Get cache by doing similar: ``IDatabase cache = lazyConnection.Value.GetDatabase();``
+    - Use commands to read ``cache.StringGet("someString")`` and to write ``cache.StringSet("someString", "someValue")``
+    - Supports storing strings, geo positions (lat/long etc), hashes, lists, sorted sets etc
 
+## Frontend Caching
+- **Content Delivery Network (CDN)**
+  - Azure has a CDN
+  - Sits in front of your website and will take any of the static files (anything that doesn't change from call to call), audios, videos, images, CSS, javaScript, HTML etc and will store them on another web server, often closer to your users
+  - **Create a CDN**
+    - CDN runs in global scale so you don't choose a location for it
+      - The CDN is a global service (even though the resource group has a local region)
+    - **Create a CDN profile***
+      - Give it a name etc
+      - **Pricing Tiers**
+        - There are three companies that provide CDN to azure: Verizon, Akamai, and Microsoft
+          - Same price, but features are different
+    - **Create a CDN endpoint**
+      - Provides the URL to access the files 
+- **Ways to update files in the CDN**
+  - For example, you need to change javaScript files in your CDN to fix a bug
+  - You can do it in the following ways:
+   1. **Purge your CDN**
+   2. **Put a version number in the file name**
+     - You will also need to update the references to reference the correct versions in the CDN
+     - This way avoids having to purge your CDN
