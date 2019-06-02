@@ -451,3 +451,51 @@
 - Organisation name = Your organisation name
 - Initial domain name = the domain of the URL
 - When you create an Azure Active Directory - it is like a whole new Azure account for your organisation.
+
+## Data Encryption and Storage Accounts
+- Storage accounts are encrypted by default at rest (Storage Service Encryption), Microsoft manages the keys
+- You cannot turn off encryption, but you can manage your own keys by selecting Use your own key in Encryption settings for Storage account.
+  - When managing your own keys, you can select to use Azure Key Vault to select the key (you are now control of the keys)
+  - If you do this, you need to grant the function access to the key
+- **Encryption in Transit**
+  - Once Microsoft has stored your file, it's encrypted on the hard disk, then somebody needs to read the file, the file gets unencrypted and if that file is going to get transferred from the storage account to a virtual machine, application, or outside of Azure, then it is unencrypted
+    - Go to Storage account settings, then Configuration. Ensure "Secure transfer required" is Enabled. This makes it only accessible by https method. Note: Azure storage doesn't support https for custom domain names (challenges there if you want to do this).
+    - If anyone needs to access the data, it gets unencrypted, but is transferred over the encrypted channel of Https
+
+## Data Encryption and SQL Databases
+- **Server level database encryption***
+  - Go to server level of the SQL Server database settings > Security > Transaparent data encryption
+  - Our data is being stored in an encrypted manner, but it's transparent to us (it's encrypted behind the scenes and gets unencrypted when you are doing select statements)
+  - Can also use own key from Azure Key Vault (similar to Data Encryption in Storage account)
+- **Database level encryption**
+  - From the server level, select SQL databases, and select a database, you will now see another set of settings > go to Transparent data encryption
+  - You can turn off encrypted at this level, might want to disable encruption if it's already encrypted at another level
+- **Note:** There is a systems generated master database which cannot be encrypted because the keys that you use to encrypt your data are stored here.
+  - You can see the master database by going to resource group of the SQL database etc, then click "Show hidden types".
+
+## Azure Key Vault 
+- Azure key vault is accessible from multiple places such as ARM templates, application code etc.
+- Secrets etc can be disabled if there is a security issue 
+- **Access policies**
+  - Restrict access to your secrets to very specific people
+- **Purpose is to store Keys, Secrets, and Certificates**
+  - **Keys**
+    - Private and public key pairs etc
+  - **Secrets**
+    - Secrets application needs to store
+    - Could be third-party API keys
+    - Create a secret to store it
+      - Azure Key Vault also stores multiple versions for you if the secret  keeps changing etc
+      - Secret has a Secret Identifier which is a URL that enables you to use it 
+      - Then use the using Microsoft.Azure.KeyVault in your application code, create a KeyVaultClient and do a request for the secret.
+        - The application will be authenticated, which means Azure will use the Service Principal and will know who you are
+        - This means the programmers will not see the secret but will have access to it and can use it.
+  - **Certificates**
+    - Used for signing things such as SSL and HTTPS
+    - Can generate/import certificates etc (you would use a Certificate authority to get a certificate etc)
+- **Pricing tiers**
+  - A1 Standard
+    - cheap monthly cost
+  - P1 Premium
+    - has Hsm backed keys which is a hardware security solution that uses the hardware element to generating the randomness etc
+- Virtual Network Access can be used to restrict access
