@@ -82,7 +82,7 @@
 ## Docker Containers
 - Create our own containers using docker
 - Can create our own containers and package it so that it is deployed in Kubernetes cluster
-- Download docker - https://hub.docker.com/editions/community/docker-ce-desktop-windows or Docker toolbox https://docs.docker.com/toolbox/toolbox_install_windows/
+- Download docker: https://hub.docker.com/editions/community/docker-ce-desktop-windows or Docker toolbox https://docs.docker.com/toolbox/toolbox_install_windows/
 - docker-compose.yaml contains instructions on how to create the container
 - Use command to create containers using the docker-compose file: ``docker-compose up -d``
 - See the created containers: ``docker container ls``
@@ -134,6 +134,7 @@
 ### Deleting Kubernetes cluster
 - When deleting the resource group of the Kubernetes cluster, it does not delete the Service Principal - you will need to do this separately
   - See url: https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal#additional-considerations
+  - See url to find your SP: https://serverfault.com/questions/896673/how-to-find-the-service-principal-assigned-to-a-newly-created-aks-cluster
 
 ## Azure Concepts
 - **Resource group** 
