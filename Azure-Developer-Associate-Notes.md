@@ -57,9 +57,22 @@
   - Batched jobs: identical tasks that need to be run multiple times
   - Can run in parrallel etc
 - Separate from Azure Subscription, need to create a batch account for the batch services
+- **Costs**
+  - Batch accounts are free
+  - You are charged for pools while the nodes are running, even if no jobs are scheduled. 
+- **Summary steps using Azure CLI**
+  - Login to azure account: ``az login``
+  - Create a resource group
+  - Create a storage account (optional)
+  - Create a batch account (required)
+  - Create a pool of compute nodes (VMs that are run)
+  - Create a job 
+    - A Batch job is a logical group for one or more tasks. A job includes settings common to the tasks, such as priority and the pool to run tasks on. Initially the job has no tasks.
+  - Create tasks on the job 
 - See Azure Batch examples on github: https://github.com/Azure-Samples/batch-dotnet-manage-batch-accounts, https://github.com/Azure-Samples/azure-batch-samples/tree/master/CSharp/GettingStarted/01_HelloWorld
 - Can use Batch explorer to see insights on your batch 
 - See Quotas and limits: https://docs.microsoft.com/en-us/azure/batch/batch-quota-limit
+- Quick start using Azure CLI: https://docs.microsoft.com/en-us/azure/batch/quick-create-cli#code-try-0
 
 ## Containers
 - Midway between an IaaS and PaaS
