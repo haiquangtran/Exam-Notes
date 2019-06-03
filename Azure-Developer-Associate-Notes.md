@@ -660,6 +660,8 @@
   - Can create API documentation
   - Allow them to register and apply, so you can approve them
   - Can put limits, throttles and quotas on your APIs
+    - **Throttling** = controls usage of APIs by consumers during a given period. Can be used to limit number of API requests per day/week/month.
+    - **Rate limiting** = defines the rate that consumers can access APIs. Determines the speed at which consumer can access APIs and is calculated in real time.
   - Can see who is calling your APIs
   - Monitor health of your APIs and identify errors
   - Run reports
