@@ -127,6 +127,18 @@
 - Defaults to 3 nodes
 - Service principal: the accounts in which the nodes are going to run
 - Minimum nodes is 1
+- Enabling virtual nodes allows you to deploy or burst out containers to nodes backed by serverless Azure Container Instances. This can provide fast burst scaling options beyond your defined cluster size.
+- VM Scale sets are required if you are using auto scale etc.
+- HTTP application routing
+  - Makes applications deployed to cluster publicly accessible by DNS names for application endpoints. 
+  - Creates DNS zone in your subscription.
+  - Not recommended for production clusters. 
+- **Enable Azure Dev Spaces on your AKS Cluster**
+  - Benefits
+    - Reduces burden and complexity of collaborating with team in a shared AKS cluster
+    - Allows you to debug containers directly in AKS
+    - Allows you to test and iteratively dev your microservice apps running in AKS 
+  - Azure Portal > AKS cluster > Dev spaces
 - **Create using application code**
   - Get service principal / authenticate
   - Create a KubernetesCluster with region, resource group, principal, defining the agent pool (with virtual machines and tier of virtual machine) with DNS prefix
