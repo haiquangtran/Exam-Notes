@@ -113,18 +113,35 @@
   - Only available for use locally
   - For local setup, download azure cli or use powerShell
   - View kubernetes dashboard in Azure Portal and copy the commands
+  - View dashboard: ``az aks browse --resource-group myResourceGroup --name myAKSCluster``
+  - See: https://docs.microsoft.com/en-us/azure/aks/kubernetes-dashboard
 - Practise: https://github.com/Azure-Samples/aks-dotnet-manage-kubernetes-cluster
+- Concepts: https://docs.microsoft.com/en-us/azure/aks/concepts-clusters-workloads
+- **Monitor health and logs**
+  - Go to azure portal > resource group > AKS cluster > Monitoring > Insights
+  - Add filter and choose Namespace <All but kube-systems>
 
 ### Create Kubernetes cluster
 - DNS name prefix - used for fully qualified domain name
 - Node size defaults to Standard DS2 v2 (2 cpus, 7 GB memory), 
 - Defaults to 3 nodes
 - Service principal: the accounts in which the nodes are going to run
-- Minimum nodes is 3
+- Minimum nodes is 1
 - **Create using application code**
   - Get service principal / authenticate
   - Create a KubernetesCluster with region, resource group, principal, defining the agent pool (with virtual machines and tier of virtual machine) with DNS prefix
   - Can update kubernetesCluster to change number of virtual nodes etc...
+- **Create using Azure cli**
+  - Create a resource group
+  - Create a azure kubernetes cluster: ``az aks create --resource-group kubernuts-rg --name myAKSClus
+ter --node-count 1 --enable-addons monitoring --generate-ssh-keys``
+  - Connect to the aks cluster: ``az aks get-credentials --resource-group kubernuts-rg --name m
+yAKSCluster``
+  - Verify the connection to the cluster: ``kubectl get nodes``
+  - A kubernetes manifest file (.yaml) specifies the desired state for a cluster and also specifies what container images to run.
+  - Deploy the application by using the manifest file: ``kubectl apply -f azure-vote.yaml``
+  - Test the application: ``kubectl get service azure-vote-front --watch``
+  - See the external IP address, and navigate to it to test it.
 
 ### Deploy Kubernetes cluster
 - Using cloud shell cli
