@@ -80,8 +80,8 @@
 - Easy to get up and running (with environment replicated etc)
 
 ## Docker Containers
-- Create our own containers using docker
-- Can create our own containers and package it so that it is deployed in Kubernetes cluster
+- Create own containers using docker
+- Can create own containers and package it so that it is deployed in Kubernetes cluster
 - Download docker: https://hub.docker.com/editions/community/docker-ce-desktop-windows or Docker toolbox https://docs.docker.com/toolbox/toolbox_install_windows/
 - docker-compose.yaml contains instructions on how to create the container
 - Use command to create containers using the docker-compose file: ``docker-compose up -d``
@@ -121,6 +121,10 @@
 - Defaults to 3 nodes
 - Service principal: the accounts in which the nodes are going to run
 - Minimum nodes is 3
+- **Create using application code**
+  - Get service principal / authenticate
+  - Create a KubernetesCluster with region, resource group, principal, defining the agent pool (with virtual machines and tier of virtual machine) with DNS prefix
+  - Can update kubernetesCluster to change number of virtual nodes etc...
 
 ### Deploy Kubernetes cluster
 - Using cloud shell cli
