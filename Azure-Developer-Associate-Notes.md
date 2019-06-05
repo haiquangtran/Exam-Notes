@@ -139,6 +139,8 @@
     - Allows you to debug containers directly in AKS
     - Allows you to test and iteratively dev your microservice apps running in AKS 
   - Azure Portal > AKS cluster > Dev spaces
+  - Connect your application to your dev space, you will need Kubernetes tools for Visual Studio. 
+    - Follow URL below: https://docs.microsoft.com/en-us/azure/dev-spaces/quickstart-netcore-visualstudio?toc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Faks%2FTOC.json&bc=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fazure%2Fbread%2Ftoc.json
 - **Create using application code**
   - Get service principal / authenticate
   - Create a KubernetesCluster with region, resource group, principal, defining the agent pool (with virtual machines and tier of virtual machine) with DNS prefix
