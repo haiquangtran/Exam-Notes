@@ -767,3 +767,34 @@ yAKSCluster``
   - Fast scaling microservices across the cluster
 - Your Servers are just resources which you can use any of them when you need it, whereas with VMs you might have hot and cold VMs that are not used and need to be spun up to be used it.
 - Has built in features with it i.e. Self healing, Stateful, Stateless, Load balancer, monitoring, application failover etc
+- https://stackoverflow.com/questions/48415057/difference-between-kubernetes-and-service-fabric
+
+## Azure Service Bus
+- Can have two different models: 
+  - **Queues**
+  - **Subscriptions/Topics**
+
+## Internal and External Load Balancer
+- Two types of load balancers:
+  - **Public Load Balancer**
+    - Has a public IP address
+    - Open to the internet, requests from internet hit the load balancer and distributes traffic to VMs inside your network
+    - Filter traffic etc
+  - **Internal Load Balancer**
+    - Is for running between your internal networks
+    - Load balance things that are not public facing 
+- Backend pools
+  - Are the backend services that are responsible for accepting traffic
+- Probes
+  - Health of the VMs to see if they are working
+- Load Balancing Rules
+  - Specifies what to do when traffic comes in
+  - Can configure the ports that are open and redirected to back-end port etc
+  - Should not enabled session persistence (if any of the servers go down - you lose your persistence etc)
+
+## Azure Application Gateway
+- For web applications
+- Type of Load balancer only applicable to Web 
+- Has security features 
+  - SSL offloading so your servers do not have to do SSL and the Gateway handles this
+  - Web Application Firewall (WAF) 
