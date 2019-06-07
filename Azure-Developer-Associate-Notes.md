@@ -340,6 +340,12 @@ yAKSCluster``
 - Partition key: determines how the data is partitioned/divided/split if the data is large.
 - Querying database: Use TableQuery (similar to LINQ), then use Table.Execute
 - Developing for Table storage in Visual Studio, use the package WindowsAzure.Storage
+- **TableBatchOperation**
+  - Are for transactions (All or nothing)
+  - Conditions for it to work:
+    - All need to use same partition key
+    - Limit of 2,000 operations per batch
+    - Only one operation to the same entity is allowed
 
 ## Cosmos DB
 - NoSQL
@@ -454,6 +460,18 @@ yAKSCluster``
     - Hot = access in an isntant but costs more money
     - Cool = have to keep file for at least 30 days but storage becomes cheaper and access becomes more expensive! i.e. good for storing items where you would only need to access it in emergency
     - Archive = a lot cheaper, making it more inaccessible, delay in accessing it. Push a request and Azure lets you know when it's available. Stored for at least 180 days.
+
+## Azure Queues
+- Queues are for messages
+- Queue naming convention has to be lowercase
+- Create a queue: ``CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();``
+  - Get the Queue: ``CloudQueue myQueue = queueClient.GetQueueReference("thisisaqueue");``
+- Insert into queue: ``CloudQueueMessage message = new CloudQueueMessage("message content");``
+  - Add it into the queue: ``myQueue.AddMessage(message);``
+- Peek 
+  - peek at the message in the queue: ``myqueue.PeekMessage();``
+- Take message off the queue
+  - take it off the queue: ``myQueue.GetMessage();``
 
 ## Azure Active Directory (AD)
 - Azure Active Directory is the default answer when it comes to identity and authentication within the cloud
