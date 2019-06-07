@@ -659,6 +659,14 @@ yAKSCluster``
   - Get cache by doing similar: ``IDatabase cache = lazyConnection.Value.GetDatabase();``
     - Use commands to read ``cache.StringGet("someString")`` and to write ``cache.StringSet("someString", "someValue")``
     - Supports storing strings, geo positions (lat/long etc), hashes, lists, sorted sets etc
+- **Security**
+  - For Basic/Standard tiers you do not assign it a network, and it is publicly available on the internet using the right access keys
+  - For Premium tier you can add it to a virtual network etc
+    - This allows you to be a Network Security Group which can do the following:
+      - Make it internal only network
+      - Packet filtering and routing
+      - Needs it's own subnet I think
+      - You have to do the reddis cache on time of set up for this as you cannot move the reddis cache etc
 
 ## Frontend Caching
 - **Content Delivery Network (CDN)**
@@ -719,6 +727,18 @@ yAKSCluster``
       - Areas within a serach engine that do the work
       - This is where it does the rebuilding of the index to give near real time results
     - Pricing is per unit so if you add more replicas or partitions then the price goes up with it.
+- **Indexes**
+  - Retrievable
+    - Can be displayed on search results
+  - Filterable
+    - filter
+  - Sortable
+    - sort
+  - Factable
+    - i.e. rate ranges from 1-4 are retrievable and then you want to also filter based on that
+    - Once they have seen the results, be able to filter all the results on another field
+  - Searchable
+    - Search this field
 
 ## API Management (APIM)
 - Your API's should be protected by a front-end so access is controlled for the API. Can have front-end protect multiple backend APIs
@@ -789,8 +809,48 @@ yAKSCluster``
 
 ## Azure Service Bus
 - Can have two different models: 
-  - **Queues**
-  - **Subscriptions/Topics**
+  - **Queue Model**
+  - **Topic Model**
+    - Publish/Subscribe model
+    - Within a topic model you push a message into a topic and that gets sent to all subscriptions to that
+      - 1 to many model
+      - i.e. twitter 
+- Add the WindowsAzure.ServiceBus package in the code etc
+- **Queue Model**
+  - See all the access keys in Shared Access Policies > RootManageSharedAccessKey
+    - Contains all the keys and connection strings
+  - Development code
+    - Create a queue client: ``QueueClient.CreateFromConnectionString(conn, queueName);``
+    - Create a message: ``var msg = new BrokeredMessage("message 1")``
+    - Send the message: ``client.Send(msg);``
+    - Read message: ``client.OnMessage(message => { Console.WriteLine(message); });``
+- **Topic Model**
+  - Like a queue but multiple subscriptions will get the message
+  - Development code
+    - Create a namespace manager: ``var nsm = NamespaceManager.CreateFromConnectionString(conn);``
+    - Check if subscription exists, if not, create it: ``if (!nsm.SubscriptionExists(topic, subscriptionName) nsm.CreateSubscription(topic, subscriptionName);``
+    - Create a topic client: ``var client = TopicClient.CreateFromConnectionString(conn, topic);``
+    - Create a message: ``var msg = new BrokeredMessage("message 1")``
+    - Send the message: ``client.Send(msg);``
+    - Subscribe to a topic: ``var subscriptionClient = SubscriptionClient.CreateFromConnectionString(conn, topic, subscriptionName);``
+    - Read message: ``client.OnMessage(message => { Console.WriteLine(message); }, options);`` - options is optional
+      - removes it from the queue: ``message.Complete();``
+      - Does not remove it from the queue: ``message.Abandon();``
+- **Pricing Tiers**
+  - Basic
+    - Queues only
+    - Shared servers/environment
+    - $0.05 USD million/month
+  - Standard
+    - Queues and Topics
+    - Shared servers/environment
+    - $10.00/12.5million/month
+  - Premium
+    - Queues and topics
+    - Dedicated servers/environment
+    - $668 month
+- **Azure Relay**
+  - 
 
 ## Internal and External Load Balancer
 - Two types of load balancers:
