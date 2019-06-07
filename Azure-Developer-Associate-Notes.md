@@ -793,8 +793,11 @@ yAKSCluster``
   - Should not enabled session persistence (if any of the servers go down - you lose your persistence etc)
 
 ## Azure Application Gateway
-- For web applications
+- Only does web based load balacing (HTTP/HTTPS etc)
 - Type of Load balancer only applicable to Web 
 - Has security features 
   - SSL offloading so your servers do not have to do SSL and the Gateway handles this
   - Web Application Firewall (WAF) 
+  - Cookie-based session affinity (sticky cookies)
+  - URL-based content routing, allows to have multiple websites behind the gateway
+- Costs money
