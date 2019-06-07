@@ -834,8 +834,9 @@ yAKSCluster``
     - Send the message: ``client.Send(msg);``
     - Subscribe to a topic: ``var subscriptionClient = SubscriptionClient.CreateFromConnectionString(conn, topic, subscriptionName);``
     - Read message: ``client.OnMessage(message => { Console.WriteLine(message); }, options);`` - options is optional
-      - removes it from the queue: ``message.Complete();``
-      - Does not remove it from the queue: ``message.Abandon();``
+      - If options AutoComplete is set to false then you have to manually handle what happens
+        - removes it from the queue: ``message.Complete();``
+        - Does not remove it from the queue: ``message.Abandon();``
 - **Pricing Tiers**
   - Basic
     - Queues only
@@ -849,8 +850,10 @@ yAKSCluster``
     - Queues and topics
     - Dedicated servers/environment
     - $668 month
-- **Azure Relay**
-  - 
+- **Azure Service Bus Relay**
+  - Allows your on-premises services (WCF services) to connect to ServiceBus namespace. 
+  - Any application or web application/mobile application that can connect to your public Azure Service Bus can communicate to any service inside your network 
+  - Exposes private serivces within your network securely
 
 ## Internal and External Load Balancer
 - Two types of load balancers:
