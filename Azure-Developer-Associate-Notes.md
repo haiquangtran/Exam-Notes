@@ -754,3 +754,16 @@ yAKSCluster``
   - Different types of Event Hubs such as IoT Hub, Irregular Hub etc
   - Allows for external sources to push events into Azure
   - Listens for events outside of Azure (can be millions of requests per second etc) and can push events into Azure using Event Grid, or push it into a database or Blob, or a type of receiver etc.
+
+## Azure Service Fabric
+- For microservices 
+- For hyperscale
+- Used for applications needed for high performacne across hundreds of servers etc
+- You can use Azure Service Fabric (software) in multiple different environments, Azure, private cloud, AWS etc
+- It is like an abstraction running above a VM, which you can deploy your code to it will take care of scaling.
+  - Many microservices per VM
+  - High microservices density
+  - Fast deployment and upgrades
+  - Fast scaling microservices across the cluster
+- Your Servers are just resources which you can use any of them when you need it, whereas with VMs you might have hot and cold VMs that are not used and need to be spun up to be used it.
+- Has built in features with it i.e. Self healing, Stateful, Stateless, Load balancer, monitoring, application failover etc
