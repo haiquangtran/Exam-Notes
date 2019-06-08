@@ -196,6 +196,26 @@ yAKSCluster``
 - If using publish as Docker Image, you can publish to Azure Container Registry or Kubernetes etc (not based on direct code)
 - Application settings
   - ARR affinity: have cookies that go to the same server
+- **Azure CLI**
+  - Configure local git deployment: ``az webapp deployment user set --user-name <username> --password <password>``
+    - You configure this deployment user only once. You can use it for all your Azure deployments.
+    - It is different from your Azure subscription credentials
+    - This deployment user is required for FTP and local Git deployment to a web app.
+    - This is at the account level
+  - Create a resource group: ``az group create --name <resourceGroup> --location "West Europe"``
+  - Create an app service plan: ``az appservice plan create --name myAppServicePlan --resource-group myResourceGroup --sku FREE``
+  - Create a web app: ``az webapp create --resource-group myResourceGroup --plan myAppSerivcePlan --name <app-name> --deployment-local-git``
+  - Add an azure remote to your local git repository: ``git remote add azure <deploymentLocalGitUrl>`` and push it: ``git push azure master``
+  - Browse to the Azure app: ``http://<app_name>.azurewebsites.net/swagger``
+  - Enable CORS: ``az resource update --name web --resource-group myResourceGroup --namespace Microsoft.Web --resource-type config --parent sites/<app_name> --set properties.cors.allowedOrigins="['http://localhost:5000']" --api-version 2015-06-01``
+  - https://docs.microsoft.com/en-gb/azure/app-service/app-service-web-tutorial-rest-api#deploy-app-to-azure
+- **App Service CORS vs your CORS**
+  - You can use your own CORS utlities instead of App Service CORS for more flexibility
+    - More fine-grained e.g. specify different allowed origins for different routes or methods
+    - Azure APp Service CORS lets you specify one set of accepted origins for all API routes and methods
+  - Do not try to use App Service CORS and your own CORS code together. 
+    - App Service CORS will take precedence over your own CORS
+  - https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-2.2
 
 #### Azure App Service Pricing Tiers
 - Azure App Service plan is similar to a hosting plan, you can have multiple web apps on 1 plan
