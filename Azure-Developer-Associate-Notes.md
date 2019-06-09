@@ -305,6 +305,7 @@ yAKSCluster``
   - Integrates to other services through bindings
 - **Durable Functions**
   - Used for complex chains of functions, similar to a logic app
+  - Lets you write stateful functions in a serverless environment.
     - Can have functions calling other async functions, chaining etc
   - In azure functions, see more templates, you will see the following:
     - **Durable Functions HTTP starter**
@@ -314,6 +315,11 @@ yAKSCluster``
     - **Durable Functions orchestrator**
       - Functions that invokes the other functions
   - See design patterns for Durable functions on Microsoft url: https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview
+    - **Fan-out/fan-in**
+      - Pattern of executing multiple concurrently then performing aggregation on the results.
+    - **Chaining**
+      - Pattern of executing in sequential order.
+      - Often, function input requires the result of the previous function output etc
 
 ### Function App Logging
 - Turn on Application Insights to turn on logging for function apps.
@@ -759,6 +765,8 @@ yAKSCluster``
     - Once they have seen the results, be able to filter all the results on another field
   - Searchable
     - Search this field
+- **Notes**
+  - When adding next steps that rely on previous step attributes, add dynamic fields! Ensure that you click the dynamic button and select the fields.
 
 ## API Management (APIM)
 - Your API's should be protected by a front-end so access is controlled for the API. Can have front-end protect multiple backend APIs
@@ -798,6 +806,28 @@ yAKSCluster``
       - Set query params
       - CORS
       - and more...
+- **Link Azure Search to Api Management**
+  - Assumes you've already created your azure search with index in a database
+  - Create a new APIM (20 mins to create it)
+  - Add new API 
+    - Enter the Web service URL as the backend service of the Azure Search
+  - Add api-key header (value is Azure Search key) to All Operations and set api-version query parameter as inbound to All Operations
+  - Create new GET operation to the API
+    - Add query parameter for search
+  - Test the operation in APIM
+  - Add outbound set-header operations to delete unnecessary headers by putting in header name and selecting "delete". Leave the value as blank
+  - Add custom outbound rule to the GET operation scope by adding the following appropriate place:
+    - ``<outbound>
+    <base />
+    <set-body>
+    @{ 
+        var response = context.Response.Body.As<JObject>();
+        return response.Property("value").Value.ToString();
+    }
+    </set-body>
+</outbound>``
+  - Test the operation in APIM
+  - Tutorial here: https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_06_lab.html#exercise-1-creating-an-azure-search-service-in-the-portal
 - See options for an API Gateway: https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway
 
 ## Event Grid and Event Hub
