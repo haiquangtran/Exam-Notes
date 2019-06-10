@@ -760,9 +760,12 @@ yAKSCluster``
     - filter
   - Sortable
     - sort
-  - Factable
+  - Facetable (facet filter)
+    - Used for searching based on grouped results (like returning buckets). For example, ``facet=price,values:100|1000|10000`` puts prices in 3 groups, where the prices are up to but not including those values. e.g. first group = all under 100 etc.
+    - Used for self-directed filtering on query results, where your application offers UI controls for scoping search to search groups
     - i.e. rate ranges from 1-4 are retrievable and then you want to also filter based on that
     - Once they have seen the results, be able to filter all the results on another field
+    - https://docs.microsoft.com/en-us/azure/search/search-filters-facets
   - Searchable
     - Search this field
 - **Notes**
