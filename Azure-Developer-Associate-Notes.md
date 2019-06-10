@@ -287,6 +287,8 @@ yAKSCluster``
   - **API definition**
     - No UI so you need to know how to interface with it by using API definition
     - Use Swagger, and put the URL as the API definition
+- **See API URL**
+  - Your API app > Properties > URL 
 
 ### Azure Function Apps
 - **Hosting plan:** have option to run in App Service plan or as a serverless compute
@@ -320,6 +322,16 @@ yAKSCluster``
     - **Chaining**
       - Pattern of executing in sequential order.
       - Often, function input requires the result of the previous function output etc
+
+## Application Insights
+- Built-in logging for applications 
+- **Instrumentation Key**
+  - This is the key used by client applications to connect to Application Insights
+  - Find it by going to: Your Application Insights > Properties > Instrument key
+- **Application Insights for API Apps**
+  - It is set automatically when building API app resource with Application insights
+  - See APPINSIGHTS_INSTRUMENTATIONKEY in the application settings by doing the following > Your API App > Configuration > App settings > APPINSIGHTS_INSTRUMENTATIONKEY
+
 
 ### Function App Logging
 - Turn on Application Insights to turn on logging for function apps.
