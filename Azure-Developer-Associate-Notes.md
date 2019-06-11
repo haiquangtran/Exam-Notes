@@ -293,6 +293,8 @@ yAKSCluster``
   - To enable autoscale go to Your API app > Scale Out > Enable AutoScale
   - Enter a name, and scale mode (based on metric), add a scale rule with default values, and specify min instances and max instances and default instances > Save.
   - See: https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_05_lab.html
+- **Deployment web app using Azure CLI**
+  - Using zip file: ``az webapp deployment source config-zip --resource-group MonitoredAssets --src api.zip --name smpapihai``
 
 ### Azure Function Apps
 - **Hosting plan:** have option to run in App Service plan or as a serverless compute
