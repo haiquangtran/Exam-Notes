@@ -295,6 +295,10 @@ yAKSCluster``
   - See: https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_05_lab.html
 - **Deployment web app using Azure CLI**
   - Using zip file: ``az webapp deployment source config-zip --resource-group MonitoredAssets --src api.zip --name smpapihai``
+- **Load/Performance Tests**
+  - Go to Web App > Performance test
+  - Use Azure Monitor metrics after the performance test
+    - Create charts in Azure Monitor based on the application insights
 
 ### Azure Function Apps
 - **Hosting plan:** have option to run in App Service plan or as a serverless compute
@@ -328,6 +332,9 @@ yAKSCluster``
     - **Chaining**
       - Pattern of executing in sequential order.
       - Often, function input requires the result of the previous function output etc
+  - **Security**
+    - System-assigned managed identity
+    - Go to Your Function App > Platform features tab > Identity > Enable system-assigned managed identity 
 
 ## Application Insights
 - Built-in logging for applications 
@@ -624,6 +631,14 @@ yAKSCluster``
   - P1 Premium
     - has Hsm backed keys which is a hardware security solution that uses the hardware element to generating the randomness etc
 - Virtual Network Access can be used to restrict access
+- **Create a secret**
+  - Create a server-assigned managed service identity for your function app and then give that identity the appropriate permissions to get the value of a secret in the Key Vault.
+  - Go to Secrets and create a new one
+  - After it has been created, record the Secret identifier to use later
+  - Configure Key Vault access policy to only allow certain application to use the secret
+    - Go to Access Policies > Create a new access policy > Set secret permissions to GET > Set principal to your application to use the secret > Save
+  - To refer to the secret use the following in the Application settings in the Portal: ``@Microsoft.KeyVault(SecretUri=<Secret Identifier>)``
+  - https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_04_lab.html#exercise-1-create-azure-resources 
 
 ## Scaling of Azure App Services
 - **Scale up** = Moving pricing tier plans either up or down
