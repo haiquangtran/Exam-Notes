@@ -23,6 +23,15 @@
 - Azure charges you for when you run your VM, as well as storage etc. If you stop your VM, charges will stop but you will still have to pay for Storage costs
 - By default, Azure recommends using the default VM size of **Standard DS1**
 
+### Create a Virtual Machine using Azure CLI
+- ``az vm create ``
+  - ``az vm create --resource-group ContainerCompute --name quickvm --image debian --admin-username student --admin-password StudentPa55w.rd``
+- Use the ``az vm show`` command to view a more detailed JSON file that contains various metadata about the newly created VM.
+- Use the ``az vm list-ip-addresses --resource-group ContainerCompute --name quickvm`` command to list all IP addresses associated with the VM
+- Use the ``az vm list-ip-addresses`` command and the ``–query`` argument to filter the output to only return the first IP address value: ``az vm list-ip-addresses --resource-group ContainerCompute --name quickvm --query '[].{ip:virtualMachine.network.publicIpAddresses[0].ipAddress}' --output tsv``
+
+
+
 ### Virtual Machine Logging
 - **Azure monitor**
   - Centralized way of monitoring applications that takes log files, alerts, metrics, from various services
@@ -96,6 +105,19 @@
 - Location where you can store container images for others to use
 - Create a container registry in Azure
   - SKU: different types but all cost money (defaults to standard)
+- Use the command ``az acr list`` to view a list of all container registries in your subscription
+- Use the command ``az acr list --query "max_by([], &creationDate).name" --output tsv`` to output most recent created container registry
+- Deploy: use the following command to upload the source code to your container registry and build the container image as an Azure Container Registry Task: ``az acr build --registry $acrName --image ipcheck:latest .``. ipcheck is the name of the created repository in ACR and latest is the name of the tag. See https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_01_lab.html.
+- **Deploy a container image automatically to an Azure Container instance**
+  - In Your Container Registry > Repositories > Repository > Your container image repository > Select the ellipsis > Run instance
+  - Fill in the fields > OK 
+  - See https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_01_lab_ak.html#exercise-3-create-a-docker-container-image-and-deploy-it-to-azure-container-registry.
+- **Deploy a container image manually to an Azure Container instance**
+  - Azure Container Registry > Access Keys > Copy values for Login server, Username and Password
+  - Create a new Container Instances in Azure by going to Create new resource etc...
+  - Enter in values copied earlier when creating the new container instance
+  - Deploy it, and go to Settings > Containers > Events, and see the Events
+  - See https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_01_lab_ak.html#exercise-3-create-a-docker-container-image-and-deploy-it-to-azure-container-registry.
 - To add docker image to register you tag the image with the ACR name for the registry: ``docker tag {image-name} {registry-name}:v1`` 
   - example: ``docker tag azure-vote-front azsj.azurecr.io/azure-vote-front:v1`` 
 - Then push the image: ``docker push {registry-name}:v1`` i.e. ``docker push azsj.azurecr.io/azure-vote-front:v1``
