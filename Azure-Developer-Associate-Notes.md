@@ -248,6 +248,11 @@ yAKSCluster``
   - Continuous - starts with web app and runs continously
   - Trigger - manual (url web hook) or scheduled CRON
 - Supports scripts and programs
+- No additional cost; however the same resources are used, so creating a WebJob will sap some of the performance from the App Service
+- You can run multiple WebJobs in an App Service.
+- https://docs.microsoft.com/en-us/azure/app-service/webjobs-create
+- https://microsoftlearning.github.io/AZ-203-DevelopingSolutionsforMicrosoftAzure/Instructions/Labs/AZ-203_02_lab.html
+- See WebJobs vs Azure Functions: https://stackoverflow.com/questions/36610952/azure-webjobs-vs-azure-functions-how-to-choose
 
 ### Enable Diagnostics logging
 - In Azure App Service, go to Alerts, Metrics, Diagnostics logs
