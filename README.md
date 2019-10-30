@@ -1,6 +1,6 @@
 # Certification Exam Study Notes
 
-This repository contains study notes and preparation notes for certifications (primarily Microsoft certifications).
+This repository contains study notes as preparation for certifications (primarily Microsoft certifications).
 
 The following certifications have been completed:
 - AZ-203: Developing Solutions for Microsoft Azure
