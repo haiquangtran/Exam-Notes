@@ -66,3 +66,25 @@
     - Standard - full suite of security related services: continous monitoring, threat detction, JIT access control for ports etc
   - References: 
     - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/2a-azure-security-center
+
+
+- **Identity and access**
+ - **Authentication and Authorization**
+   - **Authentication**
+     - Process of who the user is.
+     - Involves act of challenging a party for legitimate credentials, and provides the basis for creating a security principal for identity and access control use. 
+     - Establishes if they are who they say they are.
+   - **Authorization**
+     - Establishing what level of access an authenticated person or service has.
+     - Specifies data they're allowed to access and their permissions.
+  - Azure Active Directory (Azure AD)
+    - Cloud-based identity service
+    - Supports synchronizing with on-premises AD.
+    - Provides:
+      - Authentication
+      - SSO
+      - Application management (using Azure AD application Proxy, SSO, my apps protal, SaaS apps)
+      - B2B identity services (guests, how users sign up, their profiles etc)
+      - Device Management
+  - References:
+   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/3-identity-and-access
