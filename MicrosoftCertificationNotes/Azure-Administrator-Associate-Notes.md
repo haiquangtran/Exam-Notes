@@ -9,3 +9,46 @@
 - https://www.udemy.com/course/the-complete-walkthrough-of-microsoft-azure-services/
 
 ## Microsoft Learning Module Notes
+- **Securing Data**
+  - Cloud secruity is a shared responsibility
+    - IaaS: still have to patch/secure OS & software and secure network.
+      - Security advantage of having outsourced conern over protecting physical network
+    - PaaS: outsources a lot of security concerns. Security for OS and software is outsourced. Can still control stuff in Azure Portal.
+    - SaaS: outsources everything.
+  - You always retain responsibility for securing the following:
+    - Data
+    - Endpoints
+    - Accounts
+    - Access management
+  - **Defense in depth (Layered approach)**
+    - Strategy to slow the advance of an attack trying to get unauthorized access to info.
+    - Each layer provides protection, if one is breached then there is another layer as a safe net etc.
+      - Can provide alert telemtry that can be acted upon 
+    - Microsoft applies a layered approach to security, both in physical data centers and across Azure services
+  - **Layers:**
+    - **Data**
+      - Almost all attackers are after this (DB, disk inside VM, etc)
+    - **Application**
+      - Store sensitive application in a secure storage medium
+    - **Compute**
+      - Secure access to VMs
+      - Implement endpoint protection
+      - Keep systems patched and current
+    - **Networking**
+      - Secure outbound/inbound internet access by limiting to only what is needed
+      - Limit communication between resources
+      - Deny by default
+      - Implement secure connectivity to on-premises networks.
+    - **Perimeter**
+      - Use DDoS protection to filter large-scale attacks
+      - Use perimeter firewalls to identify and alert malicious attacks against network
+      - Protect from network-based attacks against your resources
+    - **Identity and Access**
+      - Control access to infrastructure and change control
+      - Use SSO and multi-factor auth
+      - Audit events & changes
+    - **Physical security**
+      - Controlling access to hardware within data center is first line of defence
+- References:
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/2-shared-responsibility
+  - 
