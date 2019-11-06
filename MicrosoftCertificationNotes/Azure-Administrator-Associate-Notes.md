@@ -51,4 +51,18 @@
       - Controlling access to hardware within data center is first line of defence
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/2-shared-responsibility
-  - 
+  
+- **Azure Security Center**
+  - Monitoring service for threat protection across all services in Azure, and on-premises. 
+  - **Can do the following:**
+    - Security recommendations
+    - Monitor security settings and apply required security to new services as they come online 
+    - Monitor all services and perform automatic security assessments to identify potential vulnerabilities
+    - Use ML to detect and block malware from being installed
+    - Identify potential inbound attacks
+    - JIT access control for ports
+  - **Available tiers**
+    - Free - Limited to assessments and recommendations of Azure resources only.
+    - Standard - full suite of security related services: continous monitoring, threat detction, JIT access control for ports etc
+  - References: 
+    - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/2a-azure-security-center
