@@ -165,3 +165,43 @@
         - Integrate with other Azure services (storage accounts, container registries, event hubs etc)     
 - References: 
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/4-encryption
+
+# **Azure Certificates**
+- Transport Layer Security (TLS) is the basis for encryption of website data in transit.
+- Uses certificates to encrypt/decrypt data
+- However, these certificates have a lifecycle requiring admin management.
+- Websites having expired TLS certs open security vulnerabilities.
+- **Certs can be signed by trusted cert authority, or be self-signed**
+  - Self-signed cert is signed by its own creator (therefore, not trusted by default)
+    - Most browser can ignore this problem
+    - However, **you should only use self-signed certificates when developing and testing your cloud services.**
+    - These certificates can contain a private or public key and have a thumbprint that provides a means to identify a certification in an unambiguous way.
+    - This thumbprint is used in the Azure configuration file to identify which certification a cloud service should use.
+- **Types of certificates**
+  - Certs are used in Azure for two primary purposes:
+    1. **Service certificates** are used for **cloud services**
+    2. **Management certificates** are used for **authenticating** with the management API.
+  - **Service certificates**
+    - Attached to cloud services
+    - Enable secure communication to and from the service
+    - i.e. if you deloy web role, you want to supply a cert that can authenticate an exposed HTTPS endpoint. Services which are defined in your service definition, are automatically deployed to the VM that is running an instance of your role.
+    - Upload service certificates to Azure using Portal or using classic deployment model.
+      - Service certs are associated with a specific cloud service
+      - They are assigned to a deployment in the service definition file.
+    - Can managed service certificates separately from your services and can have different people managing them.
+      - For example, a developer could upload a service package that refers to a certificate that an IT manager has previously uploaded to Azure. An IT manager can manage and renew that certificate (changing the configuration of the service) without needing to upload a new service package. Updating without a new service package is possible because the logical name, store name, and location of the certificate is in the service definition file, while the certificate thumbprint is specified in the service configuration file.
+      - To update the certificate, it's only necessary to upload a new certificate and change the thumbprint value in the service configuration file.
+  - **Management certificates**
+    - Allows you to authenticate with the classic deployment model.
+    - Many programs & tools (i.e. VS or Azure SDK) use these certs to automate configuration and deployment of various Azure Services. **However, these are not really related to cloud services.**
+  - **Using Azure Key Vault with certificates**
+    - **Automating cert management helps reduce or eliminate error prone task of manual cert management**
+    - Can store certs in Azure Key Vault, however, Key Vault provides additional features above and beyond typical certificate management:
+      - Can create certs in Key Vault or import existing certs
+      - Securely store + manage certs without interaction with prviate key material
+      - Create policy that directs Key Vault to manage life-cycle of a cert.
+      - Provide contact info for notification about life-cycle events of expiration and renewal of cert
+      - Automatically renew certs with selected issuers - Key Vsault partner x509 cert providers/cert authorities
+- References:
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/4a-certificates
+
