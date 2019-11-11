@@ -127,7 +127,7 @@
   2. Encryption in transit
 - **Encryption at rest**
   - At rest = data stored on a physical medium
-  - Ensures data is unreader without the keys and secrets needed to decrypt it
+  - Ensures data is unreadable without the keys and secrets needed to decrypt it
   - The actual data encrypted could vary in its content, usage, and importance etc.
 - **Encryption in transit**
   - Data in transit = data actively moving from one location to another, such as across internet or through private network. 
@@ -135,6 +135,33 @@
     1. Encrypt data at application layer prior to sending it over network. Only the receiver has the secret key that can decrypt the data to a usable form. HTTPS is an example of application layer in transit encryption.
     2. Can set up secure channel, like VPN, at network layer, to transmit data between two systems.
 - **Encryption on Azure**
-  - 
+  - **Encrypt raw storage**
+    - **Azure Storage Service Encryption** for data at rest. 
+      - Automatically encrypts your data before persisting it to Azure Managed Disks, Azure Blob storage, Azure files, or azure queue storage, and decrypts the data before retrieval.
+      - Handling of encryption, encryption at rest, decryption and key management in Storage Service Encryption is transparent to applications using the services.
+   - **Encrypt virtual machine disks**
+     - Azure Storage Service Encryption provides low-level encryption protection for physical disk, but how to ensure virutal hard disks (VHDs) of VMs are protected?
+     - **Azure Disk Encryption**
+       - Encrypts your Windows and Linuz IaaS feature VM disks. 
+       - Leverages industry-standard BitLocker feature of Windows and dm-crypt feature of Linux
+       - Integrated with Azure Key Vault to help control disk encryption keys and secrets.
+  - **Encrypt databases**
+    - **Transparent data encryption (TDE)**
+      - **Provides encryption at rest by default for DB etc**
+      - Performs real time encryption/decryption of the DB, backups, and transaction log files **at rest (without requiring changes to the application).**
+      - TDE is enabled for all new Azure SQL DB instances **by default**.
+      - TDE Encrypts storage of entire database using symmetric key (called DB encryption key). By default, Azure provides unique encryption key per logical SQL Server instance and handles all the details.
+      - Bring your own key (BYOK) is also supported with Azure Key Vault.
+  - **Encrypt secrets**
+    - **Azure Key Vault**
+      - Centralized cloud service for storing application secrets
+      - Provides secure access, permissions control, and access logging capabilities. 
+      - Can be used to store API keys, secrets, certificates
+      - **Benefits**
+        - Centralized application secrets
+        - Securely stored secrets and keys
+        - Monitor access and use
+        - Simplified admin of application secrets (easy to renew certs, scale up and replicate content and use standard cert management tools etc)
+        - Integrate with other Azure services (storage accounts, container registries, event hubs etc)     
 - References: 
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/4-encryption
