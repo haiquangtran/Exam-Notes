@@ -272,6 +272,7 @@
     - Detect risky behaviours
     - Track access to documents
     - Prevent data leakage or misuse
+  - Requires purchase cost
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/6-azure-information-protection
 
