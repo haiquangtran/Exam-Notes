@@ -262,3 +262,18 @@
     - Do not need to allow access to these services for your end users over the public internet, you can send this traffic through appliances for further traffic inspection.
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/5-network-security
+
+# Protect your shared documents
+- **Azure Information Protection (AIP)**
+  - Cloud based solution that helps organisations classify and optionally protect documents and emails by applying labels.
+  - Classifies content when you save, and suggests a label i.e. Confidential..
+  - After it is classified, you can:
+    - Analyze data flows 
+    - Detect risky behaviours
+    - Track access to documents
+    - Prevent data leakage or misuse
+- References:
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/6-azure-information-protection
+
+# Azure Advanced Threat Protection
+- 
