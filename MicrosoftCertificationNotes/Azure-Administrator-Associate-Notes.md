@@ -205,3 +205,60 @@
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/4a-certificates
 
+# Protect your network
+- **A layered approach to network security (Azure)**
+  - **Internet protection**
+    - Only allow inbound and outbond communication where necessary
+    - Identify all resources that are allowing inbound network traffic of any type, then ensure they are restricted to only the ports and protocols required.
+    - **Azure Security Center** allows you to see this information.
+      - Identifies internet-facing resources with no network security groups associated
+      - Identifies resources that are not secured by a firewall.
+  - **Azure Firewall**
+    - Service that graners server access based on originating IP address of each address. 
+    - You create firewall rules that specify ranges of IP addresses. These generally also include specific network protocol and port info.
+    - **To provide inbound protection at the perimeter, you have several choices**
+      - **Azure Firewall**
+        - Fully stateful firewall as a service with built-in high availability and unrestricted cloud scalability
+        - Provides inbound protection for non-HTTP/S protocols (i.e RDP, SSH, FTP etc)
+        - Provides outbound, network-level protection for all ports and protocols, and application-level protection for outbound HTTP/S.
+      - **Azure Application Gateway**
+        - **Load balancer** that includes a **Web Application Firewall (WAF)**, providing protection from known vulnerabilities in websites. (Designed to protect HTTP traffic)
+      - **Network virtual appliances (NVAs)**
+        - Ideal options for non-HTTP services or advanced configurations, and are similar to hardware firewall appliances.
+  - **Distributed Denial of Service (DDoS) protection**
+    - **Azure DDoS Protection**
+      - Protects Azure applications by monitoring traffic at the Azure network edge before it can impact service's availability. 
+      - Within a few minutes of attack detection, you are notified using Azure Monitor metrics.
+      - **Tiers**
+        - **Basic**
+          - **Automatically enabled**
+          - Always-on-traffic monitoring and real-time mitigation of common network-level attacks provide same defenses that Microsoft's online services use.
+        - **Standard**
+          - Additional mitigation capabilities tuned specifcally to Microsoft Azure Virutal Network resources.
+          - Requires no application changes
+          - Protection policies tuned through dedicated traffic monitoring and ML algorithms
+          - Policies applied to public IP addresses deployed in VNs, such as Azure Load Balancer & Application Gateway.
+          - Can mitigate the following types of attacks:
+            - Volumetric attacks: seemly legit traffic to overload network
+            - Protocol attacks: exploit weakness to render a target inaccessible
+            - Resource layer attacks: target web app packets to disrupt transmissions of data between hosts
+- **Controlling traffic inside your Virtual Network**
+  - **Virtual network security**
+    - Limit communication between resources to only what is required
+    - For communication between VMs, **Network Security Groups (NSGs)** are critical piece to restrict unnecessary communication.
+      - Allow you to filter network traffic to and from Azure resources in an Azure virtual network.
+      - Can contain multiple inbound and outbound security rules to enable you to filter traffic to and from resources by source and designation IP address, port, and protocol
+      - Provide list of allowed and denied communication to and from network interfaces and subnets, and are fully customizable.
+      - **Can completely remove public internet access by restricting access to service endpoints.** With service endpoints, Azure service access can be limited to your virtual network.
+- **Network integration**
+  - **Virtual private network (VPN)**
+    - VPN connections are common way of establishing secure communication channels between networks
+    - Connection between Azure Virtual Network and an on-premises VPN device is a great way to provide secure communication between your network and your VNet on Azure.
+  - **Azure ExpressRoute**
+    - Provides dedicated, private connection between your network
+    - Lets you extend your on-premises networks into Microsoft cloud over a private connection facilitated by a connectivity provider.
+    - Can establish connections to Microsoft cloud services, such as Azure, Office 365 etc. 
+    - Improves security of your on-premises communication by sending this traffic over private circuit instead of over the public internet.
+    - Do not need to allow access to these services for your end users over the public internet, you can send this traffic through appliances for further traffic inspection.
+- References:
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/5-network-security
