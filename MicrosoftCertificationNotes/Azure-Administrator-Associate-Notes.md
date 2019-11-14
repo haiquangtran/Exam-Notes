@@ -214,7 +214,7 @@
       - Identifies internet-facing resources with no network security groups associated
       - Identifies resources that are not secured by a firewall.
   - **Azure Firewall**
-    - Service that graners server access based on originating IP address of each address. 
+    - Service that grants server access based on originating IP address of each address. 
     - You create firewall rules that specify ranges of IP addresses. These generally also include specific network protocol and port info.
     - **To provide inbound protection at the perimeter, you have several choices**
       - **Azure Firewall**
