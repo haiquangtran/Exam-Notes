@@ -301,3 +301,6 @@
 # Understand Security Considerations for Application Lifecycle Management Solutions
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/7a-microsoft-sdl
+
+# Summary with Learn More links
+- https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/8-summary
