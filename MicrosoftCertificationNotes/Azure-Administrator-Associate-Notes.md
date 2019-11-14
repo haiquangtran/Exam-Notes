@@ -276,5 +276,26 @@
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/6-azure-information-protection
 
-# Azure Advanced Threat Protection
-- 
+# Azure Advanced Threat Protection (ATP)
+- Cloud-based security that identidies, detects, and helps investigate advanced threats, compromised idenities, and malicious insider actions directed at your organization.
+- Capable of detecting known malicious attacks and techniques, security issues, and risks against your network.
+- **Azure ATP components**
+  - **ATP Portal**
+    - Has it's own portal
+    - Allows you to create Azure ATP instance, and view data recevied from ATP sensors.
+    - Monitor, manage, nad investigate threats in your network 
+    - You can sign in to the Azure ATP portal at https://portal.atp.azure.com. You must sign in with a user account that is assigned to an Azure AD security group that has access to the Azure ATP portal.
+  - **ATP sensor**
+    - Installed directly on your domain controllers.
+    - Sensor monitors domain controller traffic without requiring a dedicated server or configuring port mirroring.
+  - **ATP cloud service**
+    - ATP cloud service runs on Azure infrastructure and is deployed in US, Europe and Asia.
+    - Connected to Microsoft's intelligent security graph.
+- **Purchasing Azure Advanced Threat Protection**
+  - available as part of the Enterprise Mobility + Security E5 suite (EMS E5) and as a standalone license.
+  -  You can acquire a license directly from the Enterprise Mobility + Security Pricing Options page or through the Cloud Solution Provider (CSP) licensing model. It is not available to purchase via the Azure portal.
+    - https://www.microsoft.com/cloud-platform/enterprise-mobility-security-pricing
+- References:
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/7-advanced-threat-protection
+
+  
