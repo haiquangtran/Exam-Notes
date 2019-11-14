@@ -298,4 +298,6 @@
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/7-advanced-threat-protection
 
-  
+# Understand Security Considerations for Application Lifecycle Management Solutions
+- References:
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/7a-microsoft-sdl
