@@ -93,7 +93,7 @@
    - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/3-identity-and-access
 
 
-# Azure: Providing Identities to Services 
+### Azure: Providing Identities to Services 
 - **Service principals**
   - **Identity** = a thing that can be authenticated (person, application, service, or servers etc)
   - **Principal** = identity acting with certain roles or claims. Groups are often considered principals because they have rights assigned.
@@ -113,7 +113,7 @@
   - Separating security principals, access permissions, and resources provides simple access management and fine-grained control.
   - Can ensure minimum necessary permissions are granted.
 
-# Encryption
+### Encryption
 - For most, data is most valuable asset.
 - **Encryption serves as last and strongest line of defense in a layered security strategy.**
 - Encryption = **making data unreadable and unusable to unauthorized viewers. (Needs to be decrypted to be read requiring a secret key)**
@@ -166,7 +166,7 @@
 - References: 
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/4-encryption
 
-# **Azure Certificates**
+### **Azure Certificates**
 - Transport Layer Security (TLS) is the basis for encryption of website data in transit.
 - Uses certificates to encrypt/decrypt data
 - However, these certificates have a lifecycle requiring admin management.
@@ -205,7 +205,7 @@
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/4a-certificates
 
-# Protect your network
+### Protect your network
 - **A layered approach to network security (Azure)**
   - **Internet protection**
     - Only allow inbound and outbond communication where necessary
@@ -263,7 +263,7 @@
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/5-network-security
 
-# Protect your shared documents
+### Protect your shared documents
 - **Azure Information Protection (AIP)**
   - Cloud based solution that helps organisations classify and optionally protect documents and emails by applying labels.
   - Classifies content when you save, and suggests a label i.e. Confidential..
@@ -298,9 +298,15 @@
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/7-advanced-threat-protection
 
-# Understand Security Considerations for Application Lifecycle Management Solutions
+### Understand Security Considerations for Application Lifecycle Management Solutions
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/7a-microsoft-sdl
 
-# Summary with Learn More links
+### Summary with Learn More links
 - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/8-summary
+
+### Creating VMs
+- 
+
+# **Microsoft Labs**
+
