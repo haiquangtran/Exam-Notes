@@ -306,7 +306,85 @@
 - https://docs.microsoft.com/en-gb/learn/modules/intro-to-security-in-azure/8-summary
 
 ### Creating VMs
-- 
+- Planning and care is required when performing migration of on-premises servers to Azure
+  - Can move all at once, or small batches, or individually
+  - Sketch out your current infrastructure model and see how it might map to the lcoud
+  - Checklist of things to think about:
+    - **Start with the network**
+      - Virtual Networks (VNets) are used in Azure to provide **private connectivity between Azure VMs and other azure services.**
+      - VMs and services that part of the same VNet can access one another.
+      - By default, external services of the VNet cannot access/connect inside the VNet. You can configure network to allow access to external service though, including on-premises servers.
+      -  Consider the topology of the network before any VMs
+      - When you set up a VNet, you specify: available address spaces, subnets, and security. If Vnet connects to other Vnets, then address ranges cannot overlap when selecting them. 
+      - Azure will treat any address range as part of the private VNet IP address space if only reachable within the Vnet. within interconnected Vnets, and from your on-premises location.
+        - **Segregate your network**
+          - Can create one or more subnets for your VNet
+          - Do this by breaking network into more manageable sections.
+          - For example, you might assign 10.1.0.0 to VMs, 10.2.0.0 to back-end services, and 10.3.0.0 to SQL Server VMs.
+        - **Secure the network**
+          - By default, no security boundary between subnets (subnets can talk to each other)
+          - Can set up NSGs to control traffic to and from subnets and to and from VMs
+          - NSGs: act as software firewalls, applying custom rules to each inbound or outbound request at the network interface and subnet level.  
+          - Allows you to fully control every network request coming in or out of the VM.
+       - **Plan each VM deployment**
+         - What does the server communicate with?
+         - Which ports are open?
+         - Which OS is used?
+         - How much disk space is in use?
+         - What kind of data does this use? Are there restrictions (legal or otherwise) with not having it on-premises?
+         - What sort of CPU, memory, and disk I/O load does the server have? Is there burst traffic to account for?
+    - **Name the VM**
+      - up to 15 characters on Windows VM
+      - up to 64 characters on Linux VM
+      - Name alsop defines a manageable azure resource, and it's difficult to change later
+      - Follow the conventions to identify what it is: 
+        - Environment: dev, prod, QA etc
+        - Location: uw (US west), ue (US east) etc
+        - Instance 01, 02,
+        - Product or service: service
+        - Role: sql, web, messaging
+        - Example: ``devusc- webvm01`` might represent first dev web server hosted in US south central location.
+      - **VMs have several elements needed to do their jobs:**
+        - VM itself
+        - Storage account for the disks
+        - VNet (shared with other VMs and services)
+        - Network interface to communicate on the network
+        - NSGs to secure the network traffic
+        - Public Internet address (optional)
+        - Azure creates these resources if required, or youcan give it existing ones. 
+        - Each resource needs a name to identify it.
+          - **If azure creates the resource, it will use VM name to generate a resource name - another reason to be consistent with your VM names**
+    - **Decide location for VM**
+      - Location can limit available options. Each region has different hardware and some configurations are not available in all regions.
+      - **Price differences between locations. Can be very cost effective to check your required config in multiple regions to find lowest price.**
+    - **Size for VM**
+      - Type of workload you need to run:
+        - **General purpose**: balanced CPU-to-memory ratio. Ideal for testing and dev, small to med DBs, and low to med traffic web servers.
+        - **Compute optimized**: high CPU-to-memory ratio. Suitable for med traffic web servers, network appliances, batch processes, and app servers.
+        - **Memory optimized**: high memory-to-CPU ratio. good for DB servers, med-large caches, in-memory analytics
+        - **Storage optimized**: high disk throughout and IO. good for VMs running DBs
+        - **GPU**: targeted for heavy graphics rendering and vid editting. Good for model training and deep learning.
+        - **High performance computes**: fastest and most powerful CPU VMs with optional high-throughput network interfaces.
+      - **You can upgrade or downgrade VM, as long as current hardware config is allowed in the new size**
+        - The VM size can be changed while the VM is running, as long as the new size is available in the current hardware cluster the VM is running on. 
+        - If changed while running, VM reboots
+        - If you stop and deallocate the VM, you can then select any size available in your region since this removes your VM from the cluster it was running on.
+    - **Pricing model**
+      - Two separate costs that will be charged for every VM: 
+        1. **Compute Costs**
+          - **Priced per-hour (i.e. $50/phr)** but **billed on a per-minute (how many mins used)**. i.e Only charged for 55 mins if the VM is deployed for 55 mins. Not charged for compute capacity if you stop and deallocate the VM since this releases the hardwork. The hourly price varies based on the VM size and OS you select. Cost for a VM includes the charge for the Windows OS (Linux OS is cheaper due to no OS license charge). 
+        2. **Storage Costs**
+          - Charged separately for storage VM uses
+          - **The STATUS of the VM has NO RELATION to the storage charges that will be incurred; even if VM is stopped/deallocated and aren't billed for the running VM, you will be charged for the storage used by the disks**
+          - Can choose two payment options for compute costs:
+            1. **Pay as you go** - pay for compute capacity by the second (no longer term commitment or upfront payments).
+            2. **Reserved Virtual Machine instances** - is an advance purchase of a VM for 1 or 3 years in specified region. Commitment is made up front, and in return, you get up to 72% price savings compared to PAYG. RIs are 
+              - RIs are flexible and can easily be exchanged or returned for early termination fee.
+    - **Storage for VM**
+    - OS
+
+- References:
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/2-compile-a-checklist-for-creating-a-vm
 
 # **Microsoft Labs**
 
