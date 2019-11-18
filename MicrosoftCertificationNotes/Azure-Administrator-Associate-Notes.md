@@ -381,8 +381,34 @@
             2. **Reserved Virtual Machine instances** - is an advance purchase of a VM for 1 or 3 years in specified region. Commitment is made up front, and in return, you get up to 72% price savings compared to PAYG. RIs are 
               - RIs are flexible and can easily be exchanged or returned for early termination fee.
     - **Storage for VM**
-    - OS
-
+      - Azure VMs have at least 2 VHDs. 
+        - VHD 1: stores OS
+        - VHD 2: used as temporary storage.
+        - Can add more VHDs depending on VM size.
+        - **Data for each VHD held in Azure Storage** as page **blobs**. It's how storage cost is measured.
+      - **Azure Storage**
+        - Storage account provides access to objects in Azure Storage for a specific subscription. 
+        - VMs always have one or more storage accounts to hold each attached virtual disk.
+        - **Virtual Disks can be backed by either Standard or Premium storage accounts.**
+          - **Premium** = SSDs for high performance and low latency for VMs running I/O intensive workloads. **Use for production workloads, especially those sensitive to performance variations or are I/O intensive**.
+          - **Standard** = For development or testing, standard storage is fine.
+        - **Creating disks (two options) for relationship between storage account and each VHD**
+          - **Unmanaged disks:**
+            - Responsible for the storage accounts used to hold the VHDs for your VM disks
+            - Pay storage account rates for space used
+            - Single storage account has fixed-rate limit of 20,000 I/O operations/sec.
+            - **Capable of supporting 40 standard virtual hard disks at full utilization.**
+            - **If need to scale out with more disks, you need more storage accounts which gets complicated.**
+          - **Managed disks:**
+            - **Newer and recommended disk storage model**
+            - Azure manages the storage accounts 
+            - You specify size of disk, up to 4 TB, and Azure creates and manages **both the disk and the storage.**
+            - **Do not have to worry about storage account limits, making managed disks easier to scale out.**
+    - **Select an Operating System (OS)**
+      - Windows (more expensive due to OS license fees), Linux (cheaper)
+      - **Choice of OS will influence hourly compute pricing as Azure bundles cost of the OS license into price.**
+      - Can also use marketplace to install images of stacks. i.e. Wordpress site = Linux server, Apache web server, MySQL db and PHP.
+      - Can create your disk image with what you need, upload it to azure storage, and use it to create an azure VM. **Azure only supports 64-bit OS.**
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/2-compile-a-checklist-for-creating-a-vm
 
