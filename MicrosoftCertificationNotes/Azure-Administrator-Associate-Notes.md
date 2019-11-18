@@ -412,5 +412,31 @@
 - References:
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/2-compile-a-checklist-for-creating-a-vm
 
+### Virtual Machines
+- Can create and administer resources in Azure using the following:
+  - **Azure Resource Manager**
+    - ARM template
+    - Allows you to create templates, which can be used to deploy and create specific configurations.
+    - You can use automation scripting tools such as the Azure CLI, Azure PowerShell, or even the Azure REST APIs with your favorite programming language to process resource templates, making this a powerful tool for quickly spinning up your infrastructure.
+  - **Azure PowerShell**
+    - Ideal for on-eoff interactive tasks and/or automation of repeated tasks
+    - Azure PowerShell is an optional add-on package that adds the Azure-specific commands (refferred to as cmdlets). i.e. ``New-AzVm -ResourceGroupName "TestResourceGroup"`` etc...
+  - **Azure CLI**
+    - Another option for scripting and command-line Azure interaction
+    - Cross-platform command-line tool for managing Azure resources 
+    - Unlike Azure PowerShell, the Azure CLI does not need PowerShell to function i.e. you can create a vm with ``az vm create --resource-group "ResourceGroup"`` etc
+  - **Azure REST API/Programmtic (APIs)**
+  - **Azure Client SDK**
+    - Higher level of abstraction to Rest APIs
+    - **Azure Client SDK encapsulates the Azure REST API**, making it easier for devs to interact with Azure.
+    - Available for .NET based languages and others such as C#, Java, Node.js, PHP, Python, Ruby, and Go.
+  - **Azure VM Extensions**
+    - Small applications that allow you to configure and automate tasks on Azure VMs after initial deployment.
+    - Azure VM extensions can be run with the Azure CLI, PowerShell, Azure Resource Manager templates, and the Azure portal.
+  - **Azure Automation Services**
+    - If have a lot of infrastructure services, consider using services in Azure to help you operate from a higher level
+    - Allows you to integrate services that allow frequent automation, of error-prone management tasks.
+- Reference: 
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/4-describe-other-create-vm-options
 # **Microsoft Labs**
 
