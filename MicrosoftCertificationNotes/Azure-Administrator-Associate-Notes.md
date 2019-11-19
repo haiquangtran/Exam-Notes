@@ -413,6 +413,47 @@
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/2-compile-a-checklist-for-creating-a-vm
 
 ### Virtual Machines
+- **Back ups**
+  - **Azure Backup**
+    - backup as a service that protects physical or virtual machines no matter where they reside.
+    - **Using Azure Backup**
+      - Utilizes several components that you download and deploy to each computer you want to back up
+      - Deployment depends on what you want to protect
+        - Azure Backup agent
+        - System Center Data Protection Manager
+        - Azure Backup Server
+        - Azure Backup VM extension
+      - Uses Recovery Services vault for storing the backup data.
+      - A vault is backed by Azure Storage blobs. 
+      - With the vault in place, you can select the machines to back up and define a backup policy (when snapshots are taken)
+    - **Advantages**:
+      - Designed to work with azure services 
+      - Automatic storage management
+      - Unlimited scaling
+      - Multiple sotrage options
+      - Unlimited data transfer
+      - Data encryption
+      - Application-consistent backup
+      - Long-term retention
+- **Availability set**
+  - To avoid Single Point of Failure, it is recommended to deploy at least two instances of each VM. This feature is called availability set.
+  - Availability set is used to ensure a group of related VMs are deployed so they aren't subject to a SPOF, and not all upgraded at the same time during host OS upgrade in data center.
+  - When you place VMs into an availability set, Azure guarantees to spread them across Fault Domains and Update Domains.
+  - **Fault Domains**
+    - Logical group of hardware in Azure sharing common power source and network switch.
+    - For availability sets, they will be in different fault domains.
+    - Think of it as a **rack** within an on-premises data center.
+  - **Update Domains**
+    - Logical group of hardware that can undergo maintenance or be rebooted at the same time.
+    - Azure automatically places availability sets into update domains to minimize impact when Azure platform introduces host OS system changes.
+    - Azure then processes each update domain one at a time.
+  - **Failover across locations**
+    - **Azure Site Recovery** replicates workloads from primary site to secondary location.
+      - Azure Site Recovery is about replication of virtual or physical machines; it keeps your workloads available in an outage.
+    - If outage at primary site happens then you can fail over to secondary location.
+    - **Two main benefits:**
+      - Site Recovercy enables use of Azure as a destination for recovery (don't need to use another sceondary physical data center)
+      - Site Recovery makes it simple to test failovers for recovery drills without impacting production environments.
 - Can create and administer resources in Azure using the following:
   - **Azure Resource Manager**
     - ARM template
@@ -438,5 +479,7 @@
     - Allows you to integrate services that allow frequent automation, of error-prone management tasks.
 - Reference: 
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/4-describe-other-create-vm-options
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/5-high-availability
+  - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/6-backup-services
 # **Microsoft Labs**
 
