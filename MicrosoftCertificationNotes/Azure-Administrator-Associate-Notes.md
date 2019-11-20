@@ -460,7 +460,7 @@
     - Allows you to create templates, which can be used to deploy and create specific configurations.
     - You can use automation scripting tools such as the Azure CLI, Azure PowerShell, or even the Azure REST APIs with your favorite programming language to process resource templates, making this a powerful tool for quickly spinning up your infrastructure.
   - **Azure PowerShell**
-    - Ideal for on-eoff interactive tasks and/or automation of repeated tasks
+    - Ideal for one-off interactive tasks and/or automation of repeated tasks
     - Azure PowerShell is an optional add-on package that adds the Azure-specific commands (refferred to as cmdlets). i.e. ``New-AzVm -ResourceGroupName "TestResourceGroup"`` etc...
   - **Azure CLI**
     - Another option for scripting and command-line Azure interaction
@@ -481,5 +481,9 @@
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/4-describe-other-create-vm-options
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/5-high-availability
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/6-backup-services
-# **Microsoft Labs**
 
+# **Microsoft Labs**
+- **Deploy and Manage Virtual Machines**
+  - 
+- References:
+  - https://microsoftlearning.github.io/AZ-103-MicrosoftAzureAdministrator/
