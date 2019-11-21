@@ -484,6 +484,10 @@
 
 # **Microsoft Labs**
 - **Deploy and Manage Virtual Machines**
-  - 
+  - **Task 1: Deploy an Azure VM running Windows Server 2016 Datacenter into an availability set by using the Azure portal**
+    1. Create Windows Server 2016 Data center
+    2. Create VM 
+    3. 
+
 - References:
   - https://microsoftlearning.github.io/AZ-103-MicrosoftAzureAdministrator/
