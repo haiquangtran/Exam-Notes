@@ -443,10 +443,12 @@
     - Logical group of hardware in Azure sharing common power source and network switch.
     - For availability sets, they will be in different fault domains.
     - Think of it as a **rack** within an on-premises data center.
+    - Virtual machines in the same fault domain share a common power source and physical network switch.
   - **Update Domains**
     - Logical group of hardware that can undergo maintenance or be rebooted at the same time.
     - Azure automatically places availability sets into update domains to minimize impact when Azure platform introduces host OS system changes.
     - Azure then processes each update domain one at a time.
+    - Virtual machines in the same update domain will be restarted together during planned maintenance. Azure never restarts more than one update domain at a time.
   - **Failover across locations**
     - **Azure Site Recovery** replicates workloads from primary site to secondary location.
       - Azure Site Recovery is about replication of virtual or physical machines; it keeps your workloads available in an outage.
