@@ -487,9 +487,39 @@
 # **Microsoft Labs**
 - **Deploy and Manage Virtual Machines**
   - **Task 1: Deploy an Azure VM running Windows Server 2016 Datacenter into an availability set by using the Azure portal**
-    1. Create Windows Server 2016 Data center
-    2. Create VM 
-    3. 
-
+    1. Create Availability set with 1 VM Windows Server 2016 Data center.
+    2. Deploy VM using Windows Server data center into existing availability set (from step 1.) using Azure PowerShell
+      - Powershell syntax commands are KebabCase. i.e.``New-AzNetworkSecurityGroup -ResourceGroupName $resouceGroup.ResourceGroupName OR Register-AzVirtualMachine OR Get-AzAvailabilitySet etc``
+    3. Deploy 2 Linux VMs into an availability set using ARM template
+      - To deploy using ARM template, search in market place for ARM template (custom)
+      - Load the ARM file and parameters, then run
+    4. Configure networking settings for Windows VM as public static IP address and Linux VM as static private IP address
+      - Az Portal > Networking blade of VM > click on public IP address > Configuration > change public IP to static
+      - Az Portal > Networking blade of VM > click Network Interface > IP configurations > change private IP to static and set to 10.103.0.100
+      - Changing private IP address requires restarting Azure VM
+      - Choosing static IP address is commonly done where the IP address is used with IP filtering, routing, or assigned to network interfaces of Azure VMs that function as DNS servers.
+    5. RDP into Azure Windows datacenter VM via public IP address
+      - Az Portal > Networking blade of VM > NSG > Create new inbound security rule allowing TCP connection to port 3389 (RDP) 
+      - RDP into it (in Overview in AZ Portal)
+    6. SSH into Azure Linux Server VM within the same Virutal Network (by being in the windows VM)
+      - CMD: ``nslookup az1000302-vm0``
+      - Install putty.exe and SSH into address 10.103.0.100
+      - This works because the NSG rules of inbound port rules allow "inside the VNet".
+    7. Deploy and configure Azure VM Scale Sets
+      - Identify available DNS name for Azure VM Scale set deployment
+        - Returns true if available: ``$rg = Get-AzResourceGroup -Name az1000301-RG
+Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
+      - Deploy new SS in Az Portal
+        - With Load Balancer settings
+      - Once deployed, install IIS on scale set VM by using PowerShell Desired State Conifguration (DSC)
+        -  Navigate to SS in AZ Portal > Extensions > PowerShell Desired State Configuration
+        - Load the .zip that contains DSC config script to install Web IIS role. 
+        - Upgrade the instance to trigger the script.
+        - Note the public IP address assigned to the SS, navigate to URL and verify IIS home page shows.
+    8. Delete Azure Resources 
+      - ``az group list --query "[?starts_with(name,'az1000')].name" --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'``
 - References:
   - https://microsoftlearning.github.io/AZ-103-MicrosoftAzureAdministrator/
+
+# **Udemy Course**
+- 
