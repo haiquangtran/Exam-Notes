@@ -522,4 +522,66 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
   - https://microsoftlearning.github.io/AZ-103-MicrosoftAzureAdministrator/
 
 # **Udemy Course**
-- 
+- **Types of Permissions**
+  - 3 permissions in Azure that are all different from each other:
+  - **Subscription level roles (Classic)**
+    - This is older, thus classic model (before RBAC existed)
+    - Every subscription has 1 Account admin and 1 Service Admin and a Co-Admin, can have up to 200 Co-admin.
+    - You see this in the Subscriptions > Properties
+    -  **Account admin:**
+      - 1 per account
+      - Can do everything
+      - Can change the billing for a subscription
+    - **Service Admin:**
+      - 1 per account
+      - Same access as Owner role at subscription scope EXCEPT they cannot create new subscriptions, or change billing for subscription etc
+      - They can cancel subscriptions and assign users to the Co-Admin role 
+    - **Co-Admin:**
+      - up to 200 per subscription
+      - Same access privileges as Service admin, EXCEPT can't change association of subscriptions to Azure directories
+      - Assign users to Co-admin role but cannot change Service Admin
+  - **Azure AD Administrator Roles**
+    - Azure AD: Authentication and Authorization for Azure AD resources i.e. has multi-factor authentication etc.
+    - Used to manage Azure AD resources in a directory such as create or edit users, assign admin roles to others, reset user passwords, manage user licenses, and manage domians.
+    - Scope is at tenant level.
+    - **Important roles:**
+      - **Global Admin**
+        - Can do everything
+         - Assign admin roles to others
+         - Reset passwords for anyone 
+      - **User Admin**
+        - Create and manage all aspects of users and groups
+        - Manage support tickets
+        - Monitor service health
+        - Change passwords for users, helpdesk admins, and other admins
+      - **Billing admin**
+        - Make purchases
+        - Manage subscriptions
+        - Manage support tickets
+        - Monitors service health
+    - Azure AD Group roles have certain permissions and supports custom roles.
+    - Controls who can access your Azure resources programatically (Does the authentication part)
+  - **Azure Role Based Access Control (RBAC) Roles**
+    - **Authorization** system providing fine-grained access management to Azure resources, such as compute and storage.
+    - Includes over 70 built-in roles.
+    - **4 Fundamental roles**:
+      - **Owner**
+        - Full access to all resources
+        - Can delegate access to others
+      - **Contributor**
+        - Create and manage all of types of Azure resources
+        - Cannot grant access to others
+      - **Reader**
+        - View Azure resources
+      - **User Access Admin** 
+        - Manage user access to Azure resources
+    - Create role assignments (Can create custom roles)
+    - **Only Azure portal and Azure Resource Manager APIs support RBAC. Users, groups, and applications assigned RBAC roles cannot use Classic deployment model APIs.**
+    - Consists of elements: security principal, role definition, and scope.
+    - Can apply to subscription level, resource group, or individual resources. If applied at higher levels, then everything within it will inherit the scope.
+  - **Differences between Azure RBAC roles, Azure AD roles**
+    - **Azure RBAC control permissions to manage Azure resources**
+    - **Azure AD admin roles control permissions to manage Azure AD resources.**
+- References:
+  - https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
+  - https://docs.microsoft.com/en-us/azure/role-based-access-control/overview
