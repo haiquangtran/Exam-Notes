@@ -578,7 +578,8 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Create role assignments (Can create custom roles)
       - **Custom Role Based Access Control**
         - Need to use either PowerShell or Azure CLI to create new definition
-        - Can get an existing role and work on that role
+        - Can get an existing role and work on that role or use a JSON based template to create a new one.
+          - i.e. ``$role = Get-AzureRmRoleDefinition -Name "Virtual Machine Contributor"`` Then modify to your liking i.e. ``$role.Id = null`` and create the new role ``New-AzureRmRoleDefinition -Role $role``
     - **Only Azure portal and Azure Resource Manager APIs support RBAC. Users, groups, and applications assigned RBAC roles cannot use Classic deployment model APIs.**
     - Consists of elements: security principal, role definition, and scope.
     - Can apply to subscription level, resource group, or individual resources. If applied at higher levels, then everything within it will inherit the scope.
