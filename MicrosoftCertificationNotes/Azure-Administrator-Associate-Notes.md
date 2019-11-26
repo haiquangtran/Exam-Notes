@@ -576,6 +576,9 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - **User Access Admin** 
         - Manage user access to Azure resources
     - Create role assignments (Can create custom roles)
+      - **Custom Role Based Access Control**
+        - Need to use either PowerShell or Azure CLI to create new definition
+        - Can get an existing role and work on that role
     - **Only Azure portal and Azure Resource Manager APIs support RBAC. Users, groups, and applications assigned RBAC roles cannot use Classic deployment model APIs.**
     - Consists of elements: security principal, role definition, and scope.
     - Can apply to subscription level, resource group, or individual resources. If applied at higher levels, then everything within it will inherit the scope.
