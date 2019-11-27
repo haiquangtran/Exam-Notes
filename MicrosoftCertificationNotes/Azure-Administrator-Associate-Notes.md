@@ -655,4 +655,21 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
   - **Azure Advisor**
     - Gives recommendations on costing perspective
     - i.e. You could save $260 if you buy a reserved instance etc... 
-- 
+- **Moving Azure Resources**
+  - You can move **resources across resource groups in a tenant**
+    - **Resources will still remain in the same location, even if resource group belongs in another location.**
+    - Validate your source and destination subscription belong to the same tenant by issuing these PowerShell commands:
+      - ``(Get-AzureRmSubscription-SubscriptionName <your-source-subscription>).TenantId``
+      - ``(Get-AzureRmSubscription-SubscriptionName <your-destination-subscription>).TenantId``
+      - If not same tenant, then you have to do extra steps in the documentation...
+    - **Resources that cannot be moved**
+      - AD Domain services, Container services
+      - **Limitations for VMs**
+        - VMs with cert stored in Key Vault can be moved to a new resource group in the same subscription, but not across subscriptions
+        - VMs configured with Azure Backup cannot be moved
+      - **Limitations for Virtual Networks**
+        - Have to move all resources within the network
+        - If network has been peered, have to remove peering first.
+      - **Limitations for classic deployments**
+        - VNets (classic) can't be moved
+        - VMs (classic) must be moved with the cloud service.
