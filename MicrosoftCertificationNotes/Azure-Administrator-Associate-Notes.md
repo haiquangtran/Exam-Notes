@@ -587,6 +587,49 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
   - **Differences between Azure RBAC roles, Azure AD roles**
     - **Azure RBAC control permissions to manage Azure resources**
     - **Azure AD admin roles control permissions to manage Azure AD resources.**
-- References:
-  - https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
-  - https://docs.microsoft.com/en-us/azure/role-based-access-control/overview
+  - References:
+    - https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
+    - https://docs.microsoft.com/en-us/azure/role-based-access-control/overview
+- **Monitoring Azure Resources**
+  - Diagnostic logs are turned off by default, need to be enabled if wanted
+  - Resource level Metrics and performance logs
+    - Show metrics from inside the Azure resource i.e. inside the VM: how app is running etc
+    - To see this, go to Azure Monitor
+    - Resource level metrics:
+      - Azure VMs
+      - CPU Utilization
+      - Info on disk level metrics
+      - Info on traffic
+    - Performance counters:
+      - IIS logs if enabled
+      - Tracing from your .NET based application
+  - Activity logs
+    - Show activity of Azure itself, i.e. created VM, deleted VM etc
+    - To see this, go to Azure Monitor
+  - **Alerts**
+    - Can create alerts on the Activity logs or diagnostic logs, resource level metrics or performance logs
+    - Need to create an action group first, then use it (Action group will contain actions: email, SMS, notify specific users etc)
+  - **Azure Log Analytics**
+    - Lets you search and view log data from various Azure resources
+    - You have to create a new Azure Log Analytics if you want it. Just like any other Azure service i.e. App Service, VM etc
+    - It is now part of Azure Monitor (was separate before)
+    - Use case - You want to perform interactive queries on the performance metrics
+    - **Why**
+      - Central location for all of your logs
+      - Can query all logs using API calls. So you can create your own custom dashboiards etc.
+    - Has **pricing tiers**
+    - Can view these logs by going to the Azure Analytics Workspace resource itself, or in Azure Monitor, under the Logs side menu. 
+    - **You will have to connect your applications to this (i.e. VM, you will have to connect it via Azure Analytics Workspace)**
+      - In the background, extension is installed, a monitoring agent will send stats from the VM onto our logs workspace.
+      - Specify what you want to collect!
+      - **Can also collect Data and performance metrics from your on-premises servers, not only Azure!**
+      - Go to Advanced settings > Data > Specify what you want to collect i.e. Performance Counters, Windows event logs etc. 
+  - **Azure Monitor**
+    - Azure monitor shows these logs (metrics, activity)
+    - Centralized monitoring service 
+    - Metrics tab - Can graph metrics (also by tags)
+    - Has Azure Log Analytics
+    - Logs tab - Azure Log Analytics logs (You have to create Azure Log Analytics)
+    
+  - **Tagging**
+    - Tag resources using 
