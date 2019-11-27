@@ -673,3 +673,11 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - **Limitations for classic deployments**
         - VNets (classic) can't be moved
         - VMs (classic) must be moved with the cloud service.
+- **Azure Policies**
+  - In Azure, Type in Policy, and go to Policy.
+  - Use in-built or create your own rules to enforce resources defined in Azure
+    - e.g Resource groups can only be created if they have certain tags attached
+    - e.g. When a VM is created, needs to be certain SKU size 
+  - Different from RBAC:
+    - RBAC: gives you permission to do something in Azure
+    - Azure Policies: Governane, more drilled down approach. 
