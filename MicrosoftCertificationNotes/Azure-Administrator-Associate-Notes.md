@@ -629,7 +629,30 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Centralized monitoring service 
     - Metrics tab - Can graph metrics (also by tags)
     - Has Azure Log Analytics
-    - Logs tab - Azure Log Analytics logs (You have to create Azure Log Analytics)
-    
-  - **Tagging**
-    - Tag resources using 
+    - Logs tab - Azure Log Analytics logs (You have to create Azure Log Analytics)  
+- **Resource Tagging**
+  - Tagging resources allows you to identify resources for billing reasons and organise your resources etc. i.e. Tag by environment (name: environment, value: Staging) or by departments (name: department, value: HR) etc.
+  - Type Tags into Azure, here you can see all distinct tags and the resources located with it.
+  - Can create multiple tags (name, value pairs) to any Azure resources
+- **Costing in Azure**
+  - **Cost Management**
+    - In Azure, Go to Cost Management - Billing
+    - Will allow you to see billing based on tags and more! Very useful
+    - **Cost Analysis is part of your subscription**
+      - **Overview (gives good overview whether you will go overbudget)**
+        - Current spending
+        - See spending per resource
+        - See your forecasts 
+        - Will also show any free services you have and if you are coming up to it's limits
+    - **Cost Analysis**
+      - See spending history
+      - See spending based on tags, resource types etc
+      - In Azure, Go to Cost Management - Billing > Cost Analysis > Filter by tags etc
+      - Can also download any cost reports
+    - **Invoices**
+      - This is just like a bill (invoices - how much was spent, which period etc)
+      - If you want to see a detailed report, then go to Cost Analysis and download the report instead.
+  - **Azure Advisor**
+    - Gives recommendations on costing perspective
+    - i.e. You could save $260 if you buy a reserved instance etc... 
+- 
