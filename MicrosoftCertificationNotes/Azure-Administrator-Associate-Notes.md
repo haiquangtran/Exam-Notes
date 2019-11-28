@@ -684,7 +684,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
   - **Take around 10-30 mins to take into effect.**
   - In Policy in Azure, you can see the existing resources that do not obey the policy.
     - Any new resources you create will have to obey the policy, however, existing ones that were already created may not have adhered to the policy.
-- **Service Types**
+- **Azure Storage Account: Service Types**
   - **Blob storage/service**
     - Object-level storage (store objects)
     - Disk files for your VM (VHD)
@@ -692,7 +692,14 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Simple structure and quick access
   - **File storage/service**
     - File shares
-    - Connect to file storage via SMB
+    - Connect to file storage via server message block protocol (SMB) protocol
+    - Gets all stored in Azure Cloud, fully managed in the cloud
+      - No need to maintain these files on your on-premises server, or config network etc
+    - **Can connect directly to the File Share from Windows or Linux machines (Azure will give you command)**
+      - Use it to Map a drive from local machine onto the file share in Azure using Access Key
+      - You can then create files or folders as you would any other directory folder etc.
+    - **Azure File Share Backup**
+      - 
   - **Queue service**
     - Sending messages  
 - **Storage Accounts**
@@ -775,3 +782,4 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Can also whitelist IP address so only those IP's can view it etc. 
 - **Azure Storage Explorer**
   - Free tools that works with all Azure account services (Storage accounts, Files, Blobs, Tables etc)
+- **Azure File Shares**
