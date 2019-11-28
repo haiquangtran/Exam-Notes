@@ -681,3 +681,48 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
   - Different from RBAC:
     - RBAC: gives you permission to do something in Azure
     - Azure Policies: Governane, more drilled down approach. 
+- **Service Types**
+  - **Blob storage/service**
+    - Object-level storage (store objects)
+    - Disk files for your VM (VHD)
+  - **Table storage/service**
+    - Simple structure and quick access
+  - **File storage/service**
+    - File shares
+    - Connect to file storage via SMB
+  - **Queue service**
+    - Sending messages  
+- **Storage Accounts**
+  - **Types:**
+    - **Block blob storage accounts**
+      - Only used to store Blob objects
+      - Can't store VHD files.
+    - **FileStorage storage accounts**
+      - Only used for storage of files
+    - **General Purpose v1 accounts**
+      - Can use Blob, File, Queue and Table Service
+    - **General Purpose v2 accounts**
+      - Can use Blob, File, Queue and Table Service
+      - This is latest version with all features.
+  - **Performance Tiers**
+    - **Standard**
+      - Storing blobs, files, tables, queues and Azure VM disks  
+    - **Premium**
+      - Storing unmanaged virtual machine disks only
+  - **Access Tiers**
+    - **Hot**
+      - Used for accessing objects that are accessed frequently
+      - Storage costs are higher, but access costs are lower
+    - **Cool** 
+      - Optimized for storing large amounts of data and stored for at least 30 days.
+      - Used for accessing objects that are accessed infrequently
+      - Storage costs are cheaper, but access costs are higher
+    - Archive
+      - Used for archive data, only available for blob storage.
+      - Could be waiting several hours to download the data
+      - Storage costs are lower than the cool tier but access costs are higher than the cool or hot tier.
+  - **Replication**
+    - **Locally-redundant storage (LRS)**
+    - **Zone-redundant storage (ZRS)**
+    - **Geo-redundant storage (GRS)**
+    - **Read-access geo-redundant storage (RA-GRS)**
