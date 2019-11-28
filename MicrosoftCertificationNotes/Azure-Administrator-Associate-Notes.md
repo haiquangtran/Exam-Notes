@@ -681,6 +681,9 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
   - Different from RBAC:
     - RBAC: gives you permission to do something in Azure
     - Azure Policies: Governane, more drilled down approach. 
+  - **Take around 10-30 mins to take into effect.**
+  - In Policy in Azure, you can see the existing resources that do not obey the policy.
+    - Any new resources you create will have to obey the policy, however, existing ones that were already created may not have adhered to the policy.
 - **Service Types**
   - **Blob storage/service**
     - Object-level storage (store objects)
@@ -721,18 +724,54 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - Used for archive data, **only available for blob service level** and not at the account level.
       - Could be waiting several hours to download the data
       - Storage costs are lower than the cool tier but access costs are higher than the cool or hot tier.
-  - **Replication**
+  - **Storage Account Replication**
     - **Locally-redundant storage (LRS)**
+      - Least highly available option, but **cheapest option** (cost effective option)
+      - Data replicated into 3 storage locations within 1 storage unit, within a 1 data center, within a 1 region/location
+      - The data is stored physically all in 1 location.
+      - A write is only successful if made into all 3 different storage locations within the storage unit.
     - **Zone-redundant storage (ZRS)**
+      - More highly available
+      - Replicated across 3 storage clusters, each cluster is physically separated from each other using Availability Zones but in 1 region.
+      - Each storage cluster is stored in separate availability zone (or data center).
+      - If 1 data center goes down, you still have your data available in other data centers!
     - **Geo-redundant storage (GRS)**
+      - Data replicated into 3 storage locations within 1 storage unit, within 1 data center, within 1 region (same as LRS), however, it gets copied synchronously to another region/location (so now you have **Primary region** and **secondary region**)
+      - The copy happens synchronously
+      - If primary region goes down, a **fail over onto the secondary region will happen**
+      - With GRS, you can only read from the primary region, unless a failover happens, then you can read from the secondary.
+      - High cost
     - **Read-access geo-redundant storage (RA-GRS)**
+      - Same as GRS, however, **both primary and secondary regions will always be available to you to READ.**
+      - Highest cost compared with all options (since you can read in both regions)
 - **Blob Service**
   - Has special access tier called Archive (see access tiers above).
   - Blobs require containers
     - Containers have 3 public access levels:
-      - Private
-      - Blob
-      - Container
+      - **Private**
+      - **Blob**
+      - **Container**
+    - **Access keys**
+      - At the account level!
+      - get 2 access keys for your storage account
+        - Allows you to regenerate any of the keys and render the prev invalid if someone else gets access etc.
+      - Access to all services in storage account
+      - Gives a user access to everything in the storage account!
+      - No concept of start and end time (only SAS will have that)
+    - **Shared Access Signatures (SAS)**
+      - At the service level, and more specific access in the storage account
+      - More secure than access keys, because more specific access
+      - Users will not see everything in the storage account, but only those that they have access to with the SAS!
+      - Here you do not need to provide your access keys to access the storage.
+      - **Two types**
+        - At the service level
+          - Only gives access to either Blob, Queue, Table or File
+          - Can limit the service that can be used
+        - Account level
+          - Access to all the services in the account
+      - **Features**
+        - Gives you a SAS URL and you can get a start and end time for the access.
+        - Can have start and end time for access (this is not possible with access keys)
+        - Can also whitelist IP address so only those IP's can view it etc. 
 - **Azure Storage Explorer**
-  - Free tools that works with all Azure account services (Files, Blobs, Tables etc)
-  - 
+  - Free tools that works with all Azure account services (Storage accounts, Files, Blobs, Tables etc)
