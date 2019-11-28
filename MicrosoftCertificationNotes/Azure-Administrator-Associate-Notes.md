@@ -717,8 +717,8 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - Optimized for storing large amounts of data and stored for at least 30 days.
       - Used for accessing objects that are accessed infrequently
       - Storage costs are cheaper, but access costs are higher
-    - Archive
-      - Used for archive data, only available for blob storage.
+    - **Archive**
+      - Used for archive data, **only available for blob service level** and not at the account level.
       - Could be waiting several hours to download the data
       - Storage costs are lower than the cool tier but access costs are higher than the cool or hot tier.
   - **Replication**
@@ -726,3 +726,13 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **Zone-redundant storage (ZRS)**
     - **Geo-redundant storage (GRS)**
     - **Read-access geo-redundant storage (RA-GRS)**
+- **Blob Service**
+  - Has special access tier called Archive (see access tiers above).
+  - Blobs require containers
+    - Containers have 3 public access levels:
+      - Private
+      - Blob
+      - Container
+- **Azure Storage Explorer**
+  - Free tools that works with all Azure account services (Files, Blobs, Tables etc)
+  - 
