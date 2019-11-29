@@ -698,8 +698,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **Can connect directly to the File Share from Windows or Linux machines (Azure will give you command)**
       - Use it to Map a drive from local machine onto the file share in Azure using Access Key
       - You can then create files or folders as you would any other directory folder etc.
-    - **Azure File Share Backup**
-      - 
+    - Can use Azure Backup to back up fle shares
   - **Queue service**
     - Sending messages  
 - **Storage Accounts**
@@ -782,4 +781,27 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Can also whitelist IP address so only those IP's can view it etc. 
 - **Azure Storage Explorer**
   - Free tools that works with all Azure account services (Storage accounts, Files, Blobs, Tables etc)
-- **Azure File Shares**
+- **Azure Backup**
+  - Backup service available in Azure.
+  - Backup data onto Azure cloud
+  - Backup Azure VMs
+  - Backup on-premise machines and workloads
+  - Can backup Azure file shares 
+  - **Features**
+    - Don't need to worry about the storage (azure manages this for you)
+    - Backup is secure (encrypted in transit and at rest)
+    - Can have short and long term backups
+    - No limit to inbound or outbound transfer
+  - Process for file share
+    - Create Azure Recovery services vault
+    - Specify a backup - Storage account, file share and backup policy
+    - Enable backup
+    - Carry out a backup operation
+    - This will create a restore point
+    - Perform a restore operation
+  - Delete the Azure Recovery services vault
+    - Stop any backup operations
+    - Delete any backup data
+    - Unregister the storage account
+    - THEN delete the recovery azure recovery vault.
+     
