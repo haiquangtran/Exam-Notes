@@ -795,18 +795,28 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
   - **Create an Azure Recovery Services Vault**
     - Two functions: 
       - Backup
-      - Site Recovery
+      - Replicate (Site Recovery)
     - Region for your vault and region for your file share need to be the same.
-      - Because it tries to find the resource you are backing up within the resource group
+      - Because it tries to find and configure the storage accounts in the same region of the Azure Recovery vault.
   - **Process for file share backup**
     - Create Azure Recovery services vault
     - Specify a backup - Storage account, file share and backup policy
+      - Backup policy: You can only backup only once a day for file share (but keep in mind, you can also do manual backups any times you want)
+      - Specify how many days retained (30 days default)
     - Enable backup
     - Carry out a backup operation
+      - Go to Azure Recovery services vault > backup items > select your backup item > Backup now
+      - Limit 4 times a day
     - This will create a restore point
     - Perform a restore operation
-  - Delete the Azure Recovery services vault
+      - Go to Azure Recovery services vault > backup items > select your backup item > Restore Share OR File Recovery
+      - File recovery: Restores file
+      - Restore Share: restore whole file share
+      - You can restore the file to overwrite existing file, or provide alternative location.
+  - **Delete the Azure Recovery services vault**
     - Stop any backup operations
     - Delete any backup data
+      - Go to Azure Recovery services vault > backup items > select your backup item > stop backups
     - Unregister the storage account
+      - Go to Azure Recovery services vault > backup infrastructure > storage accounts > unregister storage account
     - THEN delete the recovery azure recovery vault.
