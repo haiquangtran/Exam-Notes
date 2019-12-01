@@ -820,3 +820,19 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Unregister the storage account
       - Go to Azure Recovery services vault > backup infrastructure > storage accounts > unregister storage account
     - THEN delete the recovery azure recovery vault.
+  - **Azure File Sync**
+    - Distributed file system: syncs data across your on-premise file servers
+    - Files are stored in Azure File Share
+    - Data can then be cached on your on-premise servers
+    - **Pre-requisites**
+      - Storage account with Azure File share
+      - Ensure Azure file sync is available in the desired region
+    - **Preparing Azure**
+      - Deploy storage sync service in your resource group
+      - Create a sync group. Specify storage account here.
+    - **Preparing your server**
+      - Your on-premise Windows server is running Windows server 2012 R2 or higher
+      - Ensure powershell 5.1 is running on your system
+      - Install the Azure RM module
+      - IE enhanced security is off for administrators and users
+      - Download and install Azure File Sync agent
