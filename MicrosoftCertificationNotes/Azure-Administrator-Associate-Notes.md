@@ -828,11 +828,18 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - Storage account with Azure File share
       - Ensure Azure file sync is available in the desired region
     - **Preparing Azure**
-      - Deploy storage sync service in your resource group
+      - Deploy **Storage Sync Service** in your resource group
       - Create a sync group. Specify storage account here.
+        - This creates an entity called cloud endpoint. It is an endpoint that points to the file share in your account.
     - **Preparing your server**
       - Your on-premise Windows server is running Windows server 2012 R2 or higher
       - Ensure powershell 5.1 is running on your system
       - Install the Azure RM module
-      - IE enhanced security is off for administrators and users
+      - Your server configuration for IE enhanced security is off for administrators and users
       - Download and install Azure File Sync agent
+        - Go on IE and download the Azure File Sync agents (google it)
+        - Register your on-premise server through Azure File Sync agent (install it and it will pop up) 
+        - See if successful: Go to Azure portal > Sync group (created earlier in the steps) > Registered servers 
+        - Register the on-premises servers using the Azure File Sync agent
+      - **Map cloud endpoint to server endpoints:** Go to resource group > storage sync service > Azure Sync Group > choose sync group created > select cloud endpoint and add the registered server endpoint 
+      - You can add multiple server endpoints, which will automatically sync files to those servers.
