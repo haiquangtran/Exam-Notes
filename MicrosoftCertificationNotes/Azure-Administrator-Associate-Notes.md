@@ -792,7 +792,13 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Backup is secure (encrypted in transit and at rest)
     - Can have short and long term backups
     - No limit to inbound or outbound transfer
-  - Process for file share
+  - **Create an Azure Recovery Services Vault**
+    - Two functions: 
+      - Backup
+      - Site Recovery
+    - Region for your vault and region for your file share need to be the same.
+      - Because it tries to find the resource you are backing up within the resource group
+  - **Process for file share backup**
     - Create Azure Recovery services vault
     - Specify a backup - Storage account, file share and backup policy
     - Enable backup
@@ -804,4 +810,3 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Delete any backup data
     - Unregister the storage account
     - THEN delete the recovery azure recovery vault.
-     
