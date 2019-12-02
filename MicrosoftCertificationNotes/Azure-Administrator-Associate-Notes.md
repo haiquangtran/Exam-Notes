@@ -485,8 +485,7 @@
   - https://docs.microsoft.com/en-gb/learn/modules/intro-to-azure-virtual-machines/6-backup-services
 
 # **Microsoft Labs**
-- **Deploy and Manage Virtual Machines**
-  - **Task 1: Deploy an Azure VM running Windows Server 2016 Datacenter into an availability set by using the Azure portal**
+- **Module 2: Deploy and Manage Virtual Machines**
     1. Create Availability set with 1 VM Windows Server 2016 Data center.
     2. Deploy VM using Windows Server data center into existing availability set (from step 1.) using Azure PowerShell
       - Powershell syntax commands are KebabCase. i.e.``New-AzNetworkSecurityGroup -ResourceGroupName $resouceGroup.ResourceGroupName OR Register-AzVirtualMachine OR Get-AzAvailabilitySet etc``
@@ -518,6 +517,20 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Note the public IP address assigned to the SS, navigate to URL and verify IIS home page shows.
     8. Delete Azure Resources 
       - ``az group list --query "[?starts_with(name,'az1000')].name" --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'``
+- **Module 3: Storage Accounts**
+  1. Deploy Storage accounts using an ARM template
+    - To deploy using ARM template, search in market place for ARM template (custom)
+    - Load the ARM file and parameters, then run
+  2. Deployed 2 storage accounts general purpose v1 and v2, added 2 blob files on v1 storage account
+  3. Copied the blob contents from storage acc v1 to storage acc v2 using Azure PowerShell/Cloud shell
+    - Storage acc 1 = v1 general purpose, replication = LRS 
+      - Cannot modify performance (standard or premium), once it is created. Can modify everything else though.
+      - No hot/cool tier
+    - Storage acc 2 = v2 general purpose, hot tier, replicatoin = ZRS
+    - Issue commands to save storage account 1 and 2 into variables i.e. ``$context1 = ... etc``
+    - Issue command to create same container as storage acc 2.
+    - Issue command to copy blobs into storage account 2 using those variables i.e. ``az copy $key1 $key2 $context1 $context2 etc...`` (Commands are written from memory so may be incorrect).
+    - Verify both storage accs now have the same blobs 
 - References:
   - https://microsoftlearning.github.io/AZ-103-MicrosoftAzureAdministrator/
 
@@ -880,3 +893,8 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     3. **Azure Cloud Shell**
       - Requires storage account + file share (to store session details)
       - Can use bash or PowerShell (if using powershell can still issue Azure CLI commands ``i.e az storage account etc``)
+  - **Virtual Machine**
+    - Not responsible for the physical server on Azure (IaaS)
+    - Only responsible for VM (IaaS)
+    - **Deploying Virtual Machines**
+      - 
