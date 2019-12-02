@@ -713,6 +713,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **General Purpose v2 accounts**
       - Can use Blob, File, Queue and Table Service
       - This is latest version with all features.
+      - Zone redundant replication is only available for v2 
   - **Performance Tiers**
     - **Standard**
       - Storing blobs, files, tables, queues and Azure VM disks  
