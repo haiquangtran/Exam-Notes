@@ -843,3 +843,23 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Register the on-premises servers using the Azure File Sync agent
       - **Map cloud endpoint to server endpoints:** Go to resource group > storage sync service > Azure Sync Group > choose sync group created > select cloud endpoint and add the registered server endpoint 
       - You can add multiple server endpoints, which will automatically sync files to those servers.
+    - **Cloud Tiering**
+      - Allows you to control the space on the volume that's available in the local windows server
+      - **Specify a percentage:** this is the percentage that should always be free on the local volume, on the local Windows server. 
+      - The way it does this is a **pointer** to the file share, if you allocate 100% percentage, then the file will be 0 bytes on the local machine, when you double click on it - then it will get the file from the share as nothing is stored on the local machine.
+  - **Azure Import/Export Service**
+    - Used to securely transfer **large amounts** of data to Azure BLOB storage and Azure files
+    - Need to transfer the files you need to import onto a disk. **Then need to ship the disks to Azure Data Center.** They will import it for you.
+    - Can use **Azure Data Box Disk** to import data into Azure if you want to transfer data using disk drives supplied by Microsoft
+    - Can create both Import and Export jobs
+    - **Export Disk: Instructions**
+      - Exported disk needs to be encrypted with Bitlocker (required for WAImport).
+        - Requires windows 10 enterprise or professional edition
+        - Encrypts the password which is then used in the WAImportExport instructions 
+      - Download Microsoft Azure Import/Export tool
+      - First need to download an exe called WAImportExportv1
+        - Need to run powershell commands, use the exe to prepare the files that need to be exported
+        - The exe will create journal file and DriveManifest.xml file which needs to be used when creating the Import job.
+      - In Azure Portal create import/export job > Import into azure > upload the journal file etc...
+      - After **import job is created, courier the disk drive to Microsoft**
+      - Then monitor the status of the Import job in Azure portal
