@@ -893,17 +893,29 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     3. **Azure Cloud Shell**
       - Requires storage account + file share (to store session details)
       - Can use bash or PowerShell (if using powershell can still issue Azure CLI commands ``i.e az storage account etc``)
-  - **Virtual Machine**
-    - Not responsible for the physical server on Azure (IaaS)
-    - Only responsible for VM (IaaS)
-    - **Deploying Virtual Machines**
-      - When deploying a Virtual Server (VM) the following also get deployed:
-        - Virtual network (VM will be within a subnet in this VNet)
-        - NSG
-        - Network Interface (where IP address is allocated)
-        - VHD + OS Disk and Data disk
-      - **Costing:** VM + storage disks 
-    - **Install IIS into a VM**
-      - RDP into windows server VM
-      - [Remote Desktop] Go to Server Manager on the machine > Add roles and features > Role-based installation > [features tab] Server Role = web server (IIS) > Install
-    -     
+- **Virtual Machine**
+  - Not responsible for the physical server on Azure (IaaS)
+  - Only responsible for VM (IaaS)
+  - **Deploying Virtual Machines**
+    - When deploying a Virtual Server (VM) the following also get deployed:
+      - Virtual network (VM will be within a subnet in this VNet)
+      - NSG
+      - Network Interface (where IP address is allocated)
+      - VHD + OS Disk and Data disk
+    - **Costing:** VM + storage disks 
+  - **Install IIS into a VM**
+    - RDP into windows server VM
+    - [Remote Desktop] Go to Server Manager on the machine > Add roles and features > Role-based installation > [features tab] Server Role = web server (IIS) > Install
+  - Linux server in Azure
+    - SSH using Putty
+- **Configuration Management**
+  - **PowerShell Desired State Configuration (DSC)**
+    - Extension on Azure 
+    - You can define script whcih conforms to particular syntax
+    - This script will automatically run on new VMs
+    - It ensures your VM conforms to a particular Desired state.
+    - Example: ``configuration IIS { node "localhost" { WindowsFeature IIS { Ensure="Present" Name="Web-Server"} }} ``    
+      - Configuration = Details about what needs to be done on the server
+      - Node = The node the script should run
+      - Within the node, you can have many features. In this case, installs IIS
+      - **This is an automated script to install IIS** in your VM
