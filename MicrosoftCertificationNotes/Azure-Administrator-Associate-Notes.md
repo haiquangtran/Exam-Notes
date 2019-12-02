@@ -863,3 +863,19 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - In Azure Portal create import/export job > Import into azure > upload the journal file etc...
       - After **import job is created, courier the disk drive to Microsoft**
       - Then monitor the status of the Import job in Azure portal
+  - **Command line options**
+    1. **PowerShell**
+      - Install azure modules required: ``Install-Module -Name AzureRM -AllowClobber -force``
+      - Configure to sign in remotely: ``powershell Set-ExecutionPolicy RemoteSigned``
+      - Login: ``Login-AzureRmAccount``
+      - Commands are similar to this: i.e. ``Get-AzureRmStorageAccount -ResourceGroupName "azuredemo"``
+      - **New PowerShell commands:**
+        - Shortened to use Az instead of AzureRm
+        - i.e. ``Get-AzStorageAccount -ResourceGroupName "resourceGroupName" -Name "name"``
+    2. **Azure CLI**
+      - Made to work with Azure specifically
+      - Login: ``az login``
+      - Commands start with az: i.e. ``az storage account keys list --acount-name accountName --resource-group azuredemo --output table``
+    3. **Azure Cloud Shell**
+      - Requires storage account + file share (to store session details)
+      - Can use bash or PowerShell (if using powershell can still issue Azure CLI commands ``i.e az storage account etc``)
