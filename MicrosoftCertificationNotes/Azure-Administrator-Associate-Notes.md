@@ -903,3 +903,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Network Interface (where IP address is allocated)
         - VHD + OS Disk and Data disk
       - **Costing:** VM + storage disks 
+    - **Install IIS into a VM**
+      - RDP into windows server VM
+      - [Remote Desktop] Go to Server Manager on the machine > Add roles and features > Role-based installation > [features tab] Server Role = web server (IIS) > Install
+    -     
