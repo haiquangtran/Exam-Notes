@@ -897,4 +897,9 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Not responsible for the physical server on Azure (IaaS)
     - Only responsible for VM (IaaS)
     - **Deploying Virtual Machines**
-      - 
+      - When deploying a Virtual Server (VM) the following also get deployed:
+        - Virtual network (VM will be within a subnet in this VNet)
+        - NSG
+        - Network Interface (where IP address is allocated)
+        - VHD + OS Disk and Data disk
+      - **Costing:** VM + storage disks 
