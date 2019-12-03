@@ -910,12 +910,24 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - SSH using Putty
 - **Configuration Management**
   - **PowerShell Desired State Configuration (DSC)**
+    - Enables you to run scripts that modify the VM into your desired state
     - Extension on Azure 
     - You can define script whcih conforms to particular syntax
     - This script will automatically run on new VMs
     - It ensures your VM conforms to a particular Desired state.
+    - Scripts need to be in .ps1 (powershell) format and be in a zip folder
     - Example: ``configuration IIS { node "localhost" { WindowsFeature IIS { Ensure="Present" Name="Web-Server"} }} ``    
       - Configuration = Details about what needs to be done on the server
       - Node = The node the script should run
       - Within the node, you can have many features. In this case, installs IIS
       - **This is an automated script to install IIS** in your VM
+    - **How to run the DSC script**
+     - Have your powershell Script (.ps1) and zip the file
+     - In Azure > VM > Extensions > Search for PowerShell DSC > Create > Upload the zip folder and fill the rest in (version can be 2.21) 
+     - This will automatically execute once it is installed on the VM
+  - **Custom Script Extension**
+    - Can also use Custom scripts extension to execute scripts on VMs that you cant be done on PowerShell DSC
+    - This is good when you want to run adhoc or custom based scripts.
+    - **How to run the Custom Script extension**
+      - In Azure > VM > Extensions > Search for Custom Script > Select script > Done.
+      - You can pass parameters etc to the script.
