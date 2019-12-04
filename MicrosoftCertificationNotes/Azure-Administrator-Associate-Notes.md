@@ -517,7 +517,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Note the public IP address assigned to the SS, navigate to URL and verify IIS home page shows.
     8. Delete Azure Resources 
       - ``az group list --query "[?starts_with(name,'az1000')].name" --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'``
-- **Module 3: Storage Accounts**
+- **Module 3: Blob Storage Accounts & File Share**
   1. Deploy Storage accounts using an ARM template
     - To deploy using ARM template, search in market place for ARM template (custom)
     - Load the ARM file and parameters, then run
@@ -530,7 +530,17 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Issue commands to save storage account 1 and 2 into variables i.e. ``$context1 = ... etc``
     - Issue command to create same container as storage acc 2.
     - Issue command to copy blobs into storage account 2 using those variables i.e. ``az copy $key1 $key2 $context1 $context2 etc...`` (Commands are written from memory so may be incorrect).
-    - Verify both storage accs now have the same blobs 
+    - Verify both storage accs now have the same blobs
+  4. Both blob contents are private, so create a SAS token that enables you to view the BLOB
+    - Verify you can see the blob contents with the SAS URL.
+    - Done.
+  5. Create a Azure File Share and mount it to a VM
+    - Go to second storage acc > File shares > Create a new one (Any drive)
+    - Once created, go to File shares > Overview > Connect
+    - Copy the PowerShell commands, and RDP into VM and use PowerShell ISE to use the commands
+    - In the VM, you will see the new drive, create new folder and file within it.
+    - Verify in Azure > File Share > that the folders have been created
+    - DONE.
 - References:
   - https://microsoftlearning.github.io/AZ-103-MicrosoftAzureAdministrator/
 
