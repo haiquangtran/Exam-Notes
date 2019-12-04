@@ -967,4 +967,12 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - Provide better reliability in AS by ensuring disks of VMs in AS are sufficiently isolated from each other to avoid SPOF.
     - **Configure each application tier as part of a different availability set**
       - Do not put them together!
-  - **Availability Zones**
+  - **Azure Scale Sets**
+    - Instead of vertically scaling (increase CPU size etc), we horizontal scale (create more VMs)
+    - **Scale out**: Azure Scale Sets allows you to automatically deploy multiple VMs for performance based on specific condtiions. This is automated. i.e. If CPU percentage goes beyond 90% create another VM in the SS etc.
+      - When there are more than 1 VMs, then it looks at the collective utilization (i.e. collective utilization of CPU across all VMs etc) to see if the condition is met.
+    - The load will be distributed across multiple VMs.
+    - **Scale In:** opposite of scale out. 
+    - **NOTE: use your own scripting and automation to ensure application gets installed on the new VM (this will not be done for you!)**
+    - **Your duty to bootstrap your VM.** Azure Scale Sets are for infrastructure only!
+      - Could create a custom image which has your application inside the image
