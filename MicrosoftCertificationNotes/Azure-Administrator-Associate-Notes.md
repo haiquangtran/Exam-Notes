@@ -941,3 +941,30 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **How to run the Custom Script extension**
       - In Azure > VM > Extensions > Search for Custom Script > Select script > Done.
       - You can pass parameters etc to the script.
+  - **Adding a data disk to VM**
+    - Azure Portal > Vms > Disks > Add Data Disks > Create > Save 
+    - **Should host data in an application on a Data Disk** 
+    - To verify it has been created, go to Windows Server VM > File and Storage Services > Disks
+      - The disk will be created but still needs to be partitioned etc...
+      - You still need to create a volume out of the disk.
+  - **VM SLA**
+    - 99.9% for 1 VM
+    - 99.95% using availability sets (2 or more VMs in the set)
+    - 99.99% using availability zones (VMs across different zones)
+  - **Availability Sets**
+    - SLA of 99.95%
+    - **Fault Domains**
+      - Max is 3
+      - **Each fault domain is connected to a separate physical hardware** i.e. Different rack or network supply etc
+    - **Update Domains**
+      - Max is 20
+      - Helps in the rebooting services for patches
+      - **Each update domain will always be rebooted separately**
+    - **Unmanaged Disks**
+      - Responsible for maintaining the storage accounts and that the disks are placed in the storage accounts
+    - **Managed Disks**
+      - Recommended if VM is part of AS.
+      - Provide better reliability in AS by ensuring disks of VMs in AS are sufficiently isolated from each other to avoid SPOF.
+    - **Configure each application tier as part of a different availability set**
+      - Do not put them together!
+  - **Availability Zones**
