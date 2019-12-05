@@ -976,3 +976,14 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **NOTE: use your own scripting and automation to ensure application gets installed on the new VM (this will not be done for you!)**
     - **Your duty to bootstrap your VM.** Azure Scale Sets are for infrastructure only!
       - Could create a custom image which has your application inside the image
+  - **Azure Availability Zones**
+    - Avaiability zone(s) = Data center(s)
+      - These will logically be named i.e. Availability zone 1, 2 etc.
+      - You choose the Zone that your VM will be deployed to.
+      - Ensure your VMs are on different availability zones to get the SLA 99.9%!
+    - 99.99% SLA
+    - If VM is deployed to multiple data centers, then helps with Data center failures.
+    - Ensure that your location supports Availability Zones (not all regions have it)
+      - Ensure VM queue size supports availability zones
+      - Check the number of availability zones supported in a particular region
+    
