@@ -1010,3 +1010,9 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
           - Backup an entire product etc. (It understands the product)
       - **Azure IaaS VM's you can use inbuilt backup mechanism** 
       - **All data gets stored in an Azure Recovery Services Vault.** 
+    - **Backing up your VM**
+      - When creating backup of VM, need to specify Recovery Services vault
+      - Recovery Services vault stores all your backups
+      - For each backup you can create a backup policy
+        - Specify schedule for the backup and backup rentention policy
+      - Go to Azure Portal > VM > Backups > Create new or choose existing vault. 
