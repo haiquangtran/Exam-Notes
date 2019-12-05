@@ -986,4 +986,27 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Ensure that your location supports Availability Zones (not all regions have it)
       - Ensure VM queue size supports availability zones
       - Check the number of availability zones supported in a particular region
-    
+  - **Azure Backup**
+    - Azure ensures your data is stored 3 times in different areas of storage. So why use Azure Backup?
+    - Even though Azure replicates your data, it is vulnerable to the following, as these issues will also get replicated to the different areas:
+    - Data on VM:
+      - **Gets corrupted**
+      - **Victim of randsonware attack**
+      - **Accidental loss of data**
+    - **Need a backup strategy**
+      - So you can easily recover
+    - **Why choose Azure Backup?**
+      - No limit on space on the cloud, everything is done behind the scenes for you. Just keep uploading backups and automatically the space will be added for you.
+      - No limit on the data transfer
+      - Data Encrypted
+      - **Recovery services vault** allows for long term data retention. Ensures better availability of your resources.
+    - **Several Backup options:**
+      - **Azure Backup agent (MARS agent)**
+        - Can use this to backup files and folders on local machine
+          - Use case - Backup files, folders, system state
+      - **Azure Backup Server**
+        - Install the tool on a member server.
+          - Can backup system aware workloads like Sharepoint, SQL Server.
+          - Backup an entire product etc. (It understands the product)
+      - **Azure IaaS VM's you can use inbuilt backup mechanism** 
+      - **All data gets stored in an Azure Recovery Services Vault.** 
