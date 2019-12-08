@@ -1040,5 +1040,31 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **Lab: Creating Azure Site Recovery**
       - Go to VM > Configure disaster recovery > (Creates a new VNet, VM, Storage Account, Recovery services vault, etc) > Enable replication.
       - Perform Test Failover: In Portal > VM > test failover  
-
-  - 
+      - Should do two runs:
+        1. Creates a new VM, while primary is still running. Both will be running at the same time. You can check if it all works. Then do the cleanup.
+        2. Final failover: Azure will stop and deallocate the primary VM, and create a new one. Then ensure the secondary works. You need to clean up test failover when finished.
+- **Azure Virtual Network (VNet)**
+  - Network that enables devices and machines to live
+    - Has IP address
+    - Required to have a subnet or collection of subnets
+      - The address for each subnet is a subset of the address of the VNet
+      - If you create a VM in a subnet, an IP address that is within the subnet will be allocated to the VM
+    - **Everything within a VNet can communicate**
+      - Devices in different subnets can **still communciate with each other**  
+      - If you create VMs in different subnets, the VMs can still communicate (despite being on different IP addresses)
+      - Why have multiple different subnets?
+        - You can use it to deploy different workloads or tiers of your application. 
+        - i.e 1 Subnet has the web tier, and the 2nd subnet has the database tier. These tiers are now on different subnets but can still communicate.
+  - **Network Interface**
+    - Gets added as a resource to a new VM
+    - **IP addresses get assigned to the Network Interface**
+      - These are the addresses of the VNet (Subnets) and the VM
+      - When you create a VM the IP address is allocated from the subnet it is within 
+    - **Has two IP address**
+      - **Private IP address**
+        - Taken from the **address space of the Subnet**
+        - Used for **internal communication between the VMs in the VNet** OR even across different VNets (if you enable VNet peering)
+      - **Public IP address**
+        - Anything required from the internet to reach your VM then this is needed
+        - Public IP address has **nothing to do with your subnet, VM or VNet**. It is assigned based on Azure pool of public IP addresses. These public IP addresses are routable to the internet.
+        - **NOTE: You do not have to have an public IP address (i.e. for your VM)**.
