@@ -1016,3 +1016,21 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - For each backup you can create a backup policy
         - Specify schedule for the backup and backup rentention policy
       - Go to Azure Portal > VM > Backups > Create new or choose existing vault. 
+     - **Recovery Consistency levels**
+        - **Crash consistent**
+          - VM crash during time of backup
+          - No guarantee on application level backups
+        - **File/System Consistent**
+          - Gurantee of no data corruption and no data loss
+        - **Application Consistent**
+          - VSS consistent workloads
+          - Used for certain workloads in terms of application data consistency
+            - No data corruption, no data loss, and ensures applications are in a consistent state.
+     - **Restoring your VM/Files**
+       - Can restore full backup of VM, or specific file
+       - Go to Resource group > VM > File recovery > Select restore point, Download executable (script that allows volumes to be attached to machine: mount disks) > Run script (and use password) > Done.
+  - **Azure Site Recovery**
+    - Can be used as disaster recovery or migration tool
+    - Replicates workloads to from primary to secondary if a failover happens.
+    - Overhead is the complexity and the costs (secondary hardware etc)
+  - 
