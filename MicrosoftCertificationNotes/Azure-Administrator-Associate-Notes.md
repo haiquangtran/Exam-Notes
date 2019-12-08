@@ -1033,4 +1033,8 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Can be used as disaster recovery or migration tool
     - Replicates workloads to from primary to secondary if a failover happens.
     - Overhead is the complexity and the costs (secondary hardware etc)
+    - **What you can replicate**
+      - Azure VM's from one location to another
+      - On-premises VMware VMs, Hyper-V Vms, physical servers, Azure stack VMs to Azure, VMM, and physical servers to a secondary site.
+      - Even can replicate data from AWS machines to Azure.
   - 
