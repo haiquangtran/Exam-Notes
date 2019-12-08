@@ -1057,6 +1057,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - i.e 1 Subnet has the web tier, and the 2nd subnet has the database tier. These tiers are now on different subnets but can still communicate.
   - **Network Interface**
     - Gets added as a resource to a new VM
+      - You can also attach additional Network interfaces to a VM
     - **IP addresses get assigned to the Network Interface**
       - These are the addresses of the VNet (Subnets) and the VM
       - When you create a VM the IP address is allocated from the subnet it is within 
