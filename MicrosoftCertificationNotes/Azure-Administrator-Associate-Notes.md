@@ -1133,5 +1133,11 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Ensure you enable Virtual Network Access for **BOTH VNets**. 
       - Check the connectivity (see if you can see IIS website from Test VM)
       - DONE
-    
+    - **What can you do if you try and VNet peer two VNets with same CIDR blocks (address spaces)?**
+      - If the Vnets have the same CIDR blocks, then you won't see the VNet option with the same CIDR block in the Peering option.
+        - You could add another **address space**, but if you still have any overlapping addresses then it won't work.
+      -  Only option is to **Delete existing address space** and use another **address sapce** that does not overlap!
+        - When deleting address space, you have to ensure you delete any resources using it first (i.e. subnet etc)
+
+
     
