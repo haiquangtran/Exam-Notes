@@ -1138,6 +1138,28 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - You could add another **address space**, but if you still have any overlapping addresses then it won't work.
       -  Only option is to **Delete existing address space** and use another **address sapce** that does not overlap!
         - When deleting address space, you have to ensure you delete any resources using it first (i.e. subnet etc)
+  - **Virtual Private Connections Across VNets**
+    - **Options:**
+      - VNet Peering (moves across Azure backbone, not the internet)
+      - Create Virutal Private Network (VPN) connection between both virtual networks
+        - Create Gateway subnet on both VNets (separate subnets)
+        - Create Virtual Private Gateway resource on both VNets
+        - Establish a VPN connection, Traffic is encrypted using IP Sec
+    - **Lab: Implement VPN across two VNets**
+      - Using 2 VNets
+        - Staging - 10.0.0.0/16 - Default subnet of 10.0.1.0/24
+        - Production - 20.0.0.0/16 - Default subnet of 20.0.1.0/24
+      - VMs on both VNets
+      - Staging VM already has IIS installed
+      - Create a **Gateway** subnet for each VNet
+        - Azure Portal > VNets > Choose VNet > Subnet > Create gateway subnet 
+      - Create a **virtual private gateway** for each VNet
+        - Azure Portal > Create Virutal Network Gateway (search it), create another IP address as part of the options 
+      - Create a **virtual private gateway** connection
+        - Go onto Portal > VNet Gateways > Connections > Add a connection (From staging to production etc)
+          - Shared key is the password that will be encrypted 
+      - Test our setup
+      - DONE
 
 
     
