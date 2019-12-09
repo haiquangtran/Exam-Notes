@@ -1061,7 +1061,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **IP addresses get assigned to the Network Interface**
       - These are the addresses of the VNet (Subnets) and the VM
       - When you create a VM the IP address is allocated from the subnet it is within 
-    - **Has two IP address**
+    - **Has two IP addresses**
       - **Private IP address**
         - Taken from the **address space of the Subnet**
         - Used for **internal communication between the VMs in the VNet** OR even across different VNets (if you enable VNet peering)
@@ -1113,3 +1113,12 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Network Security Groups are associated on a **Subnet level** or **Network Interface level**
       - IF you want it at subnet level, create a NSG > Created NSG > Subnets > associate it to a subnet 
       - **If you have rules on both levels, then the subnet level rule will override the Network Interface level rule**
+  - **VNet Peering**
+    - Allows resources within a VNet to communicate to resources within another VNet
+    - By default, not possible without VNet Peering.
+    - Traffic goes through the Azure backbone network itself (good), not the internet.
+    - Can connect Virtual Networks in the same region or across regions
+    - Can also connect Virtual Networks across different subscriptions
+    - If you have two VNets that are the classic model, then you can't VNet peer them, but if one is the newer model you can!
+    - **Requirement: Have to ensure the IP address ranges don't conflict for VNets**
+    
