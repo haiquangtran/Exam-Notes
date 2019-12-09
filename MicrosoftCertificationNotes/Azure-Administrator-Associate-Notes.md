@@ -1094,4 +1094,22 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Start service
       6. DONE! should be able to ping VM B and VM C.
   - **Network Security Groups**
-    -    
+    - Used to control flow of traffic into and out of VM, similar to a VM
+    - Gets attached to the **Network Interface** or **Linked to entire subnet**.
+      - Attaching to entire subnet will impact all VMs in subnets
+      - Attaching to Network Interface will impact only 1 VM
+    - Consists of inbound and outbound security routes rules
+      - Has default rules (you cannot change these):
+         - Allow traffic within the Virutal Network itself
+      - Inbound security rules: traffic rules that can come into your VM
+      - Outbound security rules: traffic rules flowing out of your VM
+      - **Security rules have the following:**
+        - Priority
+        - Port number
+        - Protocol
+        - Source and destination
+      - By default, the VM will be block any incoming sources from the internet.
+        - NSG will add an inbound rule to block all traffic from internet
+    - Network Security Groups are associated on a **Subnet level** or **Network Interface level**
+      - IF you want it at subnet level, create a NSG > Created NSG > Subnets > associate it to a subnet 
+      - **If you have rules on both levels, then the subnet level rule will override the Network Interface level rule**
