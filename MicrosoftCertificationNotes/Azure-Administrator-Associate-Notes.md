@@ -1121,4 +1121,17 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - Can also connect Virtual Networks across different subscriptions
     - If you have two VNets that are the classic model, then you can't VNet peer them, but if one is the newer model you can!
     - **Requirement: Have to ensure the IP address ranges don't conflict for VNets**
+    - **Lab: How to set up VNet peering**
+      - Create 2 VNets
+        - VNet Staging - 10.1.0.0/16 - Default subnet of 10.1.1.0/24
+        - VNet Test - 10.2.0.0/16 - Default subnet of 10.2.1.0/24
+      - Create a VM in each VNet
+      - Install IIS on Staging VM
+      - Enable VNet peering
+        - Go on Azure Portal > VNet > Peerings > Add new peering connection
+        - It enables connections to both VNets (Staging to Test, and Test to staging) allowing traffic between them in both directions.
+        - Ensure you enable Virtual Network Access for **BOTH VNets**. 
+      - Check the connectivity (see if you can see IIS website from Test VM)
+      - DONE
+    
     
