@@ -1069,3 +1069,29 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Anything required from the internet to reach your VM then this is needed
         - Public IP address has **nothing to do with your subnet, VM or VNet**. It is assigned based on Azure pool of public IP addresses. These public IP addresses are routable to the internet.
         - **NOTE: You do not have to have an public IP address (i.e. for your VM)**.
+  - **Custom Routing**
+    - By default, there is a system route table attached to subnets specifying if any of the IP address used is within the Vnet then it will route to it. (You cannot see the system route table.)
+    - You can create custom routing to a VM, if you have requirements such as some virtual appliance installed on a particular VM and you want all the traffic to route to the particular VM first, then be forwarded to the other VMs.
+    - **To create custom routing:**
+      - Overview: Have 3 subnets, each with a VM. We want all traffic to route to VM A first, then forward to the other VMs (ensure they can talk to each other).
+        - We will create a custom route, attach it to Subnets B and C
+        - Enable IP Routing for the Network Interface on VM in Subnet A
+        - Install the Routing Role on the Windows Server in Subnet A.
+        - Done!
+      1. Go to Azure Portal > Search route > Create new Route Table
+      2. Add 2 Routes (1 route for Subnet B and 1 for Subnet C)
+        - Address prefix: The address space the VNet is on or Subnet
+        - Type: Virtual Appliance
+        - Hop Address: The IP address of VM A (This will route it to the correct VM whenever it hits an address space within the subnet)
+      3. Associate both the routes with the subnets (so it routes traffic to the subnet):
+        - Go to the Routes created in step 2. 
+        - Go to Subnets > Associate > and select the subnet
+      4. Ensure the traffic can be routed to the VMs
+        - Go onto VM A > Network Interface > IP Configurations > Enable IP Forwarding 
+      5. Add the routing role onto Windows Server in VM A: so the OS knows how to route the traffic
+        - Add Roles and Features Wizard > Server Roles > Enable remote access > Next > Enable Routing > Install
+        - Once role is installed, go to Tools > click on Routing and remote access > Go to server > Right-click configure and Enable routing > Custom Configuration > Lan routing > Finish
+        - Start service
+      6. DONE! should be able to ping VM B and VM C.
+  - **Network Security Groups**
+    -    
