@@ -1154,10 +1154,10 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - Create a **Gateway** subnet for each VNet
         - Azure Portal > VNets > Choose VNet > Subnet > Create gateway subnet 
       - Create a **virtual private gateway** for each VNet
-        - Azure Portal > Create Virutal Network Gateway (search it), create another IP address as part of the options 
-      - Create a **virtual private gateway** connection
+        - Azure Portal > Create Virtual Network Gateway (search it), create another IP address as part of the options 
+      - Create a **virtual private gateway** connection for each VNet
         - Go onto Portal > VNet Gateways > Connections > Add a connection (From staging to production etc)
-          - Shared key is the password that will be encrypted 
+          - Shared key is the password that will be encrypted (Use same password for both VNets)
       - Test our setup
       - DONE
 
