@@ -1153,7 +1153,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Production - 20.0.0.0/16 - Default subnet of 20.0.1.0/24
       - VMs on both VNets
       - Staging VM already has IIS installed
-      - Create a **Gateway** subnet for each VNet
+      - Create a **Gateway subnet** for each VNet
         - Azure Portal > VNets > Choose VNet > Subnet > Create gateway subnet 
       - Create a **virtual private gateway** for each VNet
         - Azure Portal > Create Virtual Network Gateway (search it), create another IP address as part of the options 
@@ -1162,6 +1162,42 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
           - Shared key is the password that will be encrypted (Use same password for both VNets)
       - Test our setup
       - DONE
+  - **Site to Site VPN Connection**
+    - Create a site to site VPN connection when you want to connect your entire data center on a Virtual Network
+      - When you want your users on your coporate network to access resources in the VNet in Azure via private connection (Private IP address)
+      - All data encrypted using IPSec
+    - **Requirements**
+      - Gateway subnet in VNet
+      - Virtual Private gateway
+      - Local gateway
+        - Azure needs to know how to route traffic via the Private gateway onto your data center (only can be done if Azure knows the public IP address of your router (on the client-side))
+        - requires public IP address that is routable to the internet which the local gateway has
+    - **Lab: How to create a VPN Gateway connection-Site to Site**
+      - [In Azure] Use our existing VNet setup from previous lab
+        - VNet Staging - 10.1.0.0/16 - Default subnet of 10.1.1.0/24
+      - [In Azure] Create a gateway subnet
+        - Portal > VNet > Subnets > Add gateway subnet
+      - [In Azure] Create a virtual private gateway
+        - Portal > Search for Virtual network gateway > Create Gateway
+      - [In Azure] Create a local gateway to represent the connection to the customer
+        - Portal > Search for local network gateway > Create Gateway
+        - Put IP address and the other options of the on-premise site when creating it.
+      - [In Azure] Add connections to local gateway to network gateway
+        -  Go to Local gateway > connections > add connection: to network gateway
+      - [In on-premise site] Windows server located in AWS
+      - [In on-premise site] Install routing services on the Windows Server. Ensure the routing is in place
+        - Ensure you tick VPN option in Windows Server
+      - [In on-premise site] Create the virtual private connection
+        - In Windows Server, next to Manage, the flag should have a notification, open the Wiszard and Deploy VPN only.
+        - Right-click > Configure and enable routing remote access > Secure connection between two private networks
+        - Choose VPN Type as IKEv2 > Enter name of IP address of Virtual private network > Rest is easy except the subnet part > Need to add destination Subnet address etc.
+        - Once done, go to Network interfaces > Properties of the Remote router > Enable Persistent Connection > Security > then add the pre shared security key > Ok
+        -  Remote router > Right click > Connect
+        - Note: He also created a static route for the router.
+      - [In on-premise site] test the private connection (trying to hit IIS website on the VM)
+  - ****
+
+
 
 
     
