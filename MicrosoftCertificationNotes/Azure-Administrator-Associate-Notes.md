@@ -1204,7 +1204,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - **Steps:**
         - [VNet to be peered] Go to VNet > Add peering > create a new peering and ensure you enable **"Use remote gateway"**.
         - [VNet that has site-to-site VPN] Go to VNet > Add peering > create a new peering and ensure you enable **"Allow gateway transit"**.
-        - DONE
+        - [Windows Server] Add static route of the other Network so the router knows you're working with 2 networks now.
 
 
 
