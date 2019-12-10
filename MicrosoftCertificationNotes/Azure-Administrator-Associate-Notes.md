@@ -541,6 +541,8 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - In the VM, you will see the new drive, create new folder and file within it.
     - Verify in Azure > File Share > that the folders have been created
     - DONE.
+- **Module 4: VNet Peering and Service Chaining**
+  1. 
 - References:
   - https://microsoftlearning.github.io/AZ-103-MicrosoftAzureAdministrator/
 
