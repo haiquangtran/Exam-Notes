@@ -1170,6 +1170,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - Gateway subnet in VNet
       - Virtual Private gateway
       - Local gateway
+        - This represents the connection to the customers site (their on-premise site etc)
         - Azure needs to know how to route traffic via the Private gateway onto your data center (only can be done if Azure knows the public IP address of your router (on the client-side))
         - requires public IP address that is routable to the internet which the local gateway has
     - **Lab: How to create a VPN Gateway connection-Site to Site**
@@ -1184,7 +1185,7 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Put IP address and the other options of the on-premise site when creating it.
       - [In Azure] Add connections to local gateway to network gateway
         -  Go to Local gateway > connections > add connection: to network gateway
-      - [In on-premise site] Windows server located in AWS
+      - [In on-premise site] Windows server located in AWS, this acts as a router to the customer's other machines (Acting as the customer on-premise site)
       - [In on-premise site] Install routing services on the Windows Server. Ensure the routing is in place
         - Ensure you tick VPN option in Windows Server
       - [In on-premise site] Create the virtual private connection
@@ -1195,7 +1196,16 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         -  Remote router > Right click > Connect
         - Note: He also created a static route for the router.
       - [In on-premise site] test the private connection (trying to hit IIS website on the VM)
-  - ****
+        - Use the private IP address of the Window server to try and hit the IIS page.
+    - **Lab: Transit gateway**
+      - Follows the previous lab: If there was another VNet, and we want our new VNet to communicate with Windows server on the on-premise customer's site, then we have two options:
+        1. Redo everything we did in previous lab, (Create new Virtual Private Network etc)
+        2. Create VNet peering using Transit gateway to the existing VNet that already has a site-to-site connection to the Windows Server (better approach)
+      - **Steps:**
+        - [VNet to be peered] Go to VNet > Add peering > create a new peering and ensure you enable **"Use remote gateway"**.
+        - [VNet that has site-to-site VPN] Go to VNet > Add peering > create a new peering and ensure you enable **"Allow gateway transit"**.
+        - DONE
+
 
 
 
