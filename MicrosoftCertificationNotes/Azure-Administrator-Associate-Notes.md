@@ -1217,12 +1217,20 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Add a A record that maps the custom name to the IP address
         - DONE.
     - **Private DNS Zones**
+      - **Features**
+        - Can link multiple VNets to a private DNS Zone
+        - Allows you to auto-register 
       - **Use case:**
         - You could have a application and database on a VNet and you want these to communicate to each other without having to use the IP address but by using a domain name instead (db-website.com etc). The connection between the application and database needs to be private communication. 
           - This is usually done via DNS names (domain names).
           - A way to do DNS name resolution is to have another VM in the VNet and install DNS software and it will be responsible for mapping Domain names to IP addresses. **However, you have to then maintain the VM**
           - **INSTEAD** you can use the Azure Private DNS Zone that will handle all this for you. It can even **automatically map/register your VM names to the IP addresses for you.** 
         - Corporate only application etc. (Enable auto register - this will map the VM name to their IP address whenever it is created etc.)
+      - **Basic steps**
+        1. Create VNet
+        2. Create Private DNS Zone
+        3. Link the VNet to the DNS Zone
+        4. Note: if you want 2 resources in different VNets to communicate via domain names, then you need to link both the VNets to the DNS Zone, then add VNet peering.
   - **Azure Load Balancer**
     - Ensures that the load is distributed evenly on your machines.
 
