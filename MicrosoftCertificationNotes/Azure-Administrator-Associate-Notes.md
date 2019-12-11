@@ -1232,8 +1232,43 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         3. Link the VNet to the DNS Zone
         4. Note: if you want 2 resources in different VNets to communicate via domain names, then you need to link both the VNets to the DNS Zone, then add VNet peering.
   - **Azure Load Balancer**
-    - Ensures that the load is distributed evenly on your machines.
-
+    - For web applications: Ensures that the load is distributed evenly on your VMs.
+    - Will be part of a VNet, and users would hit the load balancer where it would redirect the traffic to a particular VM.
+    - **Create Load Balancer**
+    - **Configure Load Balancer**
+      - **Configure Backend Pool**
+        - LB needs to know about the VMs
+      - **Configure Health Probe**
+        - Whether the VMs are healthy or not, which you configure
+        - Define the intervals etc.
+        - Needs to know how the VM is healthy or not.
+      - **Configure Frontend IP**
+        - public IP address
+        - Users would then hit this IP address (for the load balancer etc)
+      - **Configure Balancing Rules**
+        - What rules are needed? i.e. Traffic is hitting port number 80 so hit port 80 in the VM etc.
+    - **Important Points**
+      - SKU's: 
+        - Basic:
+            - Single VM
+            - Availability Set
+            - Scale Set
+        - Standard:
+          - Recommended
+          - More features
+            - **Multiple VMs**
+            - Availability Set
+            - Scale Set
+          - Higher SLA - 99.9% if 2 VMs are healthy 
+      - **Load Balancer Types**
+        - Internal Load Balancer:
+          - private load balancer not exposed to the internet.
+          - i.e. LB directs private traffic to Database tier within a subnet where multiple VMs hold the DB etc.
+        - External Load Balancer:
+          - Public load balancer
+          - i.e. LB directs public traffic to Web app tier within a subet where multiple VMs hold the application etc.
+    - **Load Balancer Lab**
+      - 
 
 
 
