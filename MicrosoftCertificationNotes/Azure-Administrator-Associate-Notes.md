@@ -1251,13 +1251,14 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
       - SKU's: 
         - Basic:
             - Single VM
-            - Availability Set
+            - Availability Set (Can have multiple VMs in here)
             - Scale Set
         - Standard:
           - Recommended
           - More features
             - **Multiple VMs**
-            - Availability Set
+              - Can have separate VMs (doesn't have to be part of the Availability set)
+            - Availability Set (Can have multiple VMs in here)
             - Scale Set
           - Higher SLA - 99.9% if 2 VMs are healthy 
       - **Load Balancer Types**
