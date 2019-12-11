@@ -1205,7 +1205,26 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - [VNet to be peered] Go to VNet > Add peering > create a new peering and ensure you enable **"Use remote gateway"**.
         - [VNet that has site-to-site VPN] Go to VNet > Add peering > create a new peering and ensure you enable **"Allow gateway transit"**.
         - [Windows Server] Add static route of the other Network so the router knows you're working with 2 networks now.
-
+  - **DNS Zones**
+    - Allows you to map your domain names to IP addresses etc
+    - Allows you to map custom domain names to Servers etc
+      - Allows you to have custom domain names for your web application
+    - **Public DNS Zones**
+      - **For custom domain names for your site**
+        - Buy a custom domain name (Pre-requisite)
+        - Create new DNS Zone
+        - Go to your domain registrar (i.e. GoDaddy) and add the 4 name servers from the DNS Zone
+        - Add a A record that maps the custom name to the IP address
+        - DONE.
+    - **Private DNS Zones**
+      - **Use case:**
+        - You could have a application and database on a VNet and you want these to communicate to each other without having to use the IP address but by using a domain name instead (db-website.com etc). The connection between the application and database needs to be private communication. 
+          - This is usually done via DNS names (domain names).
+          - A way to do DNS name resolution is to have another VM in the VNet and install DNS software and it will be responsible for mapping Domain names to IP addresses. **However, you have to then maintain the VM**
+          - **INSTEAD** you can use the Azure Private DNS Zone that will handle all this for you. It can even **automatically map/register your VM names to the IP addresses for you.** 
+        - Corporate only application etc. (Enable auto register - this will map the VM name to their IP address whenever it is created etc.)
+  - **Azure Load Balancer**
+    - Ensures that the load is distributed evenly on your machines.
 
 
 
