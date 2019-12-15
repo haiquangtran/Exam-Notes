@@ -1280,6 +1280,34 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - Can now RDP into the load balancer IP address and it will let you RDP into the VM.
     - **Standard Load Balancer**
       - **Very important, when creating the VM you must use Standard tier for the public IP address if you want to associate with Standard Load balancer!** 
-
-
-    
+  - **Azure Network Watcher**
+    - **Shows you Topology of your network as well!**
+    - If you want this, you need to enable this in your region. 
+    - **IP flow verify**
+      - Diagnose machines are not reachable because of **NSGs**
+      - This is good when you want to diagnose your Network security groups.
+    - **Connection Monitor**
+      - Check if connection can be made, whether a VM is reachable, timing, latency etc.
+    - **Next Hop**
+      - Allows you determine what the traffic is running on for the next hope i.e. Internal VNet or Public internet etc
+      - Use case: Can use this to check if you are using the proxy server etc. 
+      - See routing between source and destination
+    - **Packet Capture**
+      - Capture packets to and from a VM
+      - Similar to WireShark.
+      - If you want to see the logs, stop the Packet Capture, then go to the storage account files and see it there.
+    - **VPN Troubleshoot**
+      - Diagnose gateways and connections
+      - Need storage account if you want to start troubleshooting.
+      - Stores logs in the blob container of the storage account.
+    - **NSG Flow Logs**
+      - gives you info about ingress and egress traffic through Network Security group
+      - Example: 1543930859,10.0.1.4,18.185.108.148,51281,80,T,O,A
+        - 1543930859 = timestamp of when the flow occurred in UNIX EPOC Format
+        - 10.0.1.4 = source IP address
+        - 18.185.108.148 = destination IP
+        - 51281 = source port number
+        - 80 = destination port number
+        - T = TCP
+        - O = outbound
+        - A = Allowed (traffic decision)
