@@ -1268,6 +1268,16 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - External Load Balancer:
           - Public load balancer
           - i.e. LB directs public traffic to Web app tier within a subet where multiple VMs hold the application etc.
+    - **Load Balancer Lab**
+      1. Create a Load balancer (and VMs with IIS)
+      2. [Register the VMs to the load balancer] Add a backend pool to the load balancer
+        - Reference both the availability sets there.
+      3. Add the health probe
+      4. Add load balacing rule to direct FE traffic to backend pools
+    - **Inbound NAT Rules**
+      - You can connect to private VMs using a load balancer inbound NAT rule
+        - Create inbound NAT rule for RDP of the VM
+        - Can now RDP into the load balancer IP address and it will let you RDP into the VM. 
 
 
     
