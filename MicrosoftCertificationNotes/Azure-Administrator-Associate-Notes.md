@@ -1277,7 +1277,9 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
     - **Inbound NAT Rules**
       - You can connect to private VMs using a load balancer inbound NAT rule
         - Create inbound NAT rule for RDP of the VM
-        - Can now RDP into the load balancer IP address and it will let you RDP into the VM. 
+        - Can now RDP into the load balancer IP address and it will let you RDP into the VM.
+    - **Standard Load Balancer**
+      - **Very important, when creating the VM you must use Standard tier for the public IP address if you want to associate with Standard Load balancer!** 
 
 
     
