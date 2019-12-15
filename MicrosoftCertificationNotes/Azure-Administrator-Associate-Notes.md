@@ -1268,9 +1268,6 @@ Test-AzDnsAvailability -DomainNameLabel <custom-label> -Location $rg.Location``
         - External Load Balancer:
           - Public load balancer
           - i.e. LB directs public traffic to Web app tier within a subet where multiple VMs hold the application etc.
-    - **Load Balancer Lab**
-      - 
-
 
 
     
